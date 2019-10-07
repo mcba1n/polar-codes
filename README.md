@@ -1,3 +1,12 @@
+A library written in Python3 for **Polar Codes**, a capacity-achieving channel coding technique used in 5G. The library includes functions for **construction, encoding, decoding, and simulation** of polar codes. In addition, it supports **puncturing and shortening**.
+
+It provides:
+ - non-systemic encoder and Successive Cancellation Decoder (SCD) for polar codes
+ - mothercode construction of polar codes using Bhattacharyya Bounds or Gaussian Approximation
+ - support for puncturing and shortening
+ - Bit-Reversal Shortening (BRS) and Wang-Liu Shortening (WLS) shortening constructions
+ - an AWGN channel with BPSK modulation
+ 
 ## Getting Started
 
 1. Download the main library package from [GitHub short URL], and unzip it in "root".
