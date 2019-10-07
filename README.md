@@ -39,8 +39,7 @@ An example of encoding and decoding over an AWGN channel for a (256,100) motherc
     print("The coded message is:", myPC.x)
     
     # transmit the codeword
-    Eb_No_normalised = myPC.get_normalised_SNR(design_SNR)
-    AWGN(myPC, Eb_No_normalised, 1)
+    AWGN(myPC, design_SNR)
     print("The log-likelihoods are:", myPC.likelihoods)
     
     # decode the received codeword
