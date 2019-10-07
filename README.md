@@ -21,6 +21,14 @@ It provides:
 An example of encoding and decoding over an AWGN channel for a (256,100) mothercode, using Bhattacharyya Bounds and SCD.
 
 ```python
+   import numpy as np
+   from classes.PolarCode import PolarCode
+   from classes.Construct import Construct
+   from classes.Encode import Encode
+   from classes.Decode import Decode
+   from classes.AWGN import AWGN
+
+
     # initialise polar code
     myPC = PolarCode(256, 100)
     
