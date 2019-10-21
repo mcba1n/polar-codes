@@ -158,10 +158,9 @@ class Math:
     def phi(self, x):
         """
         Description:
-
             Helper function for the Gaussian Approximation.
         Arguments:
-            x --
+            x -- mean density.
         Returns:
             The result of phi(x).
         """
