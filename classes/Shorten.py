@@ -105,7 +105,7 @@ class Shorten(Math):
         """
 
         N = 2**self.myPC.n
-        G = self.arikan_gen(2)
+        G = self.arikan_gen(self.myPC.n)
         s = []
 
         for r in range(self.myPC.punct_set):
