@@ -15,9 +15,10 @@ It provides:
 2. Install matplotlib from https://matplotlib.org/users/installing.html.
 3. Install numpy from https://docs.scipy.org/doc/numpy/user/install.html.
 4. Run test.py using a Python3 compiler. If the program runs successfully, the library is ready to use. Make sure the compiler has writing access to directory "root/data", where simulation data will be saved by default.
+5. Run main.py to start the GUI.
 
 ## Example
-### Encoding & Decoding a Mothercode
+### Mothercode Encoding & Decoding
 An example of encoding and decoding over an AWGN channel for a (256,100) mothercode, using Bhattacharyya Bounds and SCD.
 
 ```python
