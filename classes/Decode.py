@@ -45,7 +45,6 @@ class Decode(Math):
             # principal decoding equation
             return self.logdomain_sum(l1 + l2, 0) - self.logdomain_sum(l1, l2)
 
-    # evaluate g function to get new LLR
     def lower_llr(self, l1, l2, b):
         """
         Description:
@@ -71,8 +70,6 @@ class Decode(Math):
             return l1 - l2
         return np.nan
 
-    # Update all possible likelihoods at stage (n-j)
-    # i = index of top branch, j = related to stage by (n-j)
     def update_LLR(self, x_ind):
         """
         Description:
