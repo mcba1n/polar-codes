@@ -67,4 +67,4 @@ A script to simulate a defined polar code, save the data to a *JSON* file in dir
     myPC.plot(['brs'], 'data/')
 ```
 
-#### This is a final year project created by Brendon McBain under the supervision of Harish Vangala at Monash University.
+##### This is a final year project created by Brendon McBain under the supervision of Harish Vangala at Monash University.
