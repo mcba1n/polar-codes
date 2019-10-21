@@ -113,6 +113,7 @@ class GUI:
         design_entry.grid(row=5, column=1, sticky="nsew")
         frozen_bits.grid(row=4, column=1)
         frozen_label.grid(row=4, column=0, sticky=E)
+        const_title_label.grid(row=3, column=0, sticky=E)
         const_opt.grid(row=3, column=1, sticky="nsew")
         c.grid(row=6, column = 1)
         puncturing_title_label.grid(row=0, column=2, columnspan=2)
