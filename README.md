@@ -6,7 +6,7 @@ It provides:
  - non-systemic encoder and Successive Cancellation Decoder (SCD) for polar codes
  - mothercode construction of polar codes using Bhattacharyya Bounds or Gaussian Approximation
  - support for puncturing and shortening
- - Bit-Reversal Shortening (BRS), Wang-Liu Shortening (WLS), and Bioglio-Gabry-Land shortening constructions
+ - Bit-Reversal Shortening (BRS), Wang-Liu Shortening (WLS), and Bioglio-Gabry-Land (BGL) shortening constructions
  - an AWGN channel with BPSK modulation
  
 ## Getting Started
