@@ -55,7 +55,7 @@ class PolarCode(Math):
         self.punct_set_lookup = []              # LUT: "0" => punctured, "1" => information.
         self.s = self.N - self.M                # size of punct_set
         self.punct_algorithm = 'None'
-        self.shortening_algos = {"None": '', "BRS": 'brs', "WLS": 'wls', "Permutation": 'perm'}
+        self.shortening_algos = {"None": '', "BRS": 'brs', "WLS": 'wls', "BGL": 'bgl', "Permutation": 'perm'}
         self.recip_flag = False                 # is True if coded punctured bits equal uncoded punctured bits
 
     def __str__(self):

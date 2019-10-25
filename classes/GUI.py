@@ -51,7 +51,7 @@ class GUI:
         save_dir_label = Label(my_frame, text="Directory")
         filenames_label = Label(my_frame, text="Filename(s)")
         save_label = Label(my_frame, text="Save to")
-        Eb_No_values_label = Label(my_frame, text="Eb_No Values (dB)")
+        Eb_No_values_label = Label(my_frame, text="Eb/No Values (dB)")
 
         # entries and text fields
         n_entry = Entry(my_frame)
@@ -82,7 +82,7 @@ class GUI:
         const_opt_val.set(const_options[0])
         const_opt = OptionMenu(my_frame, const_opt_val, *const_options)
 
-        shortening_options = ['None', 'BRS', 'WLS', 'Permutation']
+        shortening_options = ['None', 'BRS', 'WLS', 'BGL']
         shortening_opt_val = StringVar(my_frame)
         shortening_opt_val.set(shortening_options[0])
         shortening_opt = OptionMenu(my_frame, shortening_opt_val, *shortening_options)

@@ -25,6 +25,9 @@ class Shorten(Math):
         elif self.myPC.punct_algorithm == 'wls':  # WLS shortening
             self.myPC.punct_set = self.last_pattern()
             self.myPC.recip_flag = True
+        elif self.myPC.punct_algorithm == 'bgl':  # BGL shortening
+            self.myPC.punct_set = self.bgl_pattern()
+            self.myPC.recip_flag = True
         elif self.myPC.punct_algorithm == 'perm':  # Perm shortening
             self.myPC.punct_set = self.perm()
             self.myPC.recip_flag = True
@@ -119,3 +122,10 @@ class Shorten(Math):
                     s.append(i)
                     break
         return s
+
+    def bgl_pattern(self):
+        num_bits = self.myPC.n
+        s = self.myPC.N - self.myPC.M  # number bits to shorten
+        reversed_indices = np.array([self.bit_reversed(i, num_bits) for i in self.myPC.reliabilities])
+        punct_set = reversed_indices[-s:]  # last s bits of reversed_indices
+        return punct_set
