@@ -9,6 +9,7 @@ It provides:
  - Bit-Reversal Shortening (BRS), Wang-Liu Shortening (WLS), and Bioglio-Gabry-Land (BGL) shortening constructions
  - an AWGN channel with BPSK modulation
  
+ A YouTube video with an introduction to Polar Codes and the library:
  [![IMAGE ALT TEXT](http://img.youtube.com/vi/v47rn77RAxM/0.jpg)](http://www.youtube.com/watch?v=v47rn77RAxM "A Library for Polar Codes in Python")
  
 ## Getting Started
