@@ -20,11 +20,11 @@ class Construct(Math):
             manual -- set to True if you want this class init to do nothing.
         """
 
-        if manual:
-            return
         self.myPC = myPC
         design_SNR_normalised = self.myPC.get_normalised_SNR(design_SNR)
-
+        if manual:
+            return
+        
         # select the mothercode construction method
         if self.myPC.construction_type == 'bb':
             self.myPC.z0 = -design_SNR_normalised
