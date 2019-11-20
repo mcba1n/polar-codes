@@ -10,13 +10,15 @@ import numpy as np
 from classes.Math import Math
 
 class Shorten(Math):
-    def __init__(self, myPC):
+    def __init__(self, myPC, manual = False):
         """
         Constructor arguments:
             myPC -- a polar code created using the PolarCode class.
         """
 
         self.myPC = myPC
+        if manual:
+            return
 
         # select shortening construction method
         if self.myPC.punct_algorithm == 'brs':  # BRS shortening
@@ -69,7 +71,7 @@ class Shorten(Math):
         Description:
             Assumes a reciprocal shortening pattern given and forces the frozen bits to include the shortening set.
         Arguments:
-            punt_set -- PolarCode.punt_set.
+            punct_set -- PolarCode.punct_set.
         Returns:
             The new frozen set, that is typically stored in PolarCode.frozen.
         """
