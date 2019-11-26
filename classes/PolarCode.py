@@ -97,7 +97,7 @@ class PolarCode(Math):
         Arguments:
             design_SNR -- E_b/N_o in decibels.
         Returns:
-            Normalised E_b/N_o in decibels.
+            Normalised E_b/N_o in linear units.
         """
 
         Eb_No_dB = design_SNR
