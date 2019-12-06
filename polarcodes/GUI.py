@@ -77,12 +77,12 @@ class GUI:
         Eb_No_values_entry.insert(END, '1,2,3,4')
 
         # menus
-        const_options = ['Bhattacharyya Bounds', 'Gaussian Approximation']
+        const_options = ['bb', 'ga']
         const_opt_val = StringVar(my_frame)
         const_opt_val.set(const_options[0])
         const_opt = OptionMenu(my_frame, const_opt_val, *const_options)
 
-        shortening_options = ['None', 'BRS', 'WLS', 'BGL']
+        shortening_options = ['brs', 'wls', 'bgl']
         shortening_opt_val = StringVar(my_frame)
         shortening_opt_val.set(shortening_options[0])
         shortening_opt = OptionMenu(my_frame, shortening_opt_val, *shortening_options)

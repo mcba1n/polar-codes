@@ -1,19 +1,18 @@
 #!/usr/bin/env python
 
-"""
-A polar decoder class. Currently only Successive Cancellation Decoder (SCD) is supported.
-"""
-
 import numpy as np
-from classes.Math import Math
+from polarcodes.Math import Math
 from timeit import default_timer as timer
 
 class Decode(Math):
     def __init__(self, myPC, decoder_name = 'scd'):
         """
-        Constructor arguments:
-            myPC -- a polar code created using the PolarCode class.
-            decoder_name -- name of decoder to use (default is 'scd').
+        A polar decoder class. Currently only Successive Cancellation Decoder (SCD) is supported.
+
+        :param myPC: a polar code object created using the :class:`PolarCode` class
+        :param decoder_name: name of decoder to use (default is 'scd')
+        :type myPC: :class:`PolarCode`
+        :type decoder_name: string
         """
 
         self.myPC = myPC
@@ -24,14 +23,15 @@ class Decode(Math):
 
     def upper_llr(self, l1, l2):
         """
-        Description:
-            Update top branch LLR in the log-domain.
-            This function supports shortening by checking for infinite LLR cases.
-        Arguments:
-            l1 -- input LLR corresponding to the top branch.
-            l2 -- input LLR corresponding to the bottom branch.
-        Returns:
-            The top branch LLR at the next stage of the decoding tree.
+        Update top branch LLR in the log-domain.
+        This function supports shortening by checking for infinite LLR cases.
+
+        :param l1: input LLR corresponding to the top branch
+        :param l2: input LLR corresponding to the bottom branch
+        :type l1: float
+        :type l2: float
+        :return: the top branch LLR at the next stage of the decoding tree
+        :rtype: float
         """
 
         # check for infinite LLR, used in shortening
@@ -47,15 +47,17 @@ class Decode(Math):
 
     def lower_llr(self, l1, l2, b):
         """
-        Description:
-            Update bottom branch LLR in the log-domain.
-            This function supports shortening by checking for infinite LLR cases.
-        Arguments:
-            l1 -- input LLR corresponding to the top branch.
-            l2 -- input LLR corresponding to the bottom branch.
-            b -- the decoded bit of the top branch.
-        Returns:
-            The bottom branch LLR at the next stage of the decoding tree.
+        Update bottom branch LLR in the log-domain.
+        This function supports shortening by checking for infinite LLR cases.
+
+        :param l1: input LLR corresponding to the top branch
+        :param l2: input LLR corresponding to the bottom branch
+        :param b: the decoded bit of the top branch
+        :type l1: float
+        :type l2: float
+        :type b: int
+        :return: the bottom branch LLR at the next stage of the decoding tree
+        :rtype: float or np.nan
         """
 
         if b == 0:
@@ -72,11 +74,11 @@ class Decode(Math):
 
     def update_LLR(self, x_ind):
         """
-        Description:
-            Update all possible likelihoods at stage (n-j).
-            This is a non-recursive implementation of update_LLR_recursive().
-        Arguments:
-            x_ind -- the root index.
+        Update all possible likelihoods at stage (n-j).
+        This is a non-recursive implementation of :func:`update_LLR_recursive`.
+
+        :param x_ind: the root index of a tree in the decoder graph
+        :type x_ind: ind
         """
 
         for j in range(self.myPC.n - 1, -1, -1):
@@ -97,11 +99,8 @@ class Decode(Math):
 
     def update_LLR_recursive(self, i, j):
         """
-        Description:
-            Update all possible likelihoods at stage (n-j).
-            This is a recursive implementation.
-        Arguments:
-            x_ind -- the root index.
+        Update all possible likelihoods at stage (n-j).
+        This is a recursive implementation of :func:`update_LLR`.
         """
 
         s = 2 ** (self.myPC.n - j)  # partition size
@@ -127,11 +126,11 @@ class Decode(Math):
 
     def update_bits(self, x_ind):
         """
-        Description:
-            Update all possible bits at stage (n-j).
-            This is a non-recursive implementation.
-        Arguments:
-            x_ind -- the root index.
+        Update all possible bits at stage (n-j).
+        This is a non-recursive implementation.
+
+        :param x_ind: the root index of a tree in the decoder graph
+        :type x_ind: ind
         """
 
         next_i = [x_ind]  # store branch indices to update in next stage
@@ -154,14 +153,15 @@ class Decode(Math):
 
     def polar_decode(self, y):
         """
-        Description:
-            Successive Cancellation Decoder.
-            The decoded message is set to self.myPC.message_received.
-            The decoder will use the frozen set as defined by self.myPC.frozen.
-            Depends on update_LLR() and update_bits().
-            Reference:
-        Arguments:
-            y -- a vector of likelihoods at the channel output.
+        Successive Cancellation Decoder. The decoded message is set to :param:`message_received` in :param:`myPC`.
+        The decoder will use the frozen set as defined by :param:`frozen` in :param:`myPC`.
+        Depends on :func:`update_LLR_recursive` and :func:`update_bits`.
+        Reference: Vangala, H., Viterbo, & Yi Hong. (2014). Permuted successive cancellation decoder for polar codes.
+        2014 International Symposium on Information Theory and Its Applications, 438–442. IEICE.
+
+
+        :param y: a vector of likelihoods at the channel output
+        :type y: ndarray<float>
         """
 
         # decoding initial params

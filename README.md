@@ -3,39 +3,35 @@
 A library written in Python3 for **Polar Codes**, a capacity-achieving channel coding technique used in 5G. The library includes functions for **construction, encoding, decoding, and simulation** of polar codes. In addition, it supports **puncturing and shortening**.
 
 It provides:
- - non-systemic encoder and Successive Cancellation Decoder (SCD) for polar codes
+ - non-systemic encoder and Successive Cancellation Decoder (SCD) for polar codes.
  - mothercode construction of polar codes using Bhattacharyya Bounds or Gaussian Approximation
- - support for puncturing and shortening
- - Bit-Reversal Shortening (BRS), Wang-Liu Shortening (WLS), and Bioglio-Gabry-Land (BGL) shortening constructions
- - an AWGN channel with BPSK modulation
+ - support for puncturing and shortening.
+ - Bit-Reversal Shortening (BRS), Wang-Liu Shortening (WLS), and Bioglio-Gabry-Land (BGL) shortening constructions.
+ - an AWGN channel with BPSK modulation.
  
  Documentation:
- - [Main reference](https://github.com/mcba1n/polar-codes/blob/master/Main_Reference.pdf)
- - [Quick reference](https://github.com/mcba1n/polar-codes/blob/master/Quick_Reference.pdf)
+ - [Main reference (pdf)](https://github.com/mcba1n/polar-codes/blob/master/docs/Main_Reference.pdf)
+ - [Quick reference (website)](https://github.com/mcba1n/polar-codes/blob/master/docs/html/index.html)
  
  A YouTube video with an introduction to polar codes, shortening, and the library:
  [![IMAGE ALT TEXT](http://img.youtube.com/vi/v47rn77RAxM/0.jpg)](http://www.youtube.com/watch?v=v47rn77RAxM "A Library for Polar Codes in Python")
- 
+
 ## Getting Started
 
-1. Download the main library package from this repository, and unzip it in "root".
-2. Install matplotlib from https://matplotlib.org/users/installing.html.
+1. Install the package with
+    `pip install py-polar-codes`.
+2. Install matplotlib from https://mipatplotlib.org/users/installing.html.
 3. Install numpy from https://docs.scipy.org/doc/numpy/user/install.html.
 4. Run test.py using a Python3 compiler. If the program runs successfully, the library is ready to use. Make sure the compiler has writing access to directory "root/data", where simulation data will be saved by default.
 5. Run main.py to start the GUI.
 
-## Example
+## Examples
 ### Mothercode Encoding & Decoding
 An example of encoding and decoding over an AWGN channel for a (256,100) mothercode, using Bhattacharyya Bounds and SCD.
 
 ```python
    import numpy as np
-   from classes.PolarCode import PolarCode
-   from classes.Construct import Construct
-   from classes.Encode import Encode
-   from classes.Decode import Decode
-   from classes.AWGN import AWGN
-
+   from polarcodes import *
 
     # initialise polar code
     myPC = PolarCode(256, 100)
@@ -68,10 +64,10 @@ A script to simulate a defined polar code, save the data to a *JSON* file in dir
 
 ```python
     # simulate polar code (default settings)
-    myPC.simulate('data/brs')
+    myPC.simulate('data/pc_sim')
     
     # plot the frame error rate
-    myPC.plot(['brs'], 'data/')
+    myPC.plot(['pc_sim'], 'data/')
 ```
 
-##### This is a final year project created by Brendon McBain under the supervision of Dr Harish Vangala at Monash University.
+##### This is a final year project created by Brendon McBain under the supervision of Harish Vangala at Monash University.

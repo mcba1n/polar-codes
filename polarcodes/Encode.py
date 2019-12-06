@@ -1,20 +1,19 @@
 #!/usr/bin/env python
 
-"""
-A polar encoder class. Currently only non-systematic encoding is supported.
-"""
-
 import numpy as np
-from classes.Math import Math
+from polarcodes.Math import Math
 
 class Encode(Math):
     def __init__(self, myPC, encoder_name = 'polar_encode'):
         """
-        Constructor arguments:
-            myPC -- a polar code created using the PolarCode class.
-            encoder_name -- the name of the polar encoder implementation.
+        A polar encoder class. Currently only non-systematic encoding is supported.
+
+        :param myPC: a polar code object created using the :class:`PolarCode` class
+        :param encoder_name: the name of the polar encoder implementation.
                             'polar_encode' => a non_recursive implementation (default).
                             'polar_encode_recursive' => a recursive implementation.
+        :type myPC: :class:`PolarCode`
+        :type encoder_name: string
         """
 
         self.myPC = myPC
@@ -25,14 +24,15 @@ class Encode(Math):
 
     def polar_encode2(self, i1, i2):
         """
-        Description:
-            Encodes a message using polar coding with a recursive implementation.
-            The message self.myPC.x is encoded using in-place operations of output self.myPC.u.
-            The initial call of polar_encode2() should set (i1, i2) = (0, N-1) for a block length N.
-            For example, the second partition indices will be (0, N/2-1) and (N/2, N-1).
-        Arguments:
-            i1 -- start index of the partition.
-            i2 -- end index of the partition.
+        Encodes a message using polar coding with a recursive implementation.
+        The message :param:`x` is encoded using in-place operations of output :param:`u` in :param:`myPC`.
+        The initial call of :func:`polar_encode2` should set (i1, i2) = (0, N-1) for a block length N.
+        For example, the second partition indices will be (0, N/2-1) and (N/2, N-1).
+
+        :param i1: start index of the partition
+        :param i2: end index of the partition
+        :type i1: int
+        :type i2: int
         """
         h_shift = int((i2 - i1 + 1) / 2)  # length of each new partition
         mid = i1 + h_shift  # right-aligned mid-point
@@ -48,9 +48,8 @@ class Encode(Math):
     # x = message bit field
     def polar_encode(self):
         """
-        Description:
-            Encodes a message using polar coding with a non-recursive implementation.
-            The message self.myPC.x is encoded using in-place operations of output self.myPC.u.
+        Encodes a message using polar coding with a non-recursive implementation.
+        The message :param:`x` is encoded using in-place operations of output :param:`u` in :param:`myPC`.
         """
 
         # loop over the M stages

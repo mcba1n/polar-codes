@@ -10,13 +10,14 @@ import numpy as np
 class Math:
     def bit_reversed(self, x, n):
         """
-        Description:
-            Bit-reversal operation.
-        Arguments:
-            x -- an index.
-            n -- number of bits in x.
-        Returns:
-            Bit-reversed version of x.
+        Bit-reversal operation.
+
+        :param x: a vector of indices
+        :param n: number of bits per index in :param:`x`
+        :type x: ndarray<int> or int
+        :type n: int
+        :return: bit-reversed version of x
+        :rtype: ndarray<int> or int
         """
 
         result = 0
@@ -27,13 +28,14 @@ class Math:
 
     def logdomain_diff(self, x, y):
         """
-        Description:
-            Find the difference between x and y in log-domain.
-            It uses log1p to improve numerical stability.
-        Arguments:
-            x, y -- any number in the log-domain.
-        Returns:
-            The result of x - y.
+        Find the difference between x and y in log-domain. It uses log1p to improve numerical stability.
+
+        :param x: any number in the log-domain
+        :param y: any number in the log-domain
+        :type x: float
+        :type y: float
+        :return: the result of x - y
+        :rtype: float
         """
 
         if x > y:
@@ -44,13 +46,14 @@ class Math:
 
     def logdomain_sum(self, x, y):
         """
-        Description:
-            Find the addition of x and y in log-domain.
-            It uses log1p to improve numerical stability.
-        Arguments:
-            x, y -- any number in the log-domain.
-        Returns:
-            The result of x + y.
+        Find the addition of x and y in log-domain. It uses log1p to improve numerical stability.
+
+        :param x: any number in the log-domain
+        :param y: any number in the log-domain
+        :type x: float
+        :type y: float
+        :return: the result of x + y
+        :rtype: float
         """
 
         if x > y:
@@ -69,6 +72,15 @@ class Math:
             n -- number of bits in x.
         Returns:
             The permuted index.
+
+        :param x: a vector of indices
+        :param p: permutation vector, ex: bit-reversal is (0,1,...,n-1)
+        :param n: number of bits per index in :param:`x`
+        :type x: ndarray<int> or int
+        :type p: ndarray<int>
+        :type n: int
+        :return: permuted indices
+        :rtype: ndarray<int> or int
         """
 
         result = 0
@@ -80,13 +92,14 @@ class Math:
     # find hamming weight of an index x
     def hamming_wt(self, x, n):
         """
-        Description:
-            Find the bit-wise hamming weight of an index.
-        Arguments:
-            x -- an index.
-            n -- number of bits in x.
-        Returns:
-            The hamming weight.
+        Find the bit-wise hamming weight of an index.
+
+        :param x: an index
+        :param n: number of bits in :param:`x`
+        :type x: int
+        :type n: int
+        :return: bit-wise hamming weight of :param:`x`
+        :rtype: int
         """
 
         m = 1
@@ -100,13 +113,14 @@ class Math:
     # sort by hamming_wt()
     def sort_by_wt(self, x, n):
         """
-        Description:
-            Sort a vector by index hamming weights using hamming_wt().
-        Arguments:
-            x -- an index.
-            n -- number of bits in x.
-        Returns:
-            The sorted vector.
+        Sort a vector by index hamming weights using hamming_wt().
+
+        :param x: a vector of indices
+        :param n: number of bits per index in :param:`x`
+        :type x: ndarray<int>
+        :type n: int
+        :return: sorted vector
+        :rtype: ndarray<int>
         """
 
         wts = np.zeros(len(x), dtype=int)
@@ -117,13 +131,14 @@ class Math:
 
     def inverse_set(self, F, N):
         """
-        Description:
-            Find {0,1,...,N-1}\F.
-        Arguments:
-            x -- an index.
-            n -- number of bits in x.
-        Returns:
-            The inverted set as a vector.
+        Find {0,1,...,N-1}\F. This is useful for finding the information set given a frozen set as :param:`F`.
+
+        :param F: a vector of indices
+        :param N: block length
+        :type F: ndarray<int>
+        :type N: int
+        :return: inverted set as a vector
+        :rtype: ndarray<int>
         """
 
         n = int(np.log2(N))
@@ -133,15 +148,32 @@ class Math:
                 not_F.append(i)
         return np.array(not_F)
 
+    def subtract_set(self, X, Y):
+        """
+        Subtraction of two sets.
+
+        :param X: a vector of indices
+        :param Y: a vector of indices
+        :type X: ndarray<int>
+        :type Y: ndarray<int>
+        :return: result of subtracted set as a vector
+        :rtype: ndarray<int>
+        """
+
+        X_new = []
+        for x in X:
+            if x not in Y:
+                X_new.append(x)
+        return np.array(X_new)
+
     def arikan_gen(self, n):
         """
-        Description:
-            The n-th kronecker product of [[1, 1], [0, 1]],
-            commonly referred to as Arikan's kernel.
-        Arguments:
-            n -- log2(N), where N is the block length.
-        Returns:
-            Polar code generator matrix.
+        The n-th kronecker product of [[1, 1], [0, 1]], commonly referred to as Arikan's kernel.
+
+        :param n: log2(N), where N is the block length
+        :type n: int
+        :return: polar code generator matrix
+        :rtype: ndarray<int>
         """
 
         F = np.array([[1, 1], [0, 1]])
@@ -156,15 +188,6 @@ class Math:
         return self.phi(x) - val
 
     def phi(self, x):
-        """
-        Description:
-            Helper function for the Gaussian Approximation.
-        Arguments:
-            x -- mean density.
-        Returns:
-            The result of phi(x).
-        """
-
         if x < 10:
             y = -0.4527 * (x ** 0.86) + 0.0218
             y = np.exp(y)
@@ -173,18 +196,6 @@ class Math:
         return y
 
     def phi_inv(self, y):
-        """
-        Description:
-            The inverse of y=phi(x) using the bisection method.
-            It returns the inverse by numerically finding the roots of phi(x)-y.
-            Depends on bisection() and phi_residual().
-            Helper function for the Gaussian Approximation.
-        Arguments:
-            y -- any number.
-        Returns:
-            The result of phi_inverse(y).
-        """
-
         return self.bisection(y, 0, 10000)
 
     def bisection(self, val, a, b):
