@@ -10,7 +10,7 @@ It provides:
  - an AWGN channel with BPSK modulation.
  
  Documentation:
- - [Main reference (pdf)](https://github.com/mcba1n/polar-codes/blob/master/docs/Main_Reference.pdf)
+ - [Main reference (pdf)](https://github.com/mcba1n/polar-codes/blob/master/Main_Reference.pdf)
  - [Quick reference (website)](https://mcba1n.github.io/polar-codes-docs/)
  
  A YouTube video with an introduction to polar codes, shortening, and the library:
