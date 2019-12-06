@@ -1,6 +1,6 @@
 # Polar Codes in Python
 
-A library written in Python3 for **Polar Codes**, a capacity-achieving channel coding technique used in 5G. The library includes functions for **construction, encoding, decoding, and simulation** of polar codes. In addition, it supports **puncturing and shortening**.
+A library written in Python3 for Polar Codes, a capacity-achieving channel coding technique used in 5G. The library includes functions for construction, encoding, decoding, and simulation of polar codes. In addition, it supports puncturing and shortening.
 
 It provides:
  - non-systemic encoder and Successive Cancellation Decoder (SCD) for polar codes.
