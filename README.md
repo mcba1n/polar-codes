@@ -20,7 +20,7 @@ Documentation:
 
 1. Install the package with
     `pip install py-polar-codes` (https://pypi.org/project/py-polar-codes/1.1.0/).
-2. Install matplotlib from https://mipatplotlib.org/users/installing.html.
+2. Install matplotlib from https://matplotlib.org/users/installing.html.
 3. Install numpy from https://docs.scipy.org/doc/numpy/user/install.html.
 4. Run test.py using a Python3 compiler. If the program runs successfully, the library is ready to use. Make sure the compiler has writing access to directory "root/data", where simulation data will be saved by default.
 5. Run main.py to start the GUI.
@@ -95,38 +95,7 @@ The simulation will save your Polar Code object in a JSON file, for example:
     "n": 6,
     "K": 32,
     "frozen": [
-        22,
-        38,
-        49,
-        26,
-        42,
-        3,
-        28,
-        50,
-        5,
-        44,
-        9,
-        52,
-        6,
-        17,
-        10,
-        33,
-        56,
-        18,
-        12,
-        34,
-        20,
-        36,
-        1,
-        24,
-        40,
-        48,
-        2,
-        4,
-        8,
-        16,
-        32,
-        0
+        22, 38, 49, 26, 42, 3, 28, 50, 5,44,9, 52, 6, 17, 10, 33, 56, 18, 12, 34, 20, 36, 1, 24, 40, 48, 2, 4, 8, 16, 32, 0
     ],
     "construction_type": "bb",
     "punct_flag": false,
