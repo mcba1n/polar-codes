@@ -82,7 +82,6 @@ A script to simulate a defined polar code, save the data to a *JSON* file in dir
 
 ```python
     # simulate polar code 
-    myPC.simulate('data/pc_sim')
     myPC.simulate(save_to='data/pc_sim', Eb_No_vec=np.arange(1,5), design_SNR=5.0, manual_const_flag=True)
     
     # plot the frame error rate
