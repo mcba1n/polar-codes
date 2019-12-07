@@ -12,9 +12,7 @@ It provides:
 Documentation:
  - [Main reference (pdf)](https://github.com/mcba1n/polar-codes/blob/master/Main_Reference.pdf)
  - [Quick reference (website)](https://mcba1n.github.io/polar-codes-docs/)
- 
- A YouTube video with an introduction to polar codes, shortening, and the library:
- [![IMAGE ALT TEXT](http://img.youtube.com/vi/v47rn77RAxM/0.jpg)](http://www.youtube.com/watch?v=v47rn77RAxM "A Library for Polar Codes in Python")
+ - A YouTube video with an introduction to polar codes, shortening, and the library: http://www.youtube.com/watch?v=v47rn77RAxM
  
 ## Getting Started
 
