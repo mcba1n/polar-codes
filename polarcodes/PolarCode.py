@@ -45,7 +45,7 @@ class PolarCode(Math):
     :var recip_flag: True if ``punct_set`` equals ``source_set``
     """
 
-    def __init__(self, M, K, punct_params=('', '', [], [], [],)):
+    def __init__(self, M, K, punct_params=('', '', [], [], None,)):
         """
         :param M: the block length (after puncturing)
         :param K: the code dimension
