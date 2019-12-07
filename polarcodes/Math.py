@@ -13,7 +13,7 @@ class Math:
         Bit-reversal operation.
 
         :param x: a vector of indices
-        :param n: number of bits per index in :param:`x`
+        :param n: number of bits per index in ``x``
         :type x: ndarray<int> or int
         :type n: int
         :return: bit-reversed version of x
@@ -64,18 +64,11 @@ class Math:
 
     def bit_perm(self, x, p, n):
         """
-        Description:
-            Find the permutation of an index.
-        Arguments:
-            x -- an index.
-            p -- permutation vector, ex: bit-reversal is (0,1,...,n-1)
-            n -- number of bits in x.
-        Returns:
-            The permuted index.
+        Find the permutation of an index.
 
         :param x: a vector of indices
         :param p: permutation vector, ex: bit-reversal is (0,1,...,n-1)
-        :param n: number of bits per index in :param:`x`
+        :param n: number of bits per index in ``x``
         :type x: ndarray<int> or int
         :type p: ndarray<int>
         :type n: int
@@ -95,10 +88,10 @@ class Math:
         Find the bit-wise hamming weight of an index.
 
         :param x: an index
-        :param n: number of bits in :param:`x`
+        :param n: number of bits in ``x``
         :type x: int
         :type n: int
-        :return: bit-wise hamming weight of :param:`x`
+        :return: bit-wise hamming weight of ``x``
         :rtype: int
         """
 
@@ -116,7 +109,7 @@ class Math:
         Sort a vector by index hamming weights using hamming_wt().
 
         :param x: a vector of indices
-        :param n: number of bits per index in :param:`x`
+        :param n: number of bits per index in ``x``
         :type x: ndarray<int>
         :type n: int
         :return: sorted vector
@@ -131,7 +124,7 @@ class Math:
 
     def inverse_set(self, F, N):
         """
-        Find {0,1,...,N-1}\F. This is useful for finding the information set given a frozen set as :param:`F`.
+        Find {0,1,...,N-1}\F. This is useful for finding the information set given a frozen set as ``F``.
 
         :param F: a vector of indices
         :param N: block length

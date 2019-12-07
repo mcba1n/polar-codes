@@ -1,10 +1,10 @@
-from classes.PolarCode import PolarCode
+from polarcodes.PolarCode import PolarCode
 import numpy as np
 import json
 
 # simulate test code
 myPC = PolarCode(64, 32)
-myPC.simulate('data/pc_sim', np.arange(1,5))
+myPC.simulate(save_to='data/pc_sim', Eb_No_vec=np.arange(1,5), design_SNR=5.0, manual_const_flag=False)
 myPC.plot(['pc_sim'], 'data/')
 
 # read FER and BER data from test code

@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="polar-codes",
+    name="py-polar-codes",
     version="1.1.0",
     author="Brendon McBain",
     author_email="brendon.mcbain9@gmail.com",
@@ -18,5 +18,9 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.7',
+    python_requires='>=3.6',
+    install_requires=[
+              'numpy',
+              'matplotlib',
+          ],
 )

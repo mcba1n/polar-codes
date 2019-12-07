@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+"""
+A polar decoder class. Currently only Successive Cancellation Decoder (SCD) is supported.
+"""
+
 import numpy as np
 from polarcodes.Math import Math
 from timeit import default_timer as timer
@@ -7,8 +11,6 @@ from timeit import default_timer as timer
 class Decode(Math):
     def __init__(self, myPC, decoder_name = 'scd'):
         """
-        A polar decoder class. Currently only Successive Cancellation Decoder (SCD) is supported.
-
         :param myPC: a polar code object created using the :class:`PolarCode` class
         :param decoder_name: name of decoder to use (default is 'scd')
         :type myPC: :class:`PolarCode`
@@ -153,12 +155,14 @@ class Decode(Math):
 
     def polar_decode(self, y):
         """
-        Successive Cancellation Decoder. The decoded message is set to :param:`message_received` in :param:`myPC`.
-        The decoder will use the frozen set as defined by :param:`frozen` in :param:`myPC`.
+        Successive Cancellation Decoder. The decoded message is set to ``message_received`` in ``myPC``.
+        The decoder will use the frozen set as defined by ``frozen`` in ``myPC``.
         Depends on :func:`update_LLR_recursive` and :func:`update_bits`.
-        Reference: Vangala, H., Viterbo, & Yi Hong. (2014). Permuted successive cancellation decoder for polar codes.
-        2014 International Symposium on Information Theory and Its Applications, 438–442. IEICE.
 
+        -------------
+        **References:**
+
+        *  Vangala, H., Viterbo, & Yi Hong. (2014). Permuted successive cancellation decoder for polar codes. 2014 International Symposium on Information Theory and Its Applications, 438–442. IEICE.
 
         :param y: a vector of likelihoods at the channel output
         :type y: ndarray<float>

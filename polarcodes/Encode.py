@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 
+"""
+A polar encoder class. Currently only non-systematic encoding is supported.
+"""
+
 import numpy as np
 from polarcodes.Math import Math
 
 class Encode(Math):
     def __init__(self, myPC, encoder_name = 'polar_encode'):
         """
-        A polar encoder class. Currently only non-systematic encoding is supported.
-
         :param myPC: a polar code object created using the :class:`PolarCode` class
         :param encoder_name: the name of the polar encoder implementation.
                             'polar_encode' => a non_recursive implementation (default).
@@ -25,7 +27,7 @@ class Encode(Math):
     def polar_encode2(self, i1, i2):
         """
         Encodes a message using polar coding with a recursive implementation.
-        The message :param:`x` is encoded using in-place operations of output :param:`u` in :param:`myPC`.
+        The message ``x`` is encoded using in-place operations of output ``u`` in ``myPC``.
         The initial call of :func:`polar_encode2` should set (i1, i2) = (0, N-1) for a block length N.
         For example, the second partition indices will be (0, N/2-1) and (N/2, N-1).
 
@@ -49,7 +51,7 @@ class Encode(Math):
     def polar_encode(self):
         """
         Encodes a message using polar coding with a non-recursive implementation.
-        The message :param:`x` is encoded using in-place operations of output :param:`u` in :param:`myPC`.
+        The message ``x`` is encoded using in-place operations of output ``u`` in ``myPC``.
         """
 
         # loop over the M stages

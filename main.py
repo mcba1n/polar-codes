@@ -1,8 +1,8 @@
 from tkinter import *
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
-from classes.GUI import GUI
-from classes.PolarCode import PolarCode
+from polarcodes.GUI import GUI
+from polarcodes.PolarCode import PolarCode
 
 root = Tk()
 root.geometry("800x710")

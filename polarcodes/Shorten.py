@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+"""
+A class dedicated to shortening. This means that the likelihoods for each coded shortened bit are set to infinity at the channel output given by class AWGN.
+Shortening techniques supported: Wang-Liu Shortening (WLS), Bit-Reversal Shortening (BRS), Bioglio-Gabry-Land Shortening (BGL), and Permuted WLS (PWLS).
+"""
 
 import numpy as np
 from polarcodes.Math import Math
@@ -8,11 +12,6 @@ from polarcodes.Construct import Construct
 class Shorten(Construct):
     def __init__(self, myPC, design_SNR, manual=False):
         """
-        A class dedicated to shortening.
-        This means that the likelihoods for each coded shortened bit are set to infinity at the channel output given by class AWGN.
-        Shortening techniques supported: Wang-Liu Shortening (WLS), Bit-Reversal Shortening (BRS),
-        Boglio-Gabry-Land Shortening (BGL), and Permuted WLS (PWLS).
-
         :param myPC: a polar code object created using the :class:`PolarCode` class
         :param design_SNR: the design SNR in decibels
         :param manual: suppress the constructor init
@@ -55,7 +54,7 @@ class Shorten(Construct):
 
     def shortened_pcc(self, myPC, design_SNR):
         """
-        Find the shortened polar code construction and update :param:`frozen` in :param:`myPC`.
+        Find the shortened polar code construction and update ``frozen`` in ``myPC``.
         This is not strictly necessary, since many shortening patterns work just fine with the mothercode reliabilities.
 
         :param myPC: a polar code object created using the :class:`PolarCode` class
@@ -76,8 +75,11 @@ class Shorten(Construct):
     def wls_pattern(self, myPC):
         """
         Wang-Liu Shortening (WLS). The common pattern from the Wang-Liu algorithm.
-        Reference: Runxin Wang, & Rongke Liu. (2014). A Novel Puncturing Scheme for Polar Codes. IEEE Communications Letters, 18(12), 2081–2084.
-        https://doi.org/10.1109/LCOMM.2014.2364845
+
+        -------------
+        **References:**
+
+        * Runxin Wang, & Rongke Liu. (2014). A Novel Puncturing Scheme for Polar Codes. IEEE Communications Letters, 18(12), 2081–2084. https://doi.org/10.1109/LCOMM.2014.2364845
 
         :param myPC: a polar code object created using the :class:`PolarCode` class
         :type myPC: :class:`PolarCode` class
@@ -91,8 +93,11 @@ class Shorten(Construct):
     def brs_pattern(self, myPC):
         """
         Bit-Reversal Shortening (BRS). A known high-performing shortening set, often called RQUP.
-        Reference: Niu, Dai, Chen, Lin, Zhang, & Vasilakos. (2017). Rate-Compatible Punctured Polar Codes: Optimal Construction Based on Polar Spectra. arXiv.org.
-        Retrieved from http://search.proquest.com/docview/2076458581/
+
+        -------------
+        **References:**
+
+        * Niu, Dai, Chen, Lin, Zhang, & Vasilakos. (2017). Rate-Compatible Punctured Polar Codes: Optimal Construction Based on Polar Spectra. arXiv.org. Retrieved from http://search.proquest.com/docview/2076458581/
 
         :param myPC: a polar code object created using the :class:`PolarCode` class
         :type myPC: :class:`PolarCode` class
@@ -105,11 +110,11 @@ class Shorten(Construct):
 
     def frozen_from_pattern(self, myPC):
         """
-        Forces the frozen bits to include the corresponding puncturing source bits in :param:`source_set` in :param:`myPC`.
+        Forces the frozen bits to include the corresponding puncturing source bits in ``source_set`` in ``myPC``.
 
         :param myPC: a polar code object created using the :class:`PolarCode` class
         :type myPC: :class:`PolarCode` class
-        :return: the new frozen set, that is typically assigned to :param:`frozen` in :param:`myPC`.
+        :return: the new frozen set, that is typically assigned to ``frozen`` in ``myPC``.
         :rtype: ndarray<int>
         """
 
@@ -128,7 +133,7 @@ class Shorten(Construct):
 
         :param myPC: a polar code object created using the :class:`PolarCode` class
         :type myPC: :class:`PolarCode` class
-        :return: the permuted shortening pattern for :param:`myPC`
+        :return: the permuted shortening pattern for ``myPC``
         :rtype: ndarray<int>
         """
 
@@ -156,8 +161,11 @@ class Shorten(Construct):
     def bgl_pattern(self, myPC):
         """
         Bioglio-Gabry-Land (BGL) Shortening
-        Reference: Bioglio, V., Gabry, F., & Land, I. (2017). Low-Complexity Puncturing and Shortening of Polar Codes. arXiv.org.
-        Retrieved from http://search.proquest.com/docview/2075581442/
+
+        -------------
+        **References:**
+
+        * Bioglio, V., Gabry, F., & Land, I. (2017). Low-Complexity Puncturing and Shortening of Polar Codes. arXiv.org. Retrieved from http://search.proquest.com/docview/2075581442/
 
         :param myPC: a polar code object created using the :class:`PolarCode` class
         :type myPC: :class:`PolarCode` class

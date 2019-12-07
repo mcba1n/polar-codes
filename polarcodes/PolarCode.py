@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
 """
-PolarCode class
+An object that encapsulates all of the parameters required to define a polar code.
+This object must be given to the following classes: :class:`AWGN`, :class:`Construct`, :class:`Decode`,
+:class:`Encode`, :class:`GUI`, :class:`Shorten`.
 """
 
 import numpy as np
@@ -17,44 +19,43 @@ import threading
 import tkinter as tk
 
 class PolarCode(Math):
+    """
+    :var N: the mothercode block length
+    :var M: the block length (after puncturing)
+    :var K: the code dimension
+    :var n: number of bits per index
+    :var s: number of shortened bit-channels
+    :var reliabilities: reliability vector (least reliable to most reliable)
+    :var frozen: the frozen bit indices
+    :var frozen_lookup: lookup table for the frozen bits
+    :var x: the uncoded message with frozen bits
+    :var construction_type: the mothercode construction type
+    :var message_received: the decoded message received from a channel
+    :var punct_flag: whether or not the code is punctured
+    :var simulated_snr: the SNR values simulated
+    :var simulated_fer: the FER values for the SNR values in ``simulated_snr`` using :func:`simulate`
+    :var simulated_ber: the BER values for the SNR values in ``simulated_snr`` using :func:`simulate`
+    :var punct_type: 'punct' for puncturing, and 'shorten' for shortening
+    :var punct_set: the coded punctured indices
+    :var punct_set_lookup: lookup table for ``punct_set``
+    :var source_set: the uncoded punctured indices
+    :var source_set_lookup: lookup table for ``source_set``
+    :var punct_algorithm: the name of a puncturing algorithm. Options: {'brs', 'wls', 'bgl', 'perm'}
+    :var update_frozen_flag: whether or not to update the frozen indices after puncturing
+    :var recip_flag: True if ``punct_set`` equals ``source_set``
+    """
+
     def __init__(self, M, K, punct_params=('', '', [], [], [],)):
         """
-        An object that encapsulates all of the parameters required to define a polar code.
-        This object must be given to the following classes: :class:`AWGN`, :class:`Construct`, :class:`Decode`,
-         :class:`Encode`, :class:`GUI`, :class:`Shorten`.
-
-        :var N: the mothercode block length
-        :var M: the block length (after puncturing)
-        :var K: the code dimension
-        :var n: number of bits per index
-        :var s: number of shortened bit-channels
-        :var reliabilities: reliability vector (least reliable to most reliable)
-        :var frozen: the frozen bit indices
-        :var frozen_lookup: lookup table for the frozen bits
-        :var x: the uncoded message with frozen bits
-        :var construction_type: the mothercode construction type
-        :var message_received: the decoded message received from a channel
-        :var punct_flag: whether or not the code is punctured
-        :var simulated_snr: the SNR values simulated
-        :var simulated_fer: the FER values for the SNR values in :param simulated_snr: using :func:`simulate`
-        :var simulated_ber: the BER values for the SNR values in :param:`simulated_snr` using :func:`simulate`
-        :var punct_type: 'punct' for puncturing, and 'shorten' for shortening
-        :var punct_set: the coded punctured indices
-        :var punct_set_lookup: lookup table for :param:`punct_set`
-        :var source_set: the uncoded punctured indices
-        :var source_set_lookup: lookup table for :param:`source_set`
-        :var punct_algorithm: the name of a puncturing algorithm. Options: {'brs', 'wls', 'bgl', 'perm'}
-        :var update_frozen_flag: whether or not to update the frozen indices after puncturing
-        :var recip_flag: True if :param:`punct_set` equals :param:`source_set`
-
         :param M: the block length (after puncturing)
         :param K: the code dimension
         :param punct_params: a tuple to completely specify the puncturing parameters (if required).
-                            The syntax is (punct_type, punct_algorithm, punct_set, source_set, update_frozen_flag)
+                            The syntax is (``punct_type``, ``punct_algorithm``, ``punct_set``, ``source_set``, ``update_frozen_flag``)
         :type M: int
         :type K: int
         :type punct_params: tuple
         """
+
         self.initialise_code(M, K, punct_params)
         self.status_bar = None  # set by the GUI so that the simulation progress can be tracked
         self.gui_widgets = []
@@ -118,7 +119,7 @@ class PolarCode(Math):
 
     def set_message(self, m):
         """
-        Set the message vector to the non-frozen bits in :param x:. The frozen bits in :param:`frozen` are set to zero.
+        Set the message vector to the non-frozen bits in ``x``. The frozen bits in ``frozen`` are set to zero.
 
         :param m: the message vector
         :type m: ndarray<int>
@@ -145,11 +146,11 @@ class PolarCode(Math):
 
     def get_lut(self, my_set):
         """
-        Covert a set into a lookup table.
+        Convert a set into a lookup table.
 
         :param my_set: a vector of indices
         :type my_set: ndarray<int>
-        :return: lookup table. "0" for an index in :param:`my_set`, else "1"
+        :return: lookup table. "0" for an index in ``my_set``, else "1"
         :rtype: ndarray<int>
         """
 
@@ -219,7 +220,7 @@ class PolarCode(Math):
         :param max_iter: maximum number of iterations per SNR
         :param min_iterations: the minimum number of iterations before early stopping is allowed per SNR
         :param min_errors: the minimum number of frame errors before early stopping is allowed per SNR
-        :param sim_seed:
+        :param sim_seed: pseudo-random generator seed, default is 1729 ('twister' on MATLAB)
         :param manual_const_flag: a flag that decides if construction should be done before simulating.
                                 Set to False if mothercode and/or puncturing constructions are manually set by the user.
         :type save_to: string
@@ -345,7 +346,7 @@ class PolarCode(Math):
         Eb_No_vec = gui_dict['snr_values']
 
         # run simulation in another thread to avoid GUI freeze
-        x = threading.Thread(name='sim_thread', target=self.simulate, args=(save_to, Eb_No_vec, design_SNR, 100000, 1000, 30, 1729, manual_const_flag,))
+        x = threading.Thread(name='sim_thread', target=self.simulate, args=(save_to, Eb_No_vec, design_SNR, iterations, 1000, min_frame_errors, 1729, manual_const_flag,))
         x.setDaemon(True)
         x.start()
 

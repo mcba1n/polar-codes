@@ -1,17 +1,19 @@
 #!/usr/bin/env python
 
+"""
+This class simulates an AWGN channel by adding gaussian noise with double-sided noise power.
+It updates ``likelihoods`` in :class:`PolarCode` with randomly generated log-likelihood ratios
+for ``u`` in :class:`PolarCode`. For puncturing, the likelihoods for the punctured bits given by
+``source_set_lookup`` in :class:`PolarCode` will be set to zero. For shortening,
+these likelihoods will be set to infinity. Currently only BPSK modulation is supported.
+"""
+
 import matplotlib.pyplot as plt
 import numpy as np
 
 class AWGN:
     def __init__(self, myPC, Eb_No, plot_noise = False):
         """
-        This class simulates an AWGN channel by adding gaussian noise with double-sided noise power.
-        It updates :param:`likelihoods` in :class:`PolarCode` with randomly generated log-likelihood ratios
-        for :param:`u` in :class:`PolarCode`. For puncturing, the likelihoods for the punctured bits given by
-        :param:`source_set_lookup` in :class:`PolarCode` will be set to zero. For shortening,
-        these likelihoods will be set to infinity. Currently only BPSK modulation is supported.
-
         :param myPC: a polar code object created using the :class:`PolarCode` class
         :param Eb_No: the design SNR in decibels
         :param plot_noise: a flag to view the modeled noise
@@ -43,7 +45,7 @@ class AWGN:
 
         :param y: a received signal from a gaussian-distributed channel
         :type y: float
-        :return: log-likelihood ratio for the input signal :param:`y`
+        :return: log-likelihood ratio for the input signal ``y``
         :rtype: float
         """
 
@@ -55,7 +57,7 @@ class AWGN:
 
         :param y: an ensemble of received signals
         :type y: ndarray<float>
-        :return: log-likelihood ratios for the input signals :param:`y`
+        :return: log-likelihood ratios for the input signals ``y``
         :rtype: ndarray<float>
         """
         return [self.LLR(y[i]) for i in range(len(y))]
@@ -67,7 +69,7 @@ class AWGN:
 
         :param x: an ensemble of information to send
         :type x: ndarray<int>
-        :return: Modulated signal with the information from :param:`x`
+        :return: Modulated signal with the information from ``x``
         :rtype: ndarray<float>
         """
 
@@ -102,6 +104,6 @@ class AWGN:
 
     def show_noise(self):
         """
-        Trigger showing the gaussian noise. Only works if :param:`plot_noise` is True.
+        Trigger showing the gaussian noise. Only works if ``plot_noise`` is True.
         """
         plt.show()

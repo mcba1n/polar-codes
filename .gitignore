@@ -1,2 +1,4 @@
 .idea
 /docs/_build
+py_polar_codes.egg-info
+dist

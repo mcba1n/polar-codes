@@ -1,15 +1,17 @@
 #!/usr/bin/env python
 
+"""
+Construct performs the mothercode construction.
+It uses the algorithm specified by ``construction_type`` in ``myPC``.
+Mothercode constructions supported: Bhattacharyya Bounds, Gaussian Approximation.
+"""
+
 import numpy as np
 from polarcodes.Math import Math
 
 class Construct(Math):
     def __init__(self, myPC, design_SNR, manual=False):
         """
-        Construct performs the mothercode construction.
-        It uses the algorithm specified by :param:`construction_type` in :param:`myPC`.
-        Mothercode constructions supported: Bhattacharyya Bounds, Gaussian Approximation.
-
         :param myPC: a polar code object created using the :class:`PolarCode` class
         :param design_SNR: the design SNR in decibels
         :param manual: suppress the constructor init
@@ -38,8 +40,11 @@ class Construct(Math):
         """
         Polar code construction using Bhattacharyya Bounds. Each bit-channel can have different parameters.
         Supports shortening by adding extra cases for infinite likelihoods.
-        Reference: Vangala, H., Viterbo, E., & Hong, Y. (2015). A Comparative Study of Polar Code Constructions for the AWGN Channel. arXiv.org.
-        Retrieved from http://search.proquest.com/docview/2081709282/
+
+        -------------
+        **References:**
+
+        * Vangala, H., Viterbo, E., & Hong, Y. (2015). A Comparative Study of Polar Code Constructions for the AWGN Channel. arXiv.org. Retrieved from http://search.proquest.com/docview/2081709282/
 
         :param z0: a vector of the initial Bhattacharyya parameters in the log-domain, -E_b/N_o.
                     Note that this SNR should be normalised using :func:`get_normalised_SNR` in :class:`PolarCode`
@@ -82,8 +87,11 @@ class Construct(Math):
     def perfect_pcc(self, myPC, p):
         """
         Boolean expression approach to puncturing pattern construction.
-        Reference: Song-Nam, H., & Hui, D. (2018). On the Analysis of Puncturing for Finite-Length Polar Codes: Boolean Function Approach. arXiv.org.
-        Retrieved from http://search.proquest.com/docview/2071252269/
+
+        -------------
+        **References:**
+
+        * Song-Nam, H., & Hui, D. (2018). On the Analysis of Puncturing for Finite-Length Polar Codes: Boolean Function Approach. arXiv.org. Retrieved from http://search.proquest.com/docview/2071252269/
 
         :param p: lookup table for coded puncturing bits. "0" => punctured, "1" => information.
                     For shortening, take the complement of p.
@@ -112,11 +120,13 @@ class Construct(Math):
     def general_ga(self, myPC, z0):
         """
         Polar code construction using density evolution with the Gaussian Approximation. Each channel can have different parameters.
-        References:
-        [1] Trifonov, P. (2012). Efficient Design and Decoding of Polar Codes. IEEE Transactions on Communications, 60(11), 3221–3227.
-        https://doi.org/10.1109/TCOMM.2012.081512.110872
-        [2] Vangala, H., Viterbo, E., & Hong, Y. (2015). A Comparative Study of Polar Code Constructions for the AWGN Channel. arXiv.org.
-        Retrieved from http://search.proquest.com/docview/2081709282/
+
+        -------------
+        **References:**
+
+        * Trifonov, P. (2012). Efficient Design and Decoding of Polar Codes. IEEE Transactions on Communications, 60(11), 3221–3227. https://doi.org/10.1109/TCOMM.2012.081512.110872
+
+        * Vangala, H., Viterbo, E., & Hong, Y. (2015). A Comparative Study of Polar Code Constructions for the AWGN Channel. arXiv.org. Retrieved from http://search.proquest.com/docview/2081709282/
 
         :param z0: a vector of the initial mean likelihood densities, 4 * E_b/N_o.
                     Note that this SNR should be normalised using :func:`get_normalised_SNR` in :class:`PolarCode`
