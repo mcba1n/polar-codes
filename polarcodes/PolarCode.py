@@ -242,9 +242,7 @@ class PolarCode(Math):
         if not manual_const_flag:
             if self.punct_flag and self.punct_type == 'shorten':
                 Shorten(self, design_SNR)
-                print('SHORTEN')
             else:
-                print('MC')
                 Construct(self, design_SNR)
 
         print(self)
