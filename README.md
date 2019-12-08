@@ -8,6 +8,7 @@ It provides:
  - support for puncturing and shortening.
  - Bit-Reversal Shortening (BRS), Wang-Liu Shortening (WLS), and Bioglio-Gabry-Land (BGL) shortening constructions.
  - an AWGN channel with BPSK modulation.
+ - an easy-to-use Graphical User Interface (GUI)
  
 Documentation:
  - [Main reference (pdf)](https://github.com/mcba1n/polar-codes/blob/master/Main_Reference.pdf)
@@ -17,7 +18,7 @@ Documentation:
 ## Getting Started
 
 1. Install the package with
-    `pip install py-polar-codes` (https://pypi.org/project/py-polar-codes/1.1.2/).
+    `pip install py-polar-codes` (https://pypi.org/project/py-polar-codes/).
 2. Install matplotlib from https://matplotlib.org/users/installing.html.
 3. Install numpy from https://docs.scipy.org/doc/numpy/user/install.html.
 4. Run test.py using a Python3 compiler. If the program runs successfully, the library is ready to use. Make sure the compiler has writing access to directory "root/data", where simulation data will be saved by default.
@@ -80,7 +81,7 @@ A script to simulate a defined polar code, save the data to a *JSON* file in dir
 
 ```python
     # simulate polar code 
-    myPC.simulate(save_to='data/pc_sim', Eb_No_vec=np.arange(1,5), design_SNR=5.0, manual_const_flag=True)
+    myPC.simulate(save_to='data/pc_sim', Eb_No_vec=np.arange(1,5), manual_const_flag=True)
     
     # plot the frame error rate
     myPC.plot(['pc_sim'], 'data/')
@@ -122,5 +123,9 @@ The simulation will save your Polar Code object in a JSON file, for example:
     ]
 }
 ```
+
+### Graphical User Interface
+The GUI that you are greeted with after running `main.py`.
+<br/><img src="GUI_example.PNG" width="500">
 
 *This is a final year project created by Brendon McBain under the supervision of Dr Harish Vangala at Monash University.*
