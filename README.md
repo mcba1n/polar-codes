@@ -77,7 +77,7 @@ An example of constructing a shortened polar code with Bit-Reversal Shortening (
 ```
 
 ### Simulation & Plotting
-A script to simulate a defined polar code, save the data to a *JSON* file in directory "/data", and then display the result in a *matplotlib* figure.
+A script to simulate a defined polar code, save the data to directory "/data", and then display the result in a *matplotlib* figure.
 
 ```python
     # simulate polar code 
@@ -87,7 +87,7 @@ A script to simulate a defined polar code, save the data to a *JSON* file in dir
     myPC.plot(['pc_sim'], 'data/')
 ```
 
-The simulation will save your Polar Code object in a JSON file, for example:
+The simulation will save your PolarCode object in a JSON file, for example:
 ```JSON
 {
     "N": 64,
@@ -125,7 +125,7 @@ The simulation will save your Polar Code object in a JSON file, for example:
 ```
 
 ### Graphical User Interface
-The GUI that you are greeted with after running `main.py`.
+An example of using the GUI to simulate and plot a specified polar code. Note: if "manual construction" is ticked, the user is required to input the frozen bits and the shortened bits.
 <br/><img src="GUI_example.PNG" width="500">
 
 *This is a final year project created by Brendon McBain under the supervision of Dr Harish Vangala at Monash University.*
