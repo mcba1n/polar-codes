@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="py-polar-codes",
-    version="1.1.0",
+    version="1.2.0",
     author="Brendon McBain",
     author_email="brendon.mcbain9@gmail.com",
     description="A package for polar codes in Python.",
