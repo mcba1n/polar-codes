@@ -3,7 +3,8 @@ Polar Codes in Python
 =============================================
 """
 
-from polarcodes.Math import Math
+from polarcodes.utils import *
+from polarcodes.decoder_utils import *
 from polarcodes.Construct import Construct
 from polarcodes.Shorten import Shorten
 from polarcodes.Encode import Encode

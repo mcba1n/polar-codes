@@ -1,5 +1,4 @@
 import numpy as np
-from polarcodes.Math import Math
 from polarcodes.Construct import Construct
 
 class Puncture(Construct):
@@ -7,9 +6,11 @@ class Puncture(Construct):
         """
         In the future, this class will contain common puncturing algorithms.
 
-        :param myPC:
-        :param design_SNR:
-        :param manual:
+        Parameters
+        ----------
+        myPC: `PolarCode`
+        design_SNR: float
+        manual: bool
         """
 
         super().__init__(myPC, design_SNR, True)

@@ -1,0 +1,1412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>polarcodes.PolarCode API documentation</title>
+<meta name="description" content="An object that encapsulates all of the parameters required to define a polar code.
+This object must be given to the following classes: `AWGN`, …" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>polarcodes.PolarCode</code></h1>
+</header>
+<section id="section-intro">
+<p>An object that encapsulates all of the parameters required to define a polar code.
+This object must be given to the following classes: <code>AWGN</code>, <code>Construct</code>, <code>Decode</code>, <code>Encode</code>, <code>GUI</code>, <code>Shorten</code>.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">#!/usr/bin/env python
+
+&#34;&#34;&#34;
+An object that encapsulates all of the parameters required to define a polar code.
+This object must be given to the following classes: `AWGN`, `Construct`, `Decode`, `Encode`, `GUI`, `Shorten`.
+&#34;&#34;&#34;
+
+import numpy as np
+from polarcodes.utils import *
+from polarcodes.Construct import Construct
+from polarcodes.Shorten import Shorten
+from polarcodes.Encode import Encode
+from polarcodes.Decode import Decode
+from polarcodes.AWGN import AWGN
+import json
+import matplotlib.pyplot as plt
+import threading
+import tkinter as tk
+
+class PolarCode:
+    &#34;&#34;&#34;
+    Attributes
+    ----------
+    N: int
+        the mothercode block length
+    M: int
+        the block length (after puncturing)
+    K: int
+        the code dimension
+    n: int
+        number of bits per index
+    s: int
+        number of shortened bit-channels
+    reliabilities: ndarray&lt;int&gt;
+        reliability vector (least reliable to most reliable)
+    frozen: ndarray&lt;int&gt;
+        the frozen bit indices
+    frozen_lookup: ndarray&lt;int&gt;
+        lookup table for the frozen bits
+    x: ndarray&lt;int&gt;
+        the uncoded message with frozen bits
+    construction_type: string
+        the mothercode construction type
+    message_received: ndarray&lt;int&gt;
+        the decoded message received from a channel
+    punct_flag: bool
+        whether or not the code is punctured
+    simulated_snr: ndarray&lt;float&gt;
+        the SNR values simulated
+    simulated_fer: ndarray&lt;float&gt;
+        the FER values for the SNR values in ``simulated_snr`` using `simulate`
+    simulated_ber: ndarray&lt;float&gt;
+        the BER values for the SNR values in ``simulated_snr`` using `simulate`
+    punct_type: string
+        &#39;punct&#39; for puncturing, and &#39;shorten&#39; for shortening
+    punct_set: ndarray&lt;int&gt;
+        the coded punctured indices
+    punct_set_lookup: ndarray&lt;int&gt;
+        lookup table for ``punct_set``
+    source_set: ndarray&lt;int&gt;
+        the uncoded punctured indices
+    source_set_lookup: ndarray&lt;int&gt;
+        lookup table for ``source_set``
+    punct_algorithm: string
+        the name of a puncturing algorithm. Options: {&#39;brs&#39;, &#39;wls&#39;, &#39;bgl&#39;, &#39;perm&#39;}
+    update_frozen_flag: bool
+        whether or not to update the frozen indices after puncturing
+    recip_flag: bool
+        True if ``punct_set`` equals ``source_set``
+
+    &#34;&#34;&#34;
+
+    def __init__(self, M, K, punct_params=(&#39;&#39;, &#39;&#39;, [], [], None,)):
+        &#34;&#34;&#34;
+        Parameters
+        ----------
+        M: int
+            the block length (after puncturing)
+        K: int
+            the code dimension
+        punct_params: tuple
+            a tuple to completely specify the puncturing parameters (if required).
+            The syntax is (``punct_type``, ``punct_algorithm``, ``punct_set``, ``source_set``, ``update_frozen_flag``)
+        &#34;&#34;&#34;
+
+        self.initialise_code(M, K, punct_params)
+        self.status_bar = None  # set by the GUI so that the simulation progress can be tracked
+        self.gui_widgets = []
+
+    def initialise_code(self, M, K, punct_params):
+        &#34;&#34;&#34;
+        Initialise the code with a set of parameters the same way as the constructor.
+        Call this any time you want to change the code rate.
+        &#34;&#34;&#34;
+
+        # mothercode parameters
+        self.M = M
+        self.N = int(2**(np.ceil(np.log2(M))))
+        self.n = int(np.log2(self.N))
+        self.F = arikan_gen(self.n)
+        self.K = K
+        self.s = self.N - self.M
+        self.reliabilities = np.array([])
+        self.frozen = np.array([])
+        self.frozen_lookup = np.array([])
+        self.x = np.zeros(self.N, dtype=int)
+        self.u = np.zeros(self.N, dtype=int)
+        self.construction_type = &#39;bb&#39;
+        self.message_received = np.array([])
+        self.punct_flag = False if self.M == self.N else True
+        self.simulated_snr = np.array([])
+        self.simulated_fer = np.array([])
+        self.simulated_ber = np.array([])
+        self.FERestimate = 0
+        self.T = None
+
+        # puncturing parameters
+        self.punct_type = punct_params[0]
+        self.punct_set = np.array(punct_params[2])
+        self.punct_set_lookup = self.get_lut(punct_params[2])
+        self.source_set = np.array(punct_params[3])
+        self.source_set_lookup = self.get_lut(punct_params[3])
+        self.punct_algorithm = punct_params[1]
+        self.update_frozen_flag = punct_params[4]
+        self.recip_flag = np.array_equal(np.array(punct_params[2]), np.array(punct_params[3]))
+
+    def __str__(self):
+        &#34;&#34;&#34;
+        A string definition of PolarCode. This allows you to print any PolarCode object and see all of its
+        relevant parameters.
+
+        Returns
+        ----------
+        string
+            a stringified version of PolarCode
+
+        &#34;&#34;&#34;
+
+        output = &#39;=&#39; * 10 + &#34; Polar Code &#34; + &#39;=&#39; * 10 + &#39;\n&#39;
+        output += &#34;N: &#34; + str(self.N) + &#39;\n&#39;
+        output += &#34;M: &#34; + str(self.M) + &#39;\n&#39;
+        output += &#34;K: &#34;+ str(self.K) + &#39;\n&#39;
+        output += &#34;Mothercode Construction: &#34; + self.construction_type + &#39;\n&#39;
+        output += &#34;Ordered Bits (least reliable to most reliable): &#34; + str(self.reliabilities) + &#39;\n&#39;
+        output += &#34;Frozen Bits: &#34; + str(self.frozen) + &#39;\n&#39;
+        output += &#34;Puncturing Flag: &#34; + str(self.punct_flag) + &#39;\n&#39;
+        output += &#34;Puncturing Parameters: {punct_type: &#34; + str(self.punct_type) + &#39;\n&#39;
+        output += &#34;                        punct_algorithm: &#34; + str(self.punct_algorithm) + &#39;\n&#39;
+        output += &#34;                        punct_set: &#34; + str(self.punct_set) + &#39;\n&#39;
+        output += &#34;                        source_set: &#34; + str(self.source_set) + &#39;\n&#39;
+        output += &#34;                        update_frozen_flag: &#34; + str(self.update_frozen_flag) + &#34;}&#34; + &#39;\n&#39;
+        return output
+
+    def set_message(self, m):
+        &#34;&#34;&#34;
+        Set the message vector to the non-frozen bits in ``x``. The frozen bits in ``frozen`` are set to zero.
+
+        Parameters
+        ----------
+        m: ndarray&lt;int&gt;
+            the message vector
+
+        &#34;&#34;&#34;
+
+        self.message = m
+        self.x[self.frozen_lookup == 1] = m
+        self.u = self.x.copy()
+
+    def get_normalised_SNR(self, design_SNR):
+        &#34;&#34;&#34;
+        Normalise E_b/N_o so that the message bits have the same energy for any code rate.
+
+        Parameters
+        ----------
+        design_SNR: float
+            E_b/N_o in decibels
+
+        Returns
+        ----------
+        float
+            normalised E_b/N_o in linear units
+
+        &#34;&#34;&#34;
+
+        Eb_No_dB = design_SNR
+        Eb_No = 10 ** (Eb_No_dB / 10)  # convert dB scale to linear
+        Eb_No = Eb_No * (self.K / self.M)  # normalised message signal energy by R=K/M (M=N if not punctured)
+        return Eb_No
+
+    def get_lut(self, my_set):
+        &#34;&#34;&#34;
+        Convert a set into a lookup table.
+
+        Parameters
+        ----------
+        my_set: ndarray&lt;int&gt;
+            a vector of indices
+
+        Returns
+        ----------
+        ndarray&lt;int&gt;
+            a LUT with &#34;0&#34; for an index in ``my_set``, else &#34;1&#34;
+
+        &#34;&#34;&#34;
+
+        my_lut = np.ones(self.N, dtype=int)
+        my_lut[my_set] = 0
+        return my_lut
+
+    def save_as_json(self, sim_filename):
+        &#34;&#34;&#34;
+        Save all the important parameters in this object as a JSON file.
+
+        Parameters
+        ----------
+        sim_filename: string
+            directory and filename to save JSON file to (excluding extension)
+
+        &#34;&#34;&#34;
+        data = {
+            &#39;N&#39;: self.M,
+            &#39;n&#39;: self.n,
+            &#39;K&#39;: self.K,
+            &#39;frozen&#39;: self.frozen.tolist(),
+            &#39;construction_type&#39;: self.construction_type,
+            &#39;punct_flag&#39;: self.punct_flag,
+            &#39;punct_type&#39;: self.punct_type,
+            &#39;punct_set&#39;: self.punct_set.tolist(),
+            &#39;source_set&#39;: self.source_set.tolist(),
+            &#39;punct_algorithm&#39;: self.punct_algorithm,
+            &#39;update_frozen_flag&#39;: self.update_frozen_flag,
+            &#39;BER&#39;: self.simulated_ber.tolist(),
+            &#39;FER&#39;: self.simulated_fer.tolist(),
+            &#39;SNR&#39;: self.simulated_snr.tolist()
+        }
+        with open(sim_filename + &#39;.json&#39;, &#39;w&#39;, encoding=&#39;utf-8&#39;) as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
+
+    def run_simulation(self, Eb_No, max_iter, min_errors, min_iters):
+        frame_error_count = 0
+        bit_error_count = 0
+        num_blocks = 0
+        for i in range(1, max_iter + 1):
+            # simulate random PC in an AWGN channel
+            self.set_message(np.random.randint(2, size=self.K))
+            Encode(self)
+            AWGN(self, Eb_No)
+            Decode(self)
+
+            # detect errors
+            error_vec = self.message ^ self.message_received
+            num_errors = sum(error_vec)
+            frame_error_count = frame_error_count + (num_errors &gt; 1)
+            bit_error_count = bit_error_count + num_errors
+
+            # early stopping condition
+            num_blocks = i
+            if frame_error_count &gt;= min_errors and i &gt;= min_iters:
+                break
+        return frame_error_count, bit_error_count, num_blocks
+
+    def simulate(self, save_to, Eb_No_vec, design_SNR=None, max_iter=100000, min_iterations=1000, min_errors=30, sim_seed=1729, manual_const_flag=True):
+        &#34;&#34;&#34;
+        Monte-carlo simulation of the performance of this polar code.
+        The simulation has an early stopping condition of when the number of errors is below min_errors.
+        Each E_b/N_o simulation has an additional early stopping condition using the minimum iterations
+        and the minimum number of errors. The results are saved in a JSON file using :func:`save_as_json`.
+
+        Parameters
+        ----------
+        save_to: string
+            directory and filename to save JSON file to (excluding extension)
+        Eb_No_vec: ndarray&lt;float&gt;
+            the range of SNR values to simulate
+        design_SNR: float
+            the construction design SNR, E_b/N_o
+        max_iter: int
+            maximum number of iterations per SNR
+        min_iterations: int
+            the minimum number of iterations before early stopping is allowed per SNR
+        min_errors: int
+            the minimum number of frame errors before early stopping is allowed per SNR
+        sim_seed: int
+            pseudo-random generator seed, default is 1729 (&#39;twister&#39; on MATLAB)
+        manual_const_flag: bool
+            a flag that decides if construction should be done before simulating.
+            Set to False if mothercode and/or puncturing constructions are manually set by the user.
+
+        &#34;&#34;&#34;
+
+        # initialise simulation
+        np.random.seed(sim_seed)
+        frame_error_rates = np.zeros(len(Eb_No_vec))
+        bit_error_rates = np.zeros(len(Eb_No_vec))
+
+        # do construction if not done already
+        if not manual_const_flag:
+            if self.punct_flag and self.punct_type == &#39;shorten&#39;:
+                Shorten(self, design_SNR)
+            else:
+                Construct(self, design_SNR)
+
+        print(self)
+        print(&#39;=&#39; * 10, &#34;Simulation&#34;, &#39;=&#39; * 10)
+        for i in range(len(Eb_No_vec)):
+            # run simulation for the current SNR
+            frame_error_count, bit_error_count, num_blocks = self.run_simulation(Eb_No_vec[i], max_iter, min_errors, min_iterations)
+
+            # calculate FER and BER
+            frame_error_rate = frame_error_count / num_blocks
+            bit_error_rate = bit_error_count / (self.K * num_blocks)
+            frame_error_rates[i] = frame_error_rate
+            bit_error_rates[i] = bit_error_rate
+            print(&#34;Eb/No:&#34;, round(Eb_No_vec[i], 5), &#34;  FER:&#34;, round(frame_error_rate, 3), &#34;  BER:&#34;, round(bit_error_rate, 5))
+            print(&#39;# Iterations:&#39;, num_blocks, &#39;  # Frame Errors:&#39;, frame_error_count, &#39; # Bit Errors:&#39;, bit_error_count)
+            print(&#39;=&#39;*20)
+
+            # update GUI (if used)
+            if self.status_bar != None:
+                self.status_bar.set(&#34;Simulation progress: &#34; + str(i + 1) + &#34;/&#34; + str(len(Eb_No_vec)))
+
+            # early stopping condition
+            if frame_error_count &lt; min_errors:
+                break
+
+        # write data to JSON file
+        self.simulated_snr = Eb_No_vec
+        self.simulated_ber = bit_error_rates
+        self.simulated_fer = frame_error_rates
+        self.save_as_json(save_to)
+
+        # update GUI construction fields (if used)
+        if self.status_bar != None:
+            self.gui_widgets[3].delete(&#34;1.0&#34;, tk.END)
+            self.gui_widgets[6].delete(&#34;1.0&#34;, tk.END)
+            self.gui_widgets[3].insert(tk.INSERT, &#34;,&#34;.join(map(str, self.frozen)))
+            self.gui_widgets[6].insert(tk.INSERT, &#34;,&#34;.join(map(str, self.punct_set)))
+
+        # update console and GUI
+        print(&#34;Successfully completed simulation.\n&#34;)
+        if self.status_bar != None:
+            self.status_bar.set(&#34;Simulation progress: Done.&#34;)
+
+    def plot_helper(self, new_plot, sim_filenames, dir, plot_title = &#39;Polar Code Performance&#39;):
+        # plot the FER and BER from file list
+        new_plot.cla()
+        for sim_filename in sim_filenames:
+            with open(dir + sim_filename + &#39;.json&#39;) as data_file:
+                data_loaded = json.load(data_file)
+            new_plot.plot(data_loaded[&#39;SNR&#39;], data_loaded[&#39;FER&#39;], &#39;-o&#39;, markersize=6, linewidth=3, label=sim_filename)
+
+        # format the plots
+        new_plot.set_title(plot_title)
+        new_plot.set_ylabel(&#34;Frame Error Rate&#34;)
+        new_plot.set_xlabel(&#34;$E_b/N_o$ (dB)&#34;)
+        new_plot.grid(linestyle=&#39;-&#39;)
+        new_plot.set_yscale(&#39;log&#39;)
+        new_plot.legend(loc=&#39;lower left&#39;)
+
+    # call this for manual plotting
+    def plot(self, sim_filenames, dir):
+        &#34;&#34;&#34;
+        Plot multiple sets of FER data from the same directory on the same axes.
+
+        Parameters
+        ----------
+        sim_filenames: ndarray&lt;string&gt;
+            a list of all filenames to plot in a common root directory
+        dir: string
+            the root directory for the specified filenames
+
+        &#34;&#34;&#34;
+
+        fig = plt.figure()
+        new_plot = fig.add_subplot(111)
+        self.plot_helper(new_plot, sim_filenames, dir)
+        fig.show()
+
+    # used by the GUI class for automated plotting
+    def gui_plot_handler(self, gui_dict, fig):
+        sim_filenames = gui_dict[&#39;filenames&#39;]
+        dir = gui_dict[&#39;file_dir&#39;]
+        self.plot_helper(fig, sim_filenames, dir)
+
+    # used by the GUI class for simulating a new code
+    def gui_sim_handler(self, gui_dict):
+        # updated Polar Code from user
+        punct_type = &#39;shorten&#39; if gui_dict[&#39;punct_type&#39;] == True else &#39;punct&#39;
+        shortening_params = (punct_type, gui_dict[&#39;punct_algo&#39;], np.array(gui_dict[&#39;shortened_set&#39;], dtype=int),
+                             np.array(gui_dict[&#39;shortened_set&#39;], dtype=int), False)
+        self.initialise_code(gui_dict[&#39;N&#39;], gui_dict[&#39;K&#39;], shortening_params)
+        self.construction_type = gui_dict[&#39;construction_algo&#39;]
+        self.frozen = gui_dict[&#39;frozen_set&#39;]
+
+        # simulation parameters from user
+        iterations = gui_dict[&#39;iterations&#39;]
+        min_frame_errors = gui_dict[&#39;min_frame_errors&#39;]
+        file_dir = gui_dict[&#39;file_dir&#39;]
+        save_to = gui_dict[&#39;save_to&#39;]
+        manual_const_flag = gui_dict[&#39;manual_const_flag&#39;]
+        design_SNR = gui_dict[&#39;design_SNR&#39;]
+        Eb_No_vec = gui_dict[&#39;snr_values&#39;]
+
+        # run simulation in another thread to avoid GUI freeze
+        th = threading.Thread(name=&#39;sim_thread&#39;, target=self.simulate, args=(save_to, Eb_No_vec, design_SNR, iterations, 1000, min_frame_errors, 1729, manual_const_flag,))
+        th.setDaemon(True)
+        th.start()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="polarcodes.PolarCode.PolarCode"><code class="flex name class">
+<span>class <span class="ident">PolarCode</span></span>
+<span>(</span><span>M, K, punct_params=('', '', [], [], None))</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>N</code></strong> :&ensp;<code>int</code></dt>
+<dd>the mothercode block length</dd>
+<dt><strong><code>M</code></strong> :&ensp;<code>int</code></dt>
+<dd>the block length (after puncturing)</dd>
+<dt><strong><code>K</code></strong> :&ensp;<code>int</code></dt>
+<dd>the code dimension</dd>
+<dt><strong><code>n</code></strong> :&ensp;<code>int</code></dt>
+<dd>number of bits per index</dd>
+<dt><strong><code>s</code></strong> :&ensp;<code>int</code></dt>
+<dd>number of shortened bit-channels</dd>
+<dt><strong><code>reliabilities</code></strong> :&ensp;<code>ndarray&lt;int&gt;</code></dt>
+<dd>reliability vector (least reliable to most reliable)</dd>
+<dt><strong><code>frozen</code></strong> :&ensp;<code>ndarray&lt;int&gt;</code></dt>
+<dd>the frozen bit indices</dd>
+<dt><strong><code>frozen_lookup</code></strong> :&ensp;<code>ndarray&lt;int&gt;</code></dt>
+<dd>lookup table for the frozen bits</dd>
+<dt><strong><code>x</code></strong> :&ensp;<code>ndarray&lt;int&gt;</code></dt>
+<dd>the uncoded message with frozen bits</dd>
+<dt><strong><code>construction_type</code></strong> :&ensp;<code>string</code></dt>
+<dd>the mothercode construction type</dd>
+<dt><strong><code>message_received</code></strong> :&ensp;<code>ndarray&lt;int&gt;</code></dt>
+<dd>the decoded message received from a channel</dd>
+<dt><strong><code>punct_flag</code></strong> :&ensp;<code>bool</code></dt>
+<dd>whether or not the code is punctured</dd>
+<dt><strong><code>simulated_snr</code></strong> :&ensp;<code>ndarray&lt;float&gt;</code></dt>
+<dd>the SNR values simulated</dd>
+<dt><strong><code>simulated_fer</code></strong> :&ensp;<code>ndarray&lt;float&gt;</code></dt>
+<dd>the FER values for the SNR values in <code>simulated_snr</code> using <code>simulate</code></dd>
+<dt><strong><code>simulated_ber</code></strong> :&ensp;<code>ndarray&lt;float&gt;</code></dt>
+<dd>the BER values for the SNR values in <code>simulated_snr</code> using <code>simulate</code></dd>
+<dt><strong><code>punct_type</code></strong> :&ensp;<code>string</code></dt>
+<dd>'punct' for puncturing, and 'shorten' for shortening</dd>
+<dt><strong><code>punct_set</code></strong> :&ensp;<code>ndarray&lt;int&gt;</code></dt>
+<dd>the coded punctured indices</dd>
+<dt><strong><code>punct_set_lookup</code></strong> :&ensp;<code>ndarray&lt;int&gt;</code></dt>
+<dd>lookup table for <code>punct_set</code></dd>
+<dt><strong><code>source_set</code></strong> :&ensp;<code>ndarray&lt;int&gt;</code></dt>
+<dd>the uncoded punctured indices</dd>
+<dt><strong><code>source_set_lookup</code></strong> :&ensp;<code>ndarray&lt;int&gt;</code></dt>
+<dd>lookup table for <code>source_set</code></dd>
+<dt><strong><code>punct_algorithm</code></strong> :&ensp;<code>string</code></dt>
+<dd>the name of a puncturing algorithm. Options: {'brs', 'wls', 'bgl', 'perm'}</dd>
+<dt><strong><code>update_frozen_flag</code></strong> :&ensp;<code>bool</code></dt>
+<dd>whether or not to update the frozen indices after puncturing</dd>
+<dt><strong><code>recip_flag</code></strong> :&ensp;<code>bool</code></dt>
+<dd>True if <code>punct_set</code> equals <code>source_set</code></dd>
+</dl>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>M</code></strong> :&ensp;<code>int</code></dt>
+<dd>the block length (after puncturing)</dd>
+<dt><strong><code>K</code></strong> :&ensp;<code>int</code></dt>
+<dd>the code dimension</dd>
+<dt><strong><code>punct_params</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>a tuple to completely specify the puncturing parameters (if required).
+The syntax is (<code>punct_type</code>, <code>punct_algorithm</code>, <code>punct_set</code>, <code>source_set</code>, <code>update_frozen_flag</code>)</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PolarCode:
+    &#34;&#34;&#34;
+    Attributes
+    ----------
+    N: int
+        the mothercode block length
+    M: int
+        the block length (after puncturing)
+    K: int
+        the code dimension
+    n: int
+        number of bits per index
+    s: int
+        number of shortened bit-channels
+    reliabilities: ndarray&lt;int&gt;
+        reliability vector (least reliable to most reliable)
+    frozen: ndarray&lt;int&gt;
+        the frozen bit indices
+    frozen_lookup: ndarray&lt;int&gt;
+        lookup table for the frozen bits
+    x: ndarray&lt;int&gt;
+        the uncoded message with frozen bits
+    construction_type: string
+        the mothercode construction type
+    message_received: ndarray&lt;int&gt;
+        the decoded message received from a channel
+    punct_flag: bool
+        whether or not the code is punctured
+    simulated_snr: ndarray&lt;float&gt;
+        the SNR values simulated
+    simulated_fer: ndarray&lt;float&gt;
+        the FER values for the SNR values in ``simulated_snr`` using `simulate`
+    simulated_ber: ndarray&lt;float&gt;
+        the BER values for the SNR values in ``simulated_snr`` using `simulate`
+    punct_type: string
+        &#39;punct&#39; for puncturing, and &#39;shorten&#39; for shortening
+    punct_set: ndarray&lt;int&gt;
+        the coded punctured indices
+    punct_set_lookup: ndarray&lt;int&gt;
+        lookup table for ``punct_set``
+    source_set: ndarray&lt;int&gt;
+        the uncoded punctured indices
+    source_set_lookup: ndarray&lt;int&gt;
+        lookup table for ``source_set``
+    punct_algorithm: string
+        the name of a puncturing algorithm. Options: {&#39;brs&#39;, &#39;wls&#39;, &#39;bgl&#39;, &#39;perm&#39;}
+    update_frozen_flag: bool
+        whether or not to update the frozen indices after puncturing
+    recip_flag: bool
+        True if ``punct_set`` equals ``source_set``
+
+    &#34;&#34;&#34;
+
+    def __init__(self, M, K, punct_params=(&#39;&#39;, &#39;&#39;, [], [], None,)):
+        &#34;&#34;&#34;
+        Parameters
+        ----------
+        M: int
+            the block length (after puncturing)
+        K: int
+            the code dimension
+        punct_params: tuple
+            a tuple to completely specify the puncturing parameters (if required).
+            The syntax is (``punct_type``, ``punct_algorithm``, ``punct_set``, ``source_set``, ``update_frozen_flag``)
+        &#34;&#34;&#34;
+
+        self.initialise_code(M, K, punct_params)
+        self.status_bar = None  # set by the GUI so that the simulation progress can be tracked
+        self.gui_widgets = []
+
+    def initialise_code(self, M, K, punct_params):
+        &#34;&#34;&#34;
+        Initialise the code with a set of parameters the same way as the constructor.
+        Call this any time you want to change the code rate.
+        &#34;&#34;&#34;
+
+        # mothercode parameters
+        self.M = M
+        self.N = int(2**(np.ceil(np.log2(M))))
+        self.n = int(np.log2(self.N))
+        self.F = arikan_gen(self.n)
+        self.K = K
+        self.s = self.N - self.M
+        self.reliabilities = np.array([])
+        self.frozen = np.array([])
+        self.frozen_lookup = np.array([])
+        self.x = np.zeros(self.N, dtype=int)
+        self.u = np.zeros(self.N, dtype=int)
+        self.construction_type = &#39;bb&#39;
+        self.message_received = np.array([])
+        self.punct_flag = False if self.M == self.N else True
+        self.simulated_snr = np.array([])
+        self.simulated_fer = np.array([])
+        self.simulated_ber = np.array([])
+        self.FERestimate = 0
+        self.T = None
+
+        # puncturing parameters
+        self.punct_type = punct_params[0]
+        self.punct_set = np.array(punct_params[2])
+        self.punct_set_lookup = self.get_lut(punct_params[2])
+        self.source_set = np.array(punct_params[3])
+        self.source_set_lookup = self.get_lut(punct_params[3])
+        self.punct_algorithm = punct_params[1]
+        self.update_frozen_flag = punct_params[4]
+        self.recip_flag = np.array_equal(np.array(punct_params[2]), np.array(punct_params[3]))
+
+    def __str__(self):
+        &#34;&#34;&#34;
+        A string definition of PolarCode. This allows you to print any PolarCode object and see all of its
+        relevant parameters.
+
+        Returns
+        ----------
+        string
+            a stringified version of PolarCode
+
+        &#34;&#34;&#34;
+
+        output = &#39;=&#39; * 10 + &#34; Polar Code &#34; + &#39;=&#39; * 10 + &#39;\n&#39;
+        output += &#34;N: &#34; + str(self.N) + &#39;\n&#39;
+        output += &#34;M: &#34; + str(self.M) + &#39;\n&#39;
+        output += &#34;K: &#34;+ str(self.K) + &#39;\n&#39;
+        output += &#34;Mothercode Construction: &#34; + self.construction_type + &#39;\n&#39;
+        output += &#34;Ordered Bits (least reliable to most reliable): &#34; + str(self.reliabilities) + &#39;\n&#39;
+        output += &#34;Frozen Bits: &#34; + str(self.frozen) + &#39;\n&#39;
+        output += &#34;Puncturing Flag: &#34; + str(self.punct_flag) + &#39;\n&#39;
+        output += &#34;Puncturing Parameters: {punct_type: &#34; + str(self.punct_type) + &#39;\n&#39;
+        output += &#34;                        punct_algorithm: &#34; + str(self.punct_algorithm) + &#39;\n&#39;
+        output += &#34;                        punct_set: &#34; + str(self.punct_set) + &#39;\n&#39;
+        output += &#34;                        source_set: &#34; + str(self.source_set) + &#39;\n&#39;
+        output += &#34;                        update_frozen_flag: &#34; + str(self.update_frozen_flag) + &#34;}&#34; + &#39;\n&#39;
+        return output
+
+    def set_message(self, m):
+        &#34;&#34;&#34;
+        Set the message vector to the non-frozen bits in ``x``. The frozen bits in ``frozen`` are set to zero.
+
+        Parameters
+        ----------
+        m: ndarray&lt;int&gt;
+            the message vector
+
+        &#34;&#34;&#34;
+
+        self.message = m
+        self.x[self.frozen_lookup == 1] = m
+        self.u = self.x.copy()
+
+    def get_normalised_SNR(self, design_SNR):
+        &#34;&#34;&#34;
+        Normalise E_b/N_o so that the message bits have the same energy for any code rate.
+
+        Parameters
+        ----------
+        design_SNR: float
+            E_b/N_o in decibels
+
+        Returns
+        ----------
+        float
+            normalised E_b/N_o in linear units
+
+        &#34;&#34;&#34;
+
+        Eb_No_dB = design_SNR
+        Eb_No = 10 ** (Eb_No_dB / 10)  # convert dB scale to linear
+        Eb_No = Eb_No * (self.K / self.M)  # normalised message signal energy by R=K/M (M=N if not punctured)
+        return Eb_No
+
+    def get_lut(self, my_set):
+        &#34;&#34;&#34;
+        Convert a set into a lookup table.
+
+        Parameters
+        ----------
+        my_set: ndarray&lt;int&gt;
+            a vector of indices
+
+        Returns
+        ----------
+        ndarray&lt;int&gt;
+            a LUT with &#34;0&#34; for an index in ``my_set``, else &#34;1&#34;
+
+        &#34;&#34;&#34;
+
+        my_lut = np.ones(self.N, dtype=int)
+        my_lut[my_set] = 0
+        return my_lut
+
+    def save_as_json(self, sim_filename):
+        &#34;&#34;&#34;
+        Save all the important parameters in this object as a JSON file.
+
+        Parameters
+        ----------
+        sim_filename: string
+            directory and filename to save JSON file to (excluding extension)
+
+        &#34;&#34;&#34;
+        data = {
+            &#39;N&#39;: self.M,
+            &#39;n&#39;: self.n,
+            &#39;K&#39;: self.K,
+            &#39;frozen&#39;: self.frozen.tolist(),
+            &#39;construction_type&#39;: self.construction_type,
+            &#39;punct_flag&#39;: self.punct_flag,
+            &#39;punct_type&#39;: self.punct_type,
+            &#39;punct_set&#39;: self.punct_set.tolist(),
+            &#39;source_set&#39;: self.source_set.tolist(),
+            &#39;punct_algorithm&#39;: self.punct_algorithm,
+            &#39;update_frozen_flag&#39;: self.update_frozen_flag,
+            &#39;BER&#39;: self.simulated_ber.tolist(),
+            &#39;FER&#39;: self.simulated_fer.tolist(),
+            &#39;SNR&#39;: self.simulated_snr.tolist()
+        }
+        with open(sim_filename + &#39;.json&#39;, &#39;w&#39;, encoding=&#39;utf-8&#39;) as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
+
+    def run_simulation(self, Eb_No, max_iter, min_errors, min_iters):
+        frame_error_count = 0
+        bit_error_count = 0
+        num_blocks = 0
+        for i in range(1, max_iter + 1):
+            # simulate random PC in an AWGN channel
+            self.set_message(np.random.randint(2, size=self.K))
+            Encode(self)
+            AWGN(self, Eb_No)
+            Decode(self)
+
+            # detect errors
+            error_vec = self.message ^ self.message_received
+            num_errors = sum(error_vec)
+            frame_error_count = frame_error_count + (num_errors &gt; 1)
+            bit_error_count = bit_error_count + num_errors
+
+            # early stopping condition
+            num_blocks = i
+            if frame_error_count &gt;= min_errors and i &gt;= min_iters:
+                break
+        return frame_error_count, bit_error_count, num_blocks
+
+    def simulate(self, save_to, Eb_No_vec, design_SNR=None, max_iter=100000, min_iterations=1000, min_errors=30, sim_seed=1729, manual_const_flag=True):
+        &#34;&#34;&#34;
+        Monte-carlo simulation of the performance of this polar code.
+        The simulation has an early stopping condition of when the number of errors is below min_errors.
+        Each E_b/N_o simulation has an additional early stopping condition using the minimum iterations
+        and the minimum number of errors. The results are saved in a JSON file using :func:`save_as_json`.
+
+        Parameters
+        ----------
+        save_to: string
+            directory and filename to save JSON file to (excluding extension)
+        Eb_No_vec: ndarray&lt;float&gt;
+            the range of SNR values to simulate
+        design_SNR: float
+            the construction design SNR, E_b/N_o
+        max_iter: int
+            maximum number of iterations per SNR
+        min_iterations: int
+            the minimum number of iterations before early stopping is allowed per SNR
+        min_errors: int
+            the minimum number of frame errors before early stopping is allowed per SNR
+        sim_seed: int
+            pseudo-random generator seed, default is 1729 (&#39;twister&#39; on MATLAB)
+        manual_const_flag: bool
+            a flag that decides if construction should be done before simulating.
+            Set to False if mothercode and/or puncturing constructions are manually set by the user.
+
+        &#34;&#34;&#34;
+
+        # initialise simulation
+        np.random.seed(sim_seed)
+        frame_error_rates = np.zeros(len(Eb_No_vec))
+        bit_error_rates = np.zeros(len(Eb_No_vec))
+
+        # do construction if not done already
+        if not manual_const_flag:
+            if self.punct_flag and self.punct_type == &#39;shorten&#39;:
+                Shorten(self, design_SNR)
+            else:
+                Construct(self, design_SNR)
+
+        print(self)
+        print(&#39;=&#39; * 10, &#34;Simulation&#34;, &#39;=&#39; * 10)
+        for i in range(len(Eb_No_vec)):
+            # run simulation for the current SNR
+            frame_error_count, bit_error_count, num_blocks = self.run_simulation(Eb_No_vec[i], max_iter, min_errors, min_iterations)
+
+            # calculate FER and BER
+            frame_error_rate = frame_error_count / num_blocks
+            bit_error_rate = bit_error_count / (self.K * num_blocks)
+            frame_error_rates[i] = frame_error_rate
+            bit_error_rates[i] = bit_error_rate
+            print(&#34;Eb/No:&#34;, round(Eb_No_vec[i], 5), &#34;  FER:&#34;, round(frame_error_rate, 3), &#34;  BER:&#34;, round(bit_error_rate, 5))
+            print(&#39;# Iterations:&#39;, num_blocks, &#39;  # Frame Errors:&#39;, frame_error_count, &#39; # Bit Errors:&#39;, bit_error_count)
+            print(&#39;=&#39;*20)
+
+            # update GUI (if used)
+            if self.status_bar != None:
+                self.status_bar.set(&#34;Simulation progress: &#34; + str(i + 1) + &#34;/&#34; + str(len(Eb_No_vec)))
+
+            # early stopping condition
+            if frame_error_count &lt; min_errors:
+                break
+
+        # write data to JSON file
+        self.simulated_snr = Eb_No_vec
+        self.simulated_ber = bit_error_rates
+        self.simulated_fer = frame_error_rates
+        self.save_as_json(save_to)
+
+        # update GUI construction fields (if used)
+        if self.status_bar != None:
+            self.gui_widgets[3].delete(&#34;1.0&#34;, tk.END)
+            self.gui_widgets[6].delete(&#34;1.0&#34;, tk.END)
+            self.gui_widgets[3].insert(tk.INSERT, &#34;,&#34;.join(map(str, self.frozen)))
+            self.gui_widgets[6].insert(tk.INSERT, &#34;,&#34;.join(map(str, self.punct_set)))
+
+        # update console and GUI
+        print(&#34;Successfully completed simulation.\n&#34;)
+        if self.status_bar != None:
+            self.status_bar.set(&#34;Simulation progress: Done.&#34;)
+
+    def plot_helper(self, new_plot, sim_filenames, dir, plot_title = &#39;Polar Code Performance&#39;):
+        # plot the FER and BER from file list
+        new_plot.cla()
+        for sim_filename in sim_filenames:
+            with open(dir + sim_filename + &#39;.json&#39;) as data_file:
+                data_loaded = json.load(data_file)
+            new_plot.plot(data_loaded[&#39;SNR&#39;], data_loaded[&#39;FER&#39;], &#39;-o&#39;, markersize=6, linewidth=3, label=sim_filename)
+
+        # format the plots
+        new_plot.set_title(plot_title)
+        new_plot.set_ylabel(&#34;Frame Error Rate&#34;)
+        new_plot.set_xlabel(&#34;$E_b/N_o$ (dB)&#34;)
+        new_plot.grid(linestyle=&#39;-&#39;)
+        new_plot.set_yscale(&#39;log&#39;)
+        new_plot.legend(loc=&#39;lower left&#39;)
+
+    # call this for manual plotting
+    def plot(self, sim_filenames, dir):
+        &#34;&#34;&#34;
+        Plot multiple sets of FER data from the same directory on the same axes.
+
+        Parameters
+        ----------
+        sim_filenames: ndarray&lt;string&gt;
+            a list of all filenames to plot in a common root directory
+        dir: string
+            the root directory for the specified filenames
+
+        &#34;&#34;&#34;
+
+        fig = plt.figure()
+        new_plot = fig.add_subplot(111)
+        self.plot_helper(new_plot, sim_filenames, dir)
+        fig.show()
+
+    # used by the GUI class for automated plotting
+    def gui_plot_handler(self, gui_dict, fig):
+        sim_filenames = gui_dict[&#39;filenames&#39;]
+        dir = gui_dict[&#39;file_dir&#39;]
+        self.plot_helper(fig, sim_filenames, dir)
+
+    # used by the GUI class for simulating a new code
+    def gui_sim_handler(self, gui_dict):
+        # updated Polar Code from user
+        punct_type = &#39;shorten&#39; if gui_dict[&#39;punct_type&#39;] == True else &#39;punct&#39;
+        shortening_params = (punct_type, gui_dict[&#39;punct_algo&#39;], np.array(gui_dict[&#39;shortened_set&#39;], dtype=int),
+                             np.array(gui_dict[&#39;shortened_set&#39;], dtype=int), False)
+        self.initialise_code(gui_dict[&#39;N&#39;], gui_dict[&#39;K&#39;], shortening_params)
+        self.construction_type = gui_dict[&#39;construction_algo&#39;]
+        self.frozen = gui_dict[&#39;frozen_set&#39;]
+
+        # simulation parameters from user
+        iterations = gui_dict[&#39;iterations&#39;]
+        min_frame_errors = gui_dict[&#39;min_frame_errors&#39;]
+        file_dir = gui_dict[&#39;file_dir&#39;]
+        save_to = gui_dict[&#39;save_to&#39;]
+        manual_const_flag = gui_dict[&#39;manual_const_flag&#39;]
+        design_SNR = gui_dict[&#39;design_SNR&#39;]
+        Eb_No_vec = gui_dict[&#39;snr_values&#39;]
+
+        # run simulation in another thread to avoid GUI freeze
+        th = threading.Thread(name=&#39;sim_thread&#39;, target=self.simulate, args=(save_to, Eb_No_vec, design_SNR, iterations, 1000, min_frame_errors, 1729, manual_const_flag,))
+        th.setDaemon(True)
+        th.start()</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="polarcodes.PolarCode.PolarCode.get_lut"><code class="name flex">
+<span>def <span class="ident">get_lut</span></span>(<span>self, my_set)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Convert a set into a lookup table.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>my_set</code></strong> :&ensp;<code>ndarray&lt;int&gt;</code></dt>
+<dd>a vector of indices</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ndarray&lt;int&gt;</code></dt>
+<dd>a LUT with "0" for an index in <code>my_set</code>, else "1"</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_lut(self, my_set):
+    &#34;&#34;&#34;
+    Convert a set into a lookup table.
+
+    Parameters
+    ----------
+    my_set: ndarray&lt;int&gt;
+        a vector of indices
+
+    Returns
+    ----------
+    ndarray&lt;int&gt;
+        a LUT with &#34;0&#34; for an index in ``my_set``, else &#34;1&#34;
+
+    &#34;&#34;&#34;
+
+    my_lut = np.ones(self.N, dtype=int)
+    my_lut[my_set] = 0
+    return my_lut</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.PolarCode.PolarCode.get_normalised_SNR"><code class="name flex">
+<span>def <span class="ident">get_normalised_SNR</span></span>(<span>self, design_SNR)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Normalise E_b/N_o so that the message bits have the same energy for any code rate.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>design_SNR</code></strong> :&ensp;<code>float</code></dt>
+<dd>E_b/N_o in decibels</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>float</code></dt>
+<dd>normalised E_b/N_o in linear units</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_normalised_SNR(self, design_SNR):
+    &#34;&#34;&#34;
+    Normalise E_b/N_o so that the message bits have the same energy for any code rate.
+
+    Parameters
+    ----------
+    design_SNR: float
+        E_b/N_o in decibels
+
+    Returns
+    ----------
+    float
+        normalised E_b/N_o in linear units
+
+    &#34;&#34;&#34;
+
+    Eb_No_dB = design_SNR
+    Eb_No = 10 ** (Eb_No_dB / 10)  # convert dB scale to linear
+    Eb_No = Eb_No * (self.K / self.M)  # normalised message signal energy by R=K/M (M=N if not punctured)
+    return Eb_No</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.PolarCode.PolarCode.gui_plot_handler"><code class="name flex">
+<span>def <span class="ident">gui_plot_handler</span></span>(<span>self, gui_dict, fig)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def gui_plot_handler(self, gui_dict, fig):
+    sim_filenames = gui_dict[&#39;filenames&#39;]
+    dir = gui_dict[&#39;file_dir&#39;]
+    self.plot_helper(fig, sim_filenames, dir)</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.PolarCode.PolarCode.gui_sim_handler"><code class="name flex">
+<span>def <span class="ident">gui_sim_handler</span></span>(<span>self, gui_dict)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def gui_sim_handler(self, gui_dict):
+    # updated Polar Code from user
+    punct_type = &#39;shorten&#39; if gui_dict[&#39;punct_type&#39;] == True else &#39;punct&#39;
+    shortening_params = (punct_type, gui_dict[&#39;punct_algo&#39;], np.array(gui_dict[&#39;shortened_set&#39;], dtype=int),
+                         np.array(gui_dict[&#39;shortened_set&#39;], dtype=int), False)
+    self.initialise_code(gui_dict[&#39;N&#39;], gui_dict[&#39;K&#39;], shortening_params)
+    self.construction_type = gui_dict[&#39;construction_algo&#39;]
+    self.frozen = gui_dict[&#39;frozen_set&#39;]
+
+    # simulation parameters from user
+    iterations = gui_dict[&#39;iterations&#39;]
+    min_frame_errors = gui_dict[&#39;min_frame_errors&#39;]
+    file_dir = gui_dict[&#39;file_dir&#39;]
+    save_to = gui_dict[&#39;save_to&#39;]
+    manual_const_flag = gui_dict[&#39;manual_const_flag&#39;]
+    design_SNR = gui_dict[&#39;design_SNR&#39;]
+    Eb_No_vec = gui_dict[&#39;snr_values&#39;]
+
+    # run simulation in another thread to avoid GUI freeze
+    th = threading.Thread(name=&#39;sim_thread&#39;, target=self.simulate, args=(save_to, Eb_No_vec, design_SNR, iterations, 1000, min_frame_errors, 1729, manual_const_flag,))
+    th.setDaemon(True)
+    th.start()</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.PolarCode.PolarCode.initialise_code"><code class="name flex">
+<span>def <span class="ident">initialise_code</span></span>(<span>self, M, K, punct_params)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Initialise the code with a set of parameters the same way as the constructor.
+Call this any time you want to change the code rate.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def initialise_code(self, M, K, punct_params):
+    &#34;&#34;&#34;
+    Initialise the code with a set of parameters the same way as the constructor.
+    Call this any time you want to change the code rate.
+    &#34;&#34;&#34;
+
+    # mothercode parameters
+    self.M = M
+    self.N = int(2**(np.ceil(np.log2(M))))
+    self.n = int(np.log2(self.N))
+    self.F = arikan_gen(self.n)
+    self.K = K
+    self.s = self.N - self.M
+    self.reliabilities = np.array([])
+    self.frozen = np.array([])
+    self.frozen_lookup = np.array([])
+    self.x = np.zeros(self.N, dtype=int)
+    self.u = np.zeros(self.N, dtype=int)
+    self.construction_type = &#39;bb&#39;
+    self.message_received = np.array([])
+    self.punct_flag = False if self.M == self.N else True
+    self.simulated_snr = np.array([])
+    self.simulated_fer = np.array([])
+    self.simulated_ber = np.array([])
+    self.FERestimate = 0
+    self.T = None
+
+    # puncturing parameters
+    self.punct_type = punct_params[0]
+    self.punct_set = np.array(punct_params[2])
+    self.punct_set_lookup = self.get_lut(punct_params[2])
+    self.source_set = np.array(punct_params[3])
+    self.source_set_lookup = self.get_lut(punct_params[3])
+    self.punct_algorithm = punct_params[1]
+    self.update_frozen_flag = punct_params[4]
+    self.recip_flag = np.array_equal(np.array(punct_params[2]), np.array(punct_params[3]))</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.PolarCode.PolarCode.plot"><code class="name flex">
+<span>def <span class="ident">plot</span></span>(<span>self, sim_filenames, dir)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot multiple sets of FER data from the same directory on the same axes.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>sim_filenames</code></strong> :&ensp;<code>ndarray&lt;string&gt;</code></dt>
+<dd>a list of all filenames to plot in a common root directory</dd>
+<dt><strong><code>dir</code></strong> :&ensp;<code>string</code></dt>
+<dd>the root directory for the specified filenames</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def plot(self, sim_filenames, dir):
+    &#34;&#34;&#34;
+    Plot multiple sets of FER data from the same directory on the same axes.
+
+    Parameters
+    ----------
+    sim_filenames: ndarray&lt;string&gt;
+        a list of all filenames to plot in a common root directory
+    dir: string
+        the root directory for the specified filenames
+
+    &#34;&#34;&#34;
+
+    fig = plt.figure()
+    new_plot = fig.add_subplot(111)
+    self.plot_helper(new_plot, sim_filenames, dir)
+    fig.show()</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.PolarCode.PolarCode.plot_helper"><code class="name flex">
+<span>def <span class="ident">plot_helper</span></span>(<span>self, new_plot, sim_filenames, dir, plot_title='Polar Code Performance')</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def plot_helper(self, new_plot, sim_filenames, dir, plot_title = &#39;Polar Code Performance&#39;):
+    # plot the FER and BER from file list
+    new_plot.cla()
+    for sim_filename in sim_filenames:
+        with open(dir + sim_filename + &#39;.json&#39;) as data_file:
+            data_loaded = json.load(data_file)
+        new_plot.plot(data_loaded[&#39;SNR&#39;], data_loaded[&#39;FER&#39;], &#39;-o&#39;, markersize=6, linewidth=3, label=sim_filename)
+
+    # format the plots
+    new_plot.set_title(plot_title)
+    new_plot.set_ylabel(&#34;Frame Error Rate&#34;)
+    new_plot.set_xlabel(&#34;$E_b/N_o$ (dB)&#34;)
+    new_plot.grid(linestyle=&#39;-&#39;)
+    new_plot.set_yscale(&#39;log&#39;)
+    new_plot.legend(loc=&#39;lower left&#39;)</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.PolarCode.PolarCode.run_simulation"><code class="name flex">
+<span>def <span class="ident">run_simulation</span></span>(<span>self, Eb_No, max_iter, min_errors, min_iters)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run_simulation(self, Eb_No, max_iter, min_errors, min_iters):
+    frame_error_count = 0
+    bit_error_count = 0
+    num_blocks = 0
+    for i in range(1, max_iter + 1):
+        # simulate random PC in an AWGN channel
+        self.set_message(np.random.randint(2, size=self.K))
+        Encode(self)
+        AWGN(self, Eb_No)
+        Decode(self)
+
+        # detect errors
+        error_vec = self.message ^ self.message_received
+        num_errors = sum(error_vec)
+        frame_error_count = frame_error_count + (num_errors &gt; 1)
+        bit_error_count = bit_error_count + num_errors
+
+        # early stopping condition
+        num_blocks = i
+        if frame_error_count &gt;= min_errors and i &gt;= min_iters:
+            break
+    return frame_error_count, bit_error_count, num_blocks</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.PolarCode.PolarCode.save_as_json"><code class="name flex">
+<span>def <span class="ident">save_as_json</span></span>(<span>self, sim_filename)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Save all the important parameters in this object as a JSON file.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>sim_filename</code></strong> :&ensp;<code>string</code></dt>
+<dd>directory and filename to save JSON file to (excluding extension)</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_as_json(self, sim_filename):
+    &#34;&#34;&#34;
+    Save all the important parameters in this object as a JSON file.
+
+    Parameters
+    ----------
+    sim_filename: string
+        directory and filename to save JSON file to (excluding extension)
+
+    &#34;&#34;&#34;
+    data = {
+        &#39;N&#39;: self.M,
+        &#39;n&#39;: self.n,
+        &#39;K&#39;: self.K,
+        &#39;frozen&#39;: self.frozen.tolist(),
+        &#39;construction_type&#39;: self.construction_type,
+        &#39;punct_flag&#39;: self.punct_flag,
+        &#39;punct_type&#39;: self.punct_type,
+        &#39;punct_set&#39;: self.punct_set.tolist(),
+        &#39;source_set&#39;: self.source_set.tolist(),
+        &#39;punct_algorithm&#39;: self.punct_algorithm,
+        &#39;update_frozen_flag&#39;: self.update_frozen_flag,
+        &#39;BER&#39;: self.simulated_ber.tolist(),
+        &#39;FER&#39;: self.simulated_fer.tolist(),
+        &#39;SNR&#39;: self.simulated_snr.tolist()
+    }
+    with open(sim_filename + &#39;.json&#39;, &#39;w&#39;, encoding=&#39;utf-8&#39;) as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.PolarCode.PolarCode.set_message"><code class="name flex">
+<span>def <span class="ident">set_message</span></span>(<span>self, m)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set the message vector to the non-frozen bits in <code>x</code>. The frozen bits in <code>frozen</code> are set to zero.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>m</code></strong> :&ensp;<code>ndarray&lt;int&gt;</code></dt>
+<dd>the message vector</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_message(self, m):
+    &#34;&#34;&#34;
+    Set the message vector to the non-frozen bits in ``x``. The frozen bits in ``frozen`` are set to zero.
+
+    Parameters
+    ----------
+    m: ndarray&lt;int&gt;
+        the message vector
+
+    &#34;&#34;&#34;
+
+    self.message = m
+    self.x[self.frozen_lookup == 1] = m
+    self.u = self.x.copy()</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.PolarCode.PolarCode.simulate"><code class="name flex">
+<span>def <span class="ident">simulate</span></span>(<span>self, save_to, Eb_No_vec, design_SNR=None, max_iter=100000, min_iterations=1000, min_errors=30, sim_seed=1729, manual_const_flag=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Monte-carlo simulation of the performance of this polar code.
+The simulation has an early stopping condition of when the number of errors is below min_errors.
+Each E_b/N_o simulation has an additional early stopping condition using the minimum iterations
+and the minimum number of errors. The results are saved in a JSON file using :func:<code>save_as_json</code>.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>save_to</code></strong> :&ensp;<code>string</code></dt>
+<dd>directory and filename to save JSON file to (excluding extension)</dd>
+<dt><strong><code>Eb_No_vec</code></strong> :&ensp;<code>ndarray&lt;float&gt;</code></dt>
+<dd>the range of SNR values to simulate</dd>
+<dt><strong><code>design_SNR</code></strong> :&ensp;<code>float</code></dt>
+<dd>the construction design SNR, E_b/N_o</dd>
+<dt><strong><code>max_iter</code></strong> :&ensp;<code>int</code></dt>
+<dd>maximum number of iterations per SNR</dd>
+<dt><strong><code>min_iterations</code></strong> :&ensp;<code>int</code></dt>
+<dd>the minimum number of iterations before early stopping is allowed per SNR</dd>
+<dt><strong><code>min_errors</code></strong> :&ensp;<code>int</code></dt>
+<dd>the minimum number of frame errors before early stopping is allowed per SNR</dd>
+<dt><strong><code>sim_seed</code></strong> :&ensp;<code>int</code></dt>
+<dd>pseudo-random generator seed, default is 1729 ('twister' on MATLAB)</dd>
+<dt><strong><code>manual_const_flag</code></strong> :&ensp;<code>bool</code></dt>
+<dd>a flag that decides if construction should be done before simulating.
+Set to False if mothercode and/or puncturing constructions are manually set by the user.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def simulate(self, save_to, Eb_No_vec, design_SNR=None, max_iter=100000, min_iterations=1000, min_errors=30, sim_seed=1729, manual_const_flag=True):
+    &#34;&#34;&#34;
+    Monte-carlo simulation of the performance of this polar code.
+    The simulation has an early stopping condition of when the number of errors is below min_errors.
+    Each E_b/N_o simulation has an additional early stopping condition using the minimum iterations
+    and the minimum number of errors. The results are saved in a JSON file using :func:`save_as_json`.
+
+    Parameters
+    ----------
+    save_to: string
+        directory and filename to save JSON file to (excluding extension)
+    Eb_No_vec: ndarray&lt;float&gt;
+        the range of SNR values to simulate
+    design_SNR: float
+        the construction design SNR, E_b/N_o
+    max_iter: int
+        maximum number of iterations per SNR
+    min_iterations: int
+        the minimum number of iterations before early stopping is allowed per SNR
+    min_errors: int
+        the minimum number of frame errors before early stopping is allowed per SNR
+    sim_seed: int
+        pseudo-random generator seed, default is 1729 (&#39;twister&#39; on MATLAB)
+    manual_const_flag: bool
+        a flag that decides if construction should be done before simulating.
+        Set to False if mothercode and/or puncturing constructions are manually set by the user.
+
+    &#34;&#34;&#34;
+
+    # initialise simulation
+    np.random.seed(sim_seed)
+    frame_error_rates = np.zeros(len(Eb_No_vec))
+    bit_error_rates = np.zeros(len(Eb_No_vec))
+
+    # do construction if not done already
+    if not manual_const_flag:
+        if self.punct_flag and self.punct_type == &#39;shorten&#39;:
+            Shorten(self, design_SNR)
+        else:
+            Construct(self, design_SNR)
+
+    print(self)
+    print(&#39;=&#39; * 10, &#34;Simulation&#34;, &#39;=&#39; * 10)
+    for i in range(len(Eb_No_vec)):
+        # run simulation for the current SNR
+        frame_error_count, bit_error_count, num_blocks = self.run_simulation(Eb_No_vec[i], max_iter, min_errors, min_iterations)
+
+        # calculate FER and BER
+        frame_error_rate = frame_error_count / num_blocks
+        bit_error_rate = bit_error_count / (self.K * num_blocks)
+        frame_error_rates[i] = frame_error_rate
+        bit_error_rates[i] = bit_error_rate
+        print(&#34;Eb/No:&#34;, round(Eb_No_vec[i], 5), &#34;  FER:&#34;, round(frame_error_rate, 3), &#34;  BER:&#34;, round(bit_error_rate, 5))
+        print(&#39;# Iterations:&#39;, num_blocks, &#39;  # Frame Errors:&#39;, frame_error_count, &#39; # Bit Errors:&#39;, bit_error_count)
+        print(&#39;=&#39;*20)
+
+        # update GUI (if used)
+        if self.status_bar != None:
+            self.status_bar.set(&#34;Simulation progress: &#34; + str(i + 1) + &#34;/&#34; + str(len(Eb_No_vec)))
+
+        # early stopping condition
+        if frame_error_count &lt; min_errors:
+            break
+
+    # write data to JSON file
+    self.simulated_snr = Eb_No_vec
+    self.simulated_ber = bit_error_rates
+    self.simulated_fer = frame_error_rates
+    self.save_as_json(save_to)
+
+    # update GUI construction fields (if used)
+    if self.status_bar != None:
+        self.gui_widgets[3].delete(&#34;1.0&#34;, tk.END)
+        self.gui_widgets[6].delete(&#34;1.0&#34;, tk.END)
+        self.gui_widgets[3].insert(tk.INSERT, &#34;,&#34;.join(map(str, self.frozen)))
+        self.gui_widgets[6].insert(tk.INSERT, &#34;,&#34;.join(map(str, self.punct_set)))
+
+    # update console and GUI
+    print(&#34;Successfully completed simulation.\n&#34;)
+    if self.status_bar != None:
+        self.status_bar.set(&#34;Simulation progress: Done.&#34;)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="polarcodes" href="index.html">polarcodes</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="polarcodes.PolarCode.PolarCode" href="#polarcodes.PolarCode.PolarCode">PolarCode</a></code></h4>
+<ul class="two-column">
+<li><code><a title="polarcodes.PolarCode.PolarCode.get_lut" href="#polarcodes.PolarCode.PolarCode.get_lut">get_lut</a></code></li>
+<li><code><a title="polarcodes.PolarCode.PolarCode.get_normalised_SNR" href="#polarcodes.PolarCode.PolarCode.get_normalised_SNR">get_normalised_SNR</a></code></li>
+<li><code><a title="polarcodes.PolarCode.PolarCode.gui_plot_handler" href="#polarcodes.PolarCode.PolarCode.gui_plot_handler">gui_plot_handler</a></code></li>
+<li><code><a title="polarcodes.PolarCode.PolarCode.gui_sim_handler" href="#polarcodes.PolarCode.PolarCode.gui_sim_handler">gui_sim_handler</a></code></li>
+<li><code><a title="polarcodes.PolarCode.PolarCode.initialise_code" href="#polarcodes.PolarCode.PolarCode.initialise_code">initialise_code</a></code></li>
+<li><code><a title="polarcodes.PolarCode.PolarCode.plot" href="#polarcodes.PolarCode.PolarCode.plot">plot</a></code></li>
+<li><code><a title="polarcodes.PolarCode.PolarCode.plot_helper" href="#polarcodes.PolarCode.PolarCode.plot_helper">plot_helper</a></code></li>
+<li><code><a title="polarcodes.PolarCode.PolarCode.run_simulation" href="#polarcodes.PolarCode.PolarCode.run_simulation">run_simulation</a></code></li>
+<li><code><a title="polarcodes.PolarCode.PolarCode.save_as_json" href="#polarcodes.PolarCode.PolarCode.save_as_json">save_as_json</a></code></li>
+<li><code><a title="polarcodes.PolarCode.PolarCode.set_message" href="#polarcodes.PolarCode.PolarCode.set_message">set_message</a></code></li>
+<li><code><a title="polarcodes.PolarCode.PolarCode.simulate" href="#polarcodes.PolarCode.PolarCode.simulate">simulate</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

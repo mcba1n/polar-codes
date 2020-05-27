@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>polarcodes.AWGN API documentation</title>
+<meta name="description" content="This class simulates an AWGN channel by adding gaussian noise with double-sided noise power.
+It updates ``likelihoods`` in `PolarCode` with randomly …" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>polarcodes.AWGN</code></h1>
+</header>
+<section id="section-intro">
+<p>This class simulates an AWGN channel by adding gaussian noise with double-sided noise power.
+It updates <code>likelihoods</code> in <code>PolarCode</code> with randomly generated log-likelihood ratios
+for <code>u</code> in <code>PolarCode</code>. For puncturing, the likelihoods for the punctured bits given by
+<code>source_set_lookup</code> in <code>PolarCode</code> will be set to zero. For shortening,
+these likelihoods will be set to infinity. Currently only BPSK modulation is supported.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">#!/usr/bin/env python
+
+&#34;&#34;&#34;
+This class simulates an AWGN channel by adding gaussian noise with double-sided noise power.
+It updates ``likelihoods`` in `PolarCode` with randomly generated log-likelihood ratios
+for ``u`` in `PolarCode`. For puncturing, the likelihoods for the punctured bits given by
+``source_set_lookup`` in `PolarCode` will be set to zero. For shortening,
+these likelihoods will be set to infinity. Currently only BPSK modulation is supported.
+&#34;&#34;&#34;
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+class AWGN:
+    def __init__(self, myPC, Eb_No, plot_noise = False):
+        &#34;&#34;&#34;
+        Parameters
+        ----------
+        myPC: `PolarCode`
+            a polar code object created using the `PolarCode` class
+        Eb_No: float
+            the design SNR in decibels
+        plot_noise: bool
+            a flag to view the modeled noise
+
+        &#34;&#34;&#34;
+
+        self.myPC = myPC
+        self.Es = myPC.get_normalised_SNR(Eb_No)
+        self.No = 1
+        self.plot_noise = plot_noise
+
+        tx = self.modulation(self.myPC.u)
+        rx = tx + self.noise(self.myPC.N)
+        self.myPC.likelihoods = np.array(self.get_likelihoods(rx), dtype=np.float64)
+
+        # change shortened/punctured bit LLRs
+        if self.myPC.punct_flag:
+            if self.myPC.punct_type == &#39;shorten&#39;:
+                self.myPC.likelihoods[self.myPC.source_set_lookup == 0] = np.inf
+            elif self.myPC.punct_type == &#39;punct&#39;:
+                self.myPC.likelihoods[self.myPC.source_set_lookup == 0] = 0
+
+    def LLR(self, y):
+        &#34;&#34;&#34;
+        &gt; Finds the log-likelihood ratio of a received signal.
+        LLR = Pr(y=0)/Pr(y=1).
+
+        Parameters
+        ----------
+        y: float
+            a received signal from a gaussian-distributed channel
+
+        Returns
+        ----------
+        float
+            log-likelihood ratio for the input signal ``y``
+
+        &#34;&#34;&#34;
+
+        return -2 * y * np.sqrt(self.Es) / self.No
+
+    def get_likelihoods(self, y):
+        &#34;&#34;&#34;
+        Finds the log-likelihood ratio of an ensemble of received signals using :func:`LLR`.
+
+        Parameters
+        ----------
+        y: ndarray&lt;float&gt;
+            an ensemble of received signals
+
+        Returns
+        ----------
+        ndarray&lt;float&gt;
+            log-likelihood ratios for the input signals ``y``
+
+        &#34;&#34;&#34;
+        return [self.LLR(y[i]) for i in range(len(y))]
+
+    def modulation(self, x):
+        &#34;&#34;&#34;
+        BPSK modulation for a bit field.
+        &#34;1&#34; maps to +sqrt(E_s) and &#34;0&#34; maps to -sqrt(E_s).
+
+        Parameters
+        ----------
+        x: ndarray&lt;int&gt;
+            an ensemble of information to send
+
+        Returns
+        ----------
+        ndarray&lt;float&gt;
+            modulated signal with the information from ``x``
+
+        &#34;&#34;&#34;
+
+        return 2 * (x - 0.5) * np.sqrt(self.Es)
+
+    def noise(self, N):
+        &#34;&#34;&#34;
+        Generate gaussian noise with a specified noise power.
+        For a noise power N_o, the double-side noise power is N_o/2.
+
+        Parameters
+        ----------
+        N: float
+            the noise power
+
+        Returns
+        ----------
+        ndarray&lt;float&gt;
+            white gaussian noise vector
+
+        &#34;&#34;&#34;
+
+        # gaussian RNG vector
+        s = np.random.normal(0, np.sqrt(self.No / 2), size=N)
+
+        # display RNG values with ideal gaussian pdf
+        if self.plot_noise:
+            num_bins = 1000
+            count, bins, ignored = plt.hist(s, num_bins, density=True)
+            plt.plot(bins, 1 / (np.sqrt(np.pi * self.No)) * np.exp(- (bins) ** 2 / self.No),
+                        linewidth=2, color=&#39;r&#39;)
+            plt.title(&#39;AWGN&#39;)
+            plt.xlabel(&#39;Noise, n&#39;)
+            plt.ylabel(&#39;Density&#39;)
+            plt.legend([&#39;Theoretical&#39;, &#39;RNG&#39;])
+            plt.draw()
+        return s
+
+    def show_noise(self):
+        &#34;&#34;&#34;
+        Trigger showing the gaussian noise. Only works if ``plot_noise`` is True.
+        &#34;&#34;&#34;
+        plt.show()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="polarcodes.AWGN.AWGN"><code class="flex name class">
+<span>class <span class="ident">AWGN</span></span>
+<span>(</span><span>myPC, Eb_No, plot_noise=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>myPC</code></strong> :&ensp;<code>PolarCode</code></dt>
+<dd>a polar code object created using the <code>PolarCode</code> class</dd>
+<dt><strong><code>Eb_No</code></strong> :&ensp;<code>float</code></dt>
+<dd>the design SNR in decibels</dd>
+<dt><strong><code>plot_noise</code></strong> :&ensp;<code>bool</code></dt>
+<dd>a flag to view the modeled noise</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class AWGN:
+    def __init__(self, myPC, Eb_No, plot_noise = False):
+        &#34;&#34;&#34;
+        Parameters
+        ----------
+        myPC: `PolarCode`
+            a polar code object created using the `PolarCode` class
+        Eb_No: float
+            the design SNR in decibels
+        plot_noise: bool
+            a flag to view the modeled noise
+
+        &#34;&#34;&#34;
+
+        self.myPC = myPC
+        self.Es = myPC.get_normalised_SNR(Eb_No)
+        self.No = 1
+        self.plot_noise = plot_noise
+
+        tx = self.modulation(self.myPC.u)
+        rx = tx + self.noise(self.myPC.N)
+        self.myPC.likelihoods = np.array(self.get_likelihoods(rx), dtype=np.float64)
+
+        # change shortened/punctured bit LLRs
+        if self.myPC.punct_flag:
+            if self.myPC.punct_type == &#39;shorten&#39;:
+                self.myPC.likelihoods[self.myPC.source_set_lookup == 0] = np.inf
+            elif self.myPC.punct_type == &#39;punct&#39;:
+                self.myPC.likelihoods[self.myPC.source_set_lookup == 0] = 0
+
+    def LLR(self, y):
+        &#34;&#34;&#34;
+        &gt; Finds the log-likelihood ratio of a received signal.
+        LLR = Pr(y=0)/Pr(y=1).
+
+        Parameters
+        ----------
+        y: float
+            a received signal from a gaussian-distributed channel
+
+        Returns
+        ----------
+        float
+            log-likelihood ratio for the input signal ``y``
+
+        &#34;&#34;&#34;
+
+        return -2 * y * np.sqrt(self.Es) / self.No
+
+    def get_likelihoods(self, y):
+        &#34;&#34;&#34;
+        Finds the log-likelihood ratio of an ensemble of received signals using :func:`LLR`.
+
+        Parameters
+        ----------
+        y: ndarray&lt;float&gt;
+            an ensemble of received signals
+
+        Returns
+        ----------
+        ndarray&lt;float&gt;
+            log-likelihood ratios for the input signals ``y``
+
+        &#34;&#34;&#34;
+        return [self.LLR(y[i]) for i in range(len(y))]
+
+    def modulation(self, x):
+        &#34;&#34;&#34;
+        BPSK modulation for a bit field.
+        &#34;1&#34; maps to +sqrt(E_s) and &#34;0&#34; maps to -sqrt(E_s).
+
+        Parameters
+        ----------
+        x: ndarray&lt;int&gt;
+            an ensemble of information to send
+
+        Returns
+        ----------
+        ndarray&lt;float&gt;
+            modulated signal with the information from ``x``
+
+        &#34;&#34;&#34;
+
+        return 2 * (x - 0.5) * np.sqrt(self.Es)
+
+    def noise(self, N):
+        &#34;&#34;&#34;
+        Generate gaussian noise with a specified noise power.
+        For a noise power N_o, the double-side noise power is N_o/2.
+
+        Parameters
+        ----------
+        N: float
+            the noise power
+
+        Returns
+        ----------
+        ndarray&lt;float&gt;
+            white gaussian noise vector
+
+        &#34;&#34;&#34;
+
+        # gaussian RNG vector
+        s = np.random.normal(0, np.sqrt(self.No / 2), size=N)
+
+        # display RNG values with ideal gaussian pdf
+        if self.plot_noise:
+            num_bins = 1000
+            count, bins, ignored = plt.hist(s, num_bins, density=True)
+            plt.plot(bins, 1 / (np.sqrt(np.pi * self.No)) * np.exp(- (bins) ** 2 / self.No),
+                        linewidth=2, color=&#39;r&#39;)
+            plt.title(&#39;AWGN&#39;)
+            plt.xlabel(&#39;Noise, n&#39;)
+            plt.ylabel(&#39;Density&#39;)
+            plt.legend([&#39;Theoretical&#39;, &#39;RNG&#39;])
+            plt.draw()
+        return s
+
+    def show_noise(self):
+        &#34;&#34;&#34;
+        Trigger showing the gaussian noise. Only works if ``plot_noise`` is True.
+        &#34;&#34;&#34;
+        plt.show()</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="polarcodes.AWGN.AWGN.LLR"><code class="name flex">
+<span>def <span class="ident">LLR</span></span>(<span>self, y)</span>
+</code></dt>
+<dd>
+<div class="desc"><blockquote>
+<p>Finds the log-likelihood ratio of a received signal.
+LLR = Pr(y=0)/Pr(y=1).</p>
+</blockquote>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>y</code></strong> :&ensp;<code>float</code></dt>
+<dd>a received signal from a gaussian-distributed channel</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>float</code></dt>
+<dd>log-likelihood ratio for the input signal <code>y</code></dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def LLR(self, y):
+    &#34;&#34;&#34;
+    &gt; Finds the log-likelihood ratio of a received signal.
+    LLR = Pr(y=0)/Pr(y=1).
+
+    Parameters
+    ----------
+    y: float
+        a received signal from a gaussian-distributed channel
+
+    Returns
+    ----------
+    float
+        log-likelihood ratio for the input signal ``y``
+
+    &#34;&#34;&#34;
+
+    return -2 * y * np.sqrt(self.Es) / self.No</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.AWGN.AWGN.get_likelihoods"><code class="name flex">
+<span>def <span class="ident">get_likelihoods</span></span>(<span>self, y)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Finds the log-likelihood ratio of an ensemble of received signals using :func:<code>LLR</code>.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>y</code></strong> :&ensp;<code>ndarray&lt;float&gt;</code></dt>
+<dd>an ensemble of received signals</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ndarray&lt;float&gt;</code></dt>
+<dd>log-likelihood ratios for the input signals <code>y</code></dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_likelihoods(self, y):
+    &#34;&#34;&#34;
+    Finds the log-likelihood ratio of an ensemble of received signals using :func:`LLR`.
+
+    Parameters
+    ----------
+    y: ndarray&lt;float&gt;
+        an ensemble of received signals
+
+    Returns
+    ----------
+    ndarray&lt;float&gt;
+        log-likelihood ratios for the input signals ``y``
+
+    &#34;&#34;&#34;
+    return [self.LLR(y[i]) for i in range(len(y))]</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.AWGN.AWGN.modulation"><code class="name flex">
+<span>def <span class="ident">modulation</span></span>(<span>self, x)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>BPSK modulation for a bit field.
+"1" maps to +sqrt(E_s) and "0" maps to -sqrt(E_s).</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>x</code></strong> :&ensp;<code>ndarray&lt;int&gt;</code></dt>
+<dd>an ensemble of information to send</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ndarray&lt;float&gt;</code></dt>
+<dd>modulated signal with the information from <code>x</code></dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def modulation(self, x):
+    &#34;&#34;&#34;
+    BPSK modulation for a bit field.
+    &#34;1&#34; maps to +sqrt(E_s) and &#34;0&#34; maps to -sqrt(E_s).
+
+    Parameters
+    ----------
+    x: ndarray&lt;int&gt;
+        an ensemble of information to send
+
+    Returns
+    ----------
+    ndarray&lt;float&gt;
+        modulated signal with the information from ``x``
+
+    &#34;&#34;&#34;
+
+    return 2 * (x - 0.5) * np.sqrt(self.Es)</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.AWGN.AWGN.noise"><code class="name flex">
+<span>def <span class="ident">noise</span></span>(<span>self, N)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate gaussian noise with a specified noise power.
+For a noise power N_o, the double-side noise power is N_o/2.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>N</code></strong> :&ensp;<code>float</code></dt>
+<dd>the noise power</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ndarray&lt;float&gt;</code></dt>
+<dd>white gaussian noise vector</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def noise(self, N):
+    &#34;&#34;&#34;
+    Generate gaussian noise with a specified noise power.
+    For a noise power N_o, the double-side noise power is N_o/2.
+
+    Parameters
+    ----------
+    N: float
+        the noise power
+
+    Returns
+    ----------
+    ndarray&lt;float&gt;
+        white gaussian noise vector
+
+    &#34;&#34;&#34;
+
+    # gaussian RNG vector
+    s = np.random.normal(0, np.sqrt(self.No / 2), size=N)
+
+    # display RNG values with ideal gaussian pdf
+    if self.plot_noise:
+        num_bins = 1000
+        count, bins, ignored = plt.hist(s, num_bins, density=True)
+        plt.plot(bins, 1 / (np.sqrt(np.pi * self.No)) * np.exp(- (bins) ** 2 / self.No),
+                    linewidth=2, color=&#39;r&#39;)
+        plt.title(&#39;AWGN&#39;)
+        plt.xlabel(&#39;Noise, n&#39;)
+        plt.ylabel(&#39;Density&#39;)
+        plt.legend([&#39;Theoretical&#39;, &#39;RNG&#39;])
+        plt.draw()
+    return s</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.AWGN.AWGN.show_noise"><code class="name flex">
+<span>def <span class="ident">show_noise</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Trigger showing the gaussian noise. Only works if <code>plot_noise</code> is True.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def show_noise(self):
+    &#34;&#34;&#34;
+    Trigger showing the gaussian noise. Only works if ``plot_noise`` is True.
+    &#34;&#34;&#34;
+    plt.show()</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="polarcodes" href="index.html">polarcodes</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="polarcodes.AWGN.AWGN" href="#polarcodes.AWGN.AWGN">AWGN</a></code></h4>
+<ul class="">
+<li><code><a title="polarcodes.AWGN.AWGN.LLR" href="#polarcodes.AWGN.AWGN.LLR">LLR</a></code></li>
+<li><code><a title="polarcodes.AWGN.AWGN.get_likelihoods" href="#polarcodes.AWGN.AWGN.get_likelihoods">get_likelihoods</a></code></li>
+<li><code><a title="polarcodes.AWGN.AWGN.modulation" href="#polarcodes.AWGN.AWGN.modulation">modulation</a></code></li>
+<li><code><a title="polarcodes.AWGN.AWGN.noise" href="#polarcodes.AWGN.AWGN.noise">noise</a></code></li>
+<li><code><a title="polarcodes.AWGN.AWGN.show_noise" href="#polarcodes.AWGN.AWGN.show_noise">show_noise</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

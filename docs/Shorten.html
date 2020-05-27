@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>polarcodes.Shorten API documentation</title>
+<meta name="description" content="A class dedicated to shortening. This means that the likelihoods for each coded shortened bit are set to infinity at the channel output given by class …" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>polarcodes.Shorten</code></h1>
+</header>
+<section id="section-intro">
+<p>A class dedicated to shortening. This means that the likelihoods for each coded shortened bit are set to infinity at the channel output given by class AWGN.
+Shortening techniques supported: Wang-Liu Shortening (WLS), Bit-Reversal Shortening (BRS), Bioglio-Gabry-Land Shortening (BGL), and Permuted WLS (PWLS).</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">#!/usr/bin/env python
+
+&#34;&#34;&#34;
+A class dedicated to shortening. This means that the likelihoods for each coded shortened bit are set to infinity at the channel output given by class AWGN.
+Shortening techniques supported: Wang-Liu Shortening (WLS), Bit-Reversal Shortening (BRS), Bioglio-Gabry-Land Shortening (BGL), and Permuted WLS (PWLS).
+&#34;&#34;&#34;
+
+import numpy as np
+from polarcodes.utils import *
+from polarcodes.Construct import Construct
+
+class Shorten(Construct):
+    def __init__(self, myPC, design_SNR, manual=False):
+        &#34;&#34;&#34;
+
+        Parameters
+        ----------
+        myPC: `PolarCode`
+            a polar code object created using the :class:`PolarCode` class
+        design_SNR: float
+            the design SNR in decibels
+        manual: bool
+            suppress the constructor init
+
+        &#34;&#34;&#34;
+
+        super().__init__(myPC, design_SNR, True)
+        if manual:
+            return
+        else:
+            self.update_spcc(myPC, design_SNR)
+
+    def update_spcc(self, myPC, design_SNR):
+        # select shortening construction method
+        if myPC.punct_algorithm == &#39;brs&#39;:  # BRS shortening
+            myPC.punct_set = self.brs_pattern(myPC)
+            myPC.source_set = myPC.punct_set
+        elif myPC.punct_algorithm == &#39;wls&#39;:  # WLS shortening
+            myPC.punct_set = self.wls_pattern(myPC)
+            myPC.source_set = myPC.punct_set
+        elif myPC.punct_algorithm == &#39;bgl&#39;:  # BGL shortening
+            myPC.punct_set = self.bgl_pattern(myPC)
+            myPC.source_set = myPC.punct_set
+        elif myPC.punct_algorithm == &#39;perm&#39;:  # Perm shortening
+            myPC.punct_set = self.perm(myPC)
+            myPC.source_set = myPC.punct_set
+
+        myPC.punct_set_lookup = myPC.get_lut(myPC.punct_set)
+        myPC.source_set_lookup = myPC.get_lut(myPC.source_set)
+
+        # decide if we want a puncturing-dependent frozen set
+        if not myPC.update_frozen_flag:
+            self.update_mpcc(myPC, design_SNR)
+        else:
+            self.shortened_pcc(myPC, design_SNR)
+        myPC.frozen = self.frozen_from_pattern(myPC)
+        myPC.frozen_lookup = myPC.get_lut(myPC.frozen)
+        myPC.FERestimate = self.FER_estimate(myPC.frozen, myPC.z)
+
+    def shortened_pcc(self, myPC, design_SNR):
+        &#34;&#34;&#34;
+        Find the shortened polar code construction and update ``frozen`` in ``myPC``.
+        This is not strictly necessary, since many shortening patterns work just fine with the mothercode reliabilities.
+
+        Parameters
+        ----------
+        myPC: `PolarCode`
+            a polar code object created using the :class:`PolarCode` class
+        design_SNR: float
+            the design SNR in decibels
+
+        &#34;&#34;&#34;
+
+        # select the construction method
+        design_SNR_normalised = myPC.get_normalised_SNR(design_SNR)
+        if myPC.construction_type == &#39;bb&#39;:
+            z0 = np.array([-design_SNR_normalised] * myPC.N)
+            z0[myPC.punct_set] = -np.inf
+            myPC.reliabilities, myPC.frozen, myPC.FERestimate = self.general_pcc(myPC, z0)
+        elif myPC.construction_type == &#39;ga&#39;:
+            z0 = np.array([4 * design_SNR_normalised] * myPC.N)
+            z0[myPC.punct_set] = np.inf
+            myPC.reliabilities, myPC.frozen, myPC.FERestimate = self.general_ga(myPC, z0)
+
+    def wls_pattern(self, myPC):
+        &#34;&#34;&#34;
+        Wang-Liu Shortening (WLS). The common pattern from the Wang-Liu algorithm.
+
+        Parameters
+        ----------
+        myPC: `PolarCode`
+            a polar code object created using the :class:`PolarCode` class
+
+        Returns
+        ----------
+        ndarray&lt;int&gt;
+            WLS shortening set
+
+        -------------
+        **References:**
+
+        * Runxin Wang, &amp; Rongke Liu. (2014). A Novel Puncturing Scheme for Polar Codes. IEEE Communications Letters, 18(12), 2081–2084. https://doi.org/10.1109/LCOMM.2014.2364845
+
+        &#34;&#34;&#34;
+
+        punct_set = np.array(range(myPC.N - myPC.s, myPC.N))
+        return punct_set
+
+    def brs_pattern(self, myPC):
+        &#34;&#34;&#34;
+        Bit-Reversal Shortening (BRS). A known high-performing shortening set, often called RQUP.
+
+        Parameters
+        ----------
+        myPC: `PolarCode`
+            a polar code object created using the `PolarCode` class
+
+        Returns
+        ----------
+        ndarray&lt;int&gt;
+            BRS shortening set
+
+        -------------
+        **References:**
+
+        * Niu, Dai, Chen, Lin, Zhang, &amp; Vasilakos. (2017). Rate-Compatible Punctured Polar Codes: Optimal Construction Based on Polar Spectra. arXiv.org. Retrieved from http://search.proquest.com/docview/2076458581/
+
+        &#34;&#34;&#34;
+        punct_set_last = self.wls_pattern(myPC)
+        punct_set = np.array([bit_reversed(i, myPC.n) for i in punct_set_last])
+        return punct_set
+
+    def frozen_from_pattern(self, myPC):
+        &#34;&#34;&#34;
+        Forces the frozen bits to include the corresponding puncturing source bits in ``source_set`` in ``myPC``.
+
+        Parameters
+        ----------
+        myPC: `PolarCode`
+            a polar code object created using the :class:`PolarCode` class
+
+        Returns
+        ----------
+        ndarray&lt;int&gt;
+            the new frozen set, that is typically assigned to ``frozen`` in ``myPC``.
+
+        &#34;&#34;&#34;
+
+        R_m = []
+        for i in range(myPC.N):    # add elements from R not in punct_set to R_m
+            if myPC.reliabilities[i] not in myPC.source_set:
+                R_m.append(myPC.reliabilities[i])
+        t = myPC.M - myPC.K   # number of frozen bits left to select
+        frozen = np.array(np.append(np.array(R_m[:t]), myPC.source_set))   # first t bits of R_m, then append S
+        return frozen
+
+    def perm(self, myPC):
+        &#34;&#34;&#34;
+        Bit-wise permutation of the indices of the WLS pattern. This has been shown to produce other reciprocal
+        shortening patterns, and so it is useful in enumerating them all for analysis.
+
+        Parameters
+        ----------
+        myPC: `PolarCode`
+            a polar code object created using the :class:`PolarCode` class
+
+        Returns
+        ----------
+        ndarray&lt;int&gt;
+            the permuted shortening pattern for ``myPC``
+
+        &#34;&#34;&#34;
+
+        punct_set_last = self.wls_pattern(myPC)
+        punct_set = np.array(bit_perm(punct_set_last, myPC.perm, myPC.n))  # specify perm before construction
+        return punct_set
+
+    def wang_liu(self, myPC):
+        N = 2**myPC.n
+        G = arikan_gen(myPC.n)
+        s = []
+
+        for r in range(myPC.punct_set):
+            for i in range(N):
+                row = G[i, :]
+                row_wt = np.sum(row)
+                if row_wt == 1:
+                    j = (np.where(row==1)[0]).item()
+                    G[i, :] = np.zeros(N)
+                    G[:, j] = np.zeros(N)
+                    s.append(i)
+                    break
+        return np.array(s)
+
+    def bgl_pattern(self, myPC):
+        &#34;&#34;&#34;
+        Bioglio-Gabry-Land (BGL) Shortening
+
+        Parameters
+        ----------
+        myPC: `PolarCode`
+            a polar code object created using the :class:`PolarCode` class
+        ndarray&lt;int&gt;
+            the BGL shortening set
+
+        -------------
+        **References:**
+
+        * Bioglio, V., Gabry, F., &amp; Land, I. (2017). Low-Complexity Puncturing and Shortening of Polar Codes. arXiv.org. Retrieved from http://search.proquest.com/docview/2075581442/
+
+        &#34;&#34;&#34;
+
+        num_bits = myPC.n
+        s = myPC.N - myPC.M  # number bits to shorten
+        reversed_indices = np.array([bit_reversed(i, num_bits) for i in myPC.reliabilities])
+        punct_set = np.array(reversed_indices[-s:])  # last s bits of reversed_indices
+        return punct_set</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="polarcodes.Shorten.Shorten"><code class="flex name class">
+<span>class <span class="ident">Shorten</span></span>
+<span>(</span><span>myPC, design_SNR, manual=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>myPC</code></strong> :&ensp;<code>PolarCode</code></dt>
+<dd>a polar code object created using the :class:<code>PolarCode</code> class</dd>
+<dt><strong><code>design_SNR</code></strong> :&ensp;<code>float</code></dt>
+<dd>the design SNR in decibels</dd>
+<dt><strong><code>manual</code></strong> :&ensp;<code>bool</code></dt>
+<dd>suppress the constructor init</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Shorten(Construct):
+    def __init__(self, myPC, design_SNR, manual=False):
+        &#34;&#34;&#34;
+
+        Parameters
+        ----------
+        myPC: `PolarCode`
+            a polar code object created using the :class:`PolarCode` class
+        design_SNR: float
+            the design SNR in decibels
+        manual: bool
+            suppress the constructor init
+
+        &#34;&#34;&#34;
+
+        super().__init__(myPC, design_SNR, True)
+        if manual:
+            return
+        else:
+            self.update_spcc(myPC, design_SNR)
+
+    def update_spcc(self, myPC, design_SNR):
+        # select shortening construction method
+        if myPC.punct_algorithm == &#39;brs&#39;:  # BRS shortening
+            myPC.punct_set = self.brs_pattern(myPC)
+            myPC.source_set = myPC.punct_set
+        elif myPC.punct_algorithm == &#39;wls&#39;:  # WLS shortening
+            myPC.punct_set = self.wls_pattern(myPC)
+            myPC.source_set = myPC.punct_set
+        elif myPC.punct_algorithm == &#39;bgl&#39;:  # BGL shortening
+            myPC.punct_set = self.bgl_pattern(myPC)
+            myPC.source_set = myPC.punct_set
+        elif myPC.punct_algorithm == &#39;perm&#39;:  # Perm shortening
+            myPC.punct_set = self.perm(myPC)
+            myPC.source_set = myPC.punct_set
+
+        myPC.punct_set_lookup = myPC.get_lut(myPC.punct_set)
+        myPC.source_set_lookup = myPC.get_lut(myPC.source_set)
+
+        # decide if we want a puncturing-dependent frozen set
+        if not myPC.update_frozen_flag:
+            self.update_mpcc(myPC, design_SNR)
+        else:
+            self.shortened_pcc(myPC, design_SNR)
+        myPC.frozen = self.frozen_from_pattern(myPC)
+        myPC.frozen_lookup = myPC.get_lut(myPC.frozen)
+        myPC.FERestimate = self.FER_estimate(myPC.frozen, myPC.z)
+
+    def shortened_pcc(self, myPC, design_SNR):
+        &#34;&#34;&#34;
+        Find the shortened polar code construction and update ``frozen`` in ``myPC``.
+        This is not strictly necessary, since many shortening patterns work just fine with the mothercode reliabilities.
+
+        Parameters
+        ----------
+        myPC: `PolarCode`
+            a polar code object created using the :class:`PolarCode` class
+        design_SNR: float
+            the design SNR in decibels
+
+        &#34;&#34;&#34;
+
+        # select the construction method
+        design_SNR_normalised = myPC.get_normalised_SNR(design_SNR)
+        if myPC.construction_type == &#39;bb&#39;:
+            z0 = np.array([-design_SNR_normalised] * myPC.N)
+            z0[myPC.punct_set] = -np.inf
+            myPC.reliabilities, myPC.frozen, myPC.FERestimate = self.general_pcc(myPC, z0)
+        elif myPC.construction_type == &#39;ga&#39;:
+            z0 = np.array([4 * design_SNR_normalised] * myPC.N)
+            z0[myPC.punct_set] = np.inf
+            myPC.reliabilities, myPC.frozen, myPC.FERestimate = self.general_ga(myPC, z0)
+
+    def wls_pattern(self, myPC):
+        &#34;&#34;&#34;
+        Wang-Liu Shortening (WLS). The common pattern from the Wang-Liu algorithm.
+
+        Parameters
+        ----------
+        myPC: `PolarCode`
+            a polar code object created using the :class:`PolarCode` class
+
+        Returns
+        ----------
+        ndarray&lt;int&gt;
+            WLS shortening set
+
+        -------------
+        **References:**
+
+        * Runxin Wang, &amp; Rongke Liu. (2014). A Novel Puncturing Scheme for Polar Codes. IEEE Communications Letters, 18(12), 2081–2084. https://doi.org/10.1109/LCOMM.2014.2364845
+
+        &#34;&#34;&#34;
+
+        punct_set = np.array(range(myPC.N - myPC.s, myPC.N))
+        return punct_set
+
+    def brs_pattern(self, myPC):
+        &#34;&#34;&#34;
+        Bit-Reversal Shortening (BRS). A known high-performing shortening set, often called RQUP.
+
+        Parameters
+        ----------
+        myPC: `PolarCode`
+            a polar code object created using the `PolarCode` class
+
+        Returns
+        ----------
+        ndarray&lt;int&gt;
+            BRS shortening set
+
+        -------------
+        **References:**
+
+        * Niu, Dai, Chen, Lin, Zhang, &amp; Vasilakos. (2017). Rate-Compatible Punctured Polar Codes: Optimal Construction Based on Polar Spectra. arXiv.org. Retrieved from http://search.proquest.com/docview/2076458581/
+
+        &#34;&#34;&#34;
+        punct_set_last = self.wls_pattern(myPC)
+        punct_set = np.array([bit_reversed(i, myPC.n) for i in punct_set_last])
+        return punct_set
+
+    def frozen_from_pattern(self, myPC):
+        &#34;&#34;&#34;
+        Forces the frozen bits to include the corresponding puncturing source bits in ``source_set`` in ``myPC``.
+
+        Parameters
+        ----------
+        myPC: `PolarCode`
+            a polar code object created using the :class:`PolarCode` class
+
+        Returns
+        ----------
+        ndarray&lt;int&gt;
+            the new frozen set, that is typically assigned to ``frozen`` in ``myPC``.
+
+        &#34;&#34;&#34;
+
+        R_m = []
+        for i in range(myPC.N):    # add elements from R not in punct_set to R_m
+            if myPC.reliabilities[i] not in myPC.source_set:
+                R_m.append(myPC.reliabilities[i])
+        t = myPC.M - myPC.K   # number of frozen bits left to select
+        frozen = np.array(np.append(np.array(R_m[:t]), myPC.source_set))   # first t bits of R_m, then append S
+        return frozen
+
+    def perm(self, myPC):
+        &#34;&#34;&#34;
+        Bit-wise permutation of the indices of the WLS pattern. This has been shown to produce other reciprocal
+        shortening patterns, and so it is useful in enumerating them all for analysis.
+
+        Parameters
+        ----------
+        myPC: `PolarCode`
+            a polar code object created using the :class:`PolarCode` class
+
+        Returns
+        ----------
+        ndarray&lt;int&gt;
+            the permuted shortening pattern for ``myPC``
+
+        &#34;&#34;&#34;
+
+        punct_set_last = self.wls_pattern(myPC)
+        punct_set = np.array(bit_perm(punct_set_last, myPC.perm, myPC.n))  # specify perm before construction
+        return punct_set
+
+    def wang_liu(self, myPC):
+        N = 2**myPC.n
+        G = arikan_gen(myPC.n)
+        s = []
+
+        for r in range(myPC.punct_set):
+            for i in range(N):
+                row = G[i, :]
+                row_wt = np.sum(row)
+                if row_wt == 1:
+                    j = (np.where(row==1)[0]).item()
+                    G[i, :] = np.zeros(N)
+                    G[:, j] = np.zeros(N)
+                    s.append(i)
+                    break
+        return np.array(s)
+
+    def bgl_pattern(self, myPC):
+        &#34;&#34;&#34;
+        Bioglio-Gabry-Land (BGL) Shortening
+
+        Parameters
+        ----------
+        myPC: `PolarCode`
+            a polar code object created using the :class:`PolarCode` class
+        ndarray&lt;int&gt;
+            the BGL shortening set
+
+        -------------
+        **References:**
+
+        * Bioglio, V., Gabry, F., &amp; Land, I. (2017). Low-Complexity Puncturing and Shortening of Polar Codes. arXiv.org. Retrieved from http://search.proquest.com/docview/2075581442/
+
+        &#34;&#34;&#34;
+
+        num_bits = myPC.n
+        s = myPC.N - myPC.M  # number bits to shorten
+        reversed_indices = np.array([bit_reversed(i, num_bits) for i in myPC.reliabilities])
+        punct_set = np.array(reversed_indices[-s:])  # last s bits of reversed_indices
+        return punct_set</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="polarcodes.Construct.Construct" href="Construct.html#polarcodes.Construct.Construct">Construct</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="polarcodes.Shorten.Shorten.bgl_pattern"><code class="name flex">
+<span>def <span class="ident">bgl_pattern</span></span>(<span>self, myPC)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Bioglio-Gabry-Land (BGL) Shortening</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>myPC</code></strong> :&ensp;<code>PolarCode</code></dt>
+<dd>a polar code object created using the :class:<code>PolarCode</code> class</dd>
+</dl>
+<p>ndarray<int>
+the BGL shortening set</p>
+<hr>
+<p><strong>References:</strong></p>
+<ul>
+<li>Bioglio, V., Gabry, F., &amp; Land, I. (2017). Low-Complexity Puncturing and Shortening of Polar Codes. arXiv.org. Retrieved from <a href="http://search.proquest.com/docview/2075581442/">http://search.proquest.com/docview/2075581442/</a></li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def bgl_pattern(self, myPC):
+    &#34;&#34;&#34;
+    Bioglio-Gabry-Land (BGL) Shortening
+
+    Parameters
+    ----------
+    myPC: `PolarCode`
+        a polar code object created using the :class:`PolarCode` class
+    ndarray&lt;int&gt;
+        the BGL shortening set
+
+    -------------
+    **References:**
+
+    * Bioglio, V., Gabry, F., &amp; Land, I. (2017). Low-Complexity Puncturing and Shortening of Polar Codes. arXiv.org. Retrieved from http://search.proquest.com/docview/2075581442/
+
+    &#34;&#34;&#34;
+
+    num_bits = myPC.n
+    s = myPC.N - myPC.M  # number bits to shorten
+    reversed_indices = np.array([bit_reversed(i, num_bits) for i in myPC.reliabilities])
+    punct_set = np.array(reversed_indices[-s:])  # last s bits of reversed_indices
+    return punct_set</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.Shorten.Shorten.brs_pattern"><code class="name flex">
+<span>def <span class="ident">brs_pattern</span></span>(<span>self, myPC)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Bit-Reversal Shortening (BRS). A known high-performing shortening set, often called RQUP.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>myPC</code></strong> :&ensp;<code>PolarCode</code></dt>
+<dd>a polar code object created using the <code>PolarCode</code> class</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ndarray&lt;int&gt;</code></dt>
+<dd>BRS shortening set</dd>
+</dl>
+<hr>
+<p><strong>References:</strong></p>
+<ul>
+<li>Niu, Dai, Chen, Lin, Zhang, &amp; Vasilakos. (2017). Rate-Compatible Punctured Polar Codes: Optimal Construction Based on Polar Spectra. arXiv.org. Retrieved from <a href="http://search.proquest.com/docview/2076458581/">http://search.proquest.com/docview/2076458581/</a></li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def brs_pattern(self, myPC):
+    &#34;&#34;&#34;
+    Bit-Reversal Shortening (BRS). A known high-performing shortening set, often called RQUP.
+
+    Parameters
+    ----------
+    myPC: `PolarCode`
+        a polar code object created using the `PolarCode` class
+
+    Returns
+    ----------
+    ndarray&lt;int&gt;
+        BRS shortening set
+
+    -------------
+    **References:**
+
+    * Niu, Dai, Chen, Lin, Zhang, &amp; Vasilakos. (2017). Rate-Compatible Punctured Polar Codes: Optimal Construction Based on Polar Spectra. arXiv.org. Retrieved from http://search.proquest.com/docview/2076458581/
+
+    &#34;&#34;&#34;
+    punct_set_last = self.wls_pattern(myPC)
+    punct_set = np.array([bit_reversed(i, myPC.n) for i in punct_set_last])
+    return punct_set</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.Shorten.Shorten.frozen_from_pattern"><code class="name flex">
+<span>def <span class="ident">frozen_from_pattern</span></span>(<span>self, myPC)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Forces the frozen bits to include the corresponding puncturing source bits in <code>source_set</code> in <code>myPC</code>.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>myPC</code></strong> :&ensp;<code>PolarCode</code></dt>
+<dd>a polar code object created using the :class:<code>PolarCode</code> class</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ndarray&lt;int&gt;</code></dt>
+<dd>the new frozen set, that is typically assigned to <code>frozen</code> in <code>myPC</code>.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def frozen_from_pattern(self, myPC):
+    &#34;&#34;&#34;
+    Forces the frozen bits to include the corresponding puncturing source bits in ``source_set`` in ``myPC``.
+
+    Parameters
+    ----------
+    myPC: `PolarCode`
+        a polar code object created using the :class:`PolarCode` class
+
+    Returns
+    ----------
+    ndarray&lt;int&gt;
+        the new frozen set, that is typically assigned to ``frozen`` in ``myPC``.
+
+    &#34;&#34;&#34;
+
+    R_m = []
+    for i in range(myPC.N):    # add elements from R not in punct_set to R_m
+        if myPC.reliabilities[i] not in myPC.source_set:
+            R_m.append(myPC.reliabilities[i])
+    t = myPC.M - myPC.K   # number of frozen bits left to select
+    frozen = np.array(np.append(np.array(R_m[:t]), myPC.source_set))   # first t bits of R_m, then append S
+    return frozen</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.Shorten.Shorten.perm"><code class="name flex">
+<span>def <span class="ident">perm</span></span>(<span>self, myPC)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Bit-wise permutation of the indices of the WLS pattern. This has been shown to produce other reciprocal
+shortening patterns, and so it is useful in enumerating them all for analysis.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>myPC</code></strong> :&ensp;<code>PolarCode</code></dt>
+<dd>a polar code object created using the :class:<code>PolarCode</code> class</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ndarray&lt;int&gt;</code></dt>
+<dd>the permuted shortening pattern for <code>myPC</code></dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def perm(self, myPC):
+    &#34;&#34;&#34;
+    Bit-wise permutation of the indices of the WLS pattern. This has been shown to produce other reciprocal
+    shortening patterns, and so it is useful in enumerating them all for analysis.
+
+    Parameters
+    ----------
+    myPC: `PolarCode`
+        a polar code object created using the :class:`PolarCode` class
+
+    Returns
+    ----------
+    ndarray&lt;int&gt;
+        the permuted shortening pattern for ``myPC``
+
+    &#34;&#34;&#34;
+
+    punct_set_last = self.wls_pattern(myPC)
+    punct_set = np.array(bit_perm(punct_set_last, myPC.perm, myPC.n))  # specify perm before construction
+    return punct_set</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.Shorten.Shorten.shortened_pcc"><code class="name flex">
+<span>def <span class="ident">shortened_pcc</span></span>(<span>self, myPC, design_SNR)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Find the shortened polar code construction and update <code>frozen</code> in <code>myPC</code>.
+This is not strictly necessary, since many shortening patterns work just fine with the mothercode reliabilities.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>myPC</code></strong> :&ensp;<code>PolarCode</code></dt>
+<dd>a polar code object created using the :class:<code>PolarCode</code> class</dd>
+<dt><strong><code>design_SNR</code></strong> :&ensp;<code>float</code></dt>
+<dd>the design SNR in decibels</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def shortened_pcc(self, myPC, design_SNR):
+    &#34;&#34;&#34;
+    Find the shortened polar code construction and update ``frozen`` in ``myPC``.
+    This is not strictly necessary, since many shortening patterns work just fine with the mothercode reliabilities.
+
+    Parameters
+    ----------
+    myPC: `PolarCode`
+        a polar code object created using the :class:`PolarCode` class
+    design_SNR: float
+        the design SNR in decibels
+
+    &#34;&#34;&#34;
+
+    # select the construction method
+    design_SNR_normalised = myPC.get_normalised_SNR(design_SNR)
+    if myPC.construction_type == &#39;bb&#39;:
+        z0 = np.array([-design_SNR_normalised] * myPC.N)
+        z0[myPC.punct_set] = -np.inf
+        myPC.reliabilities, myPC.frozen, myPC.FERestimate = self.general_pcc(myPC, z0)
+    elif myPC.construction_type == &#39;ga&#39;:
+        z0 = np.array([4 * design_SNR_normalised] * myPC.N)
+        z0[myPC.punct_set] = np.inf
+        myPC.reliabilities, myPC.frozen, myPC.FERestimate = self.general_ga(myPC, z0)</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.Shorten.Shorten.update_spcc"><code class="name flex">
+<span>def <span class="ident">update_spcc</span></span>(<span>self, myPC, design_SNR)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_spcc(self, myPC, design_SNR):
+    # select shortening construction method
+    if myPC.punct_algorithm == &#39;brs&#39;:  # BRS shortening
+        myPC.punct_set = self.brs_pattern(myPC)
+        myPC.source_set = myPC.punct_set
+    elif myPC.punct_algorithm == &#39;wls&#39;:  # WLS shortening
+        myPC.punct_set = self.wls_pattern(myPC)
+        myPC.source_set = myPC.punct_set
+    elif myPC.punct_algorithm == &#39;bgl&#39;:  # BGL shortening
+        myPC.punct_set = self.bgl_pattern(myPC)
+        myPC.source_set = myPC.punct_set
+    elif myPC.punct_algorithm == &#39;perm&#39;:  # Perm shortening
+        myPC.punct_set = self.perm(myPC)
+        myPC.source_set = myPC.punct_set
+
+    myPC.punct_set_lookup = myPC.get_lut(myPC.punct_set)
+    myPC.source_set_lookup = myPC.get_lut(myPC.source_set)
+
+    # decide if we want a puncturing-dependent frozen set
+    if not myPC.update_frozen_flag:
+        self.update_mpcc(myPC, design_SNR)
+    else:
+        self.shortened_pcc(myPC, design_SNR)
+    myPC.frozen = self.frozen_from_pattern(myPC)
+    myPC.frozen_lookup = myPC.get_lut(myPC.frozen)
+    myPC.FERestimate = self.FER_estimate(myPC.frozen, myPC.z)</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.Shorten.Shorten.wang_liu"><code class="name flex">
+<span>def <span class="ident">wang_liu</span></span>(<span>self, myPC)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def wang_liu(self, myPC):
+    N = 2**myPC.n
+    G = arikan_gen(myPC.n)
+    s = []
+
+    for r in range(myPC.punct_set):
+        for i in range(N):
+            row = G[i, :]
+            row_wt = np.sum(row)
+            if row_wt == 1:
+                j = (np.where(row==1)[0]).item()
+                G[i, :] = np.zeros(N)
+                G[:, j] = np.zeros(N)
+                s.append(i)
+                break
+    return np.array(s)</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.Shorten.Shorten.wls_pattern"><code class="name flex">
+<span>def <span class="ident">wls_pattern</span></span>(<span>self, myPC)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wang-Liu Shortening (WLS). The common pattern from the Wang-Liu algorithm.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>myPC</code></strong> :&ensp;<code>PolarCode</code></dt>
+<dd>a polar code object created using the :class:<code>PolarCode</code> class</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ndarray&lt;int&gt;</code></dt>
+<dd>WLS shortening set</dd>
+</dl>
+<hr>
+<p><strong>References:</strong></p>
+<ul>
+<li>Runxin Wang, &amp; Rongke Liu. (2014). A Novel Puncturing Scheme for Polar Codes. IEEE Communications Letters, 18(12), 2081–2084. <a href="https://doi.org/10.1109/LCOMM.2014.2364845">https://doi.org/10.1109/LCOMM.2014.2364845</a></li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def wls_pattern(self, myPC):
+    &#34;&#34;&#34;
+    Wang-Liu Shortening (WLS). The common pattern from the Wang-Liu algorithm.
+
+    Parameters
+    ----------
+    myPC: `PolarCode`
+        a polar code object created using the :class:`PolarCode` class
+
+    Returns
+    ----------
+    ndarray&lt;int&gt;
+        WLS shortening set
+
+    -------------
+    **References:**
+
+    * Runxin Wang, &amp; Rongke Liu. (2014). A Novel Puncturing Scheme for Polar Codes. IEEE Communications Letters, 18(12), 2081–2084. https://doi.org/10.1109/LCOMM.2014.2364845
+
+    &#34;&#34;&#34;
+
+    punct_set = np.array(range(myPC.N - myPC.s, myPC.N))
+    return punct_set</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="polarcodes.Construct.Construct" href="Construct.html#polarcodes.Construct.Construct">Construct</a></b></code>:
+<ul class="hlist">
+<li><code><a title="polarcodes.Construct.Construct.general_ga" href="Construct.html#polarcodes.Construct.Construct.general_ga">general_ga</a></code></li>
+<li><code><a title="polarcodes.Construct.Construct.general_pcc" href="Construct.html#polarcodes.Construct.Construct.general_pcc">general_pcc</a></code></li>
+<li><code><a title="polarcodes.Construct.Construct.perfect_pcc" href="Construct.html#polarcodes.Construct.Construct.perfect_pcc">perfect_pcc</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="polarcodes" href="index.html">polarcodes</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="polarcodes.Shorten.Shorten" href="#polarcodes.Shorten.Shorten">Shorten</a></code></h4>
+<ul class="two-column">
+<li><code><a title="polarcodes.Shorten.Shorten.bgl_pattern" href="#polarcodes.Shorten.Shorten.bgl_pattern">bgl_pattern</a></code></li>
+<li><code><a title="polarcodes.Shorten.Shorten.brs_pattern" href="#polarcodes.Shorten.Shorten.brs_pattern">brs_pattern</a></code></li>
+<li><code><a title="polarcodes.Shorten.Shorten.frozen_from_pattern" href="#polarcodes.Shorten.Shorten.frozen_from_pattern">frozen_from_pattern</a></code></li>
+<li><code><a title="polarcodes.Shorten.Shorten.perm" href="#polarcodes.Shorten.Shorten.perm">perm</a></code></li>
+<li><code><a title="polarcodes.Shorten.Shorten.shortened_pcc" href="#polarcodes.Shorten.Shorten.shortened_pcc">shortened_pcc</a></code></li>
+<li><code><a title="polarcodes.Shorten.Shorten.update_spcc" href="#polarcodes.Shorten.Shorten.update_spcc">update_spcc</a></code></li>
+<li><code><a title="polarcodes.Shorten.Shorten.wang_liu" href="#polarcodes.Shorten.Shorten.wang_liu">wang_liu</a></code></li>
+<li><code><a title="polarcodes.Shorten.Shorten.wls_pattern" href="#polarcodes.Shorten.Shorten.wls_pattern">wls_pattern</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

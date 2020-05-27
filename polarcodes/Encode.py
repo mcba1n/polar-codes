@@ -5,17 +5,19 @@ A polar encoder class. Currently only non-systematic encoding is supported.
 """
 
 import numpy as np
-from polarcodes.Math import Math
+from polarcodes.utils import *
 
-class Encode(Math):
+class Encode:
     def __init__(self, myPC, encoder_name = 'polar_encode'):
         """
-        :param myPC: a polar code object created using the :class:`PolarCode` class
-        :param encoder_name: the name of the polar encoder implementation.
+        Parameters
+        ----------
+        myPC: `PolarCode`
+            a polar code object created using the :class:`PolarCode` class
+        encoder_name: string
+            the name of the polar encoder implementation.
                             'polar_encode' => a non_recursive implementation (default).
                             'polar_encode_recursive' => a recursive implementation.
-        :type myPC: :class:`PolarCode`
-        :type encoder_name: string
         """
 
         self.myPC = myPC
@@ -23,18 +25,25 @@ class Encode(Math):
             self.polar_encode()
         elif encoder_name == 'polar_encode_recursive':
             self.polar_encode2(0, myPC.N-1)
+        elif encoder_name == 'systematic_encode':
+            if myPC.T == None:
+                self.systematic_init()
+            self.systematic_encode()
 
     def polar_encode2(self, i1, i2):
         """
         Encodes a message using polar coding with a recursive implementation.
         The message ``x`` is encoded using in-place operations of output ``u`` in ``myPC``.
-        The initial call of :func:`polar_encode2` should set (i1, i2) = (0, N-1) for a block length N.
+        The initial call of `polar_encode2` should set (i1, i2) = (0, N-1) for a block length N.
         For example, the second partition indices will be (0, N/2-1) and (N/2, N-1).
 
-        :param i1: start index of the partition
-        :param i2: end index of the partition
-        :type i1: int
-        :type i2: int
+        Parameters
+        ----------
+        i1: int
+            start index of the partition
+        i2: int
+            end index of the partition
+
         """
         h_shift = int((i2 - i1 + 1) / 2)  # length of each new partition
         mid = i1 + h_shift  # right-aligned mid-point
@@ -68,3 +77,29 @@ class Encode(Math):
                     l = p + k
                     self.myPC.u[l] = self.myPC.u[l] ^ self.myPC.u[l + n_split]
             n = n_split
+
+    def systematic_encode(self):
+        """
+        Encodes a message using systematic polar encode by matrix multiplications.
+        The input message is transformed using matrix T such that the subsequent polar transformation
+        will result in the message bits being in the codeword, i.e. a systematic polar code.
+        """
+
+        # systematic polar encoding operations
+        x = np.array([self.myPC.x])
+        v = np.mod(np.dot(self.myPC.T, x.T), 2)
+        self.myPC.u = np.transpose(np.mod(np.dot(self.myPC.F, v), 2))[0]
+
+    def systematic_init(self):
+        """
+        Calculate the systematic T transformation required in ``Encode.systematic_encode``,
+        then store it in ``self.myPC`` for quick access by the systematic encoding function.
+        """
+
+        # T = [I_(N-K,N)|F_(K,N)]
+        # multiply with the inverse of sub-matrix F_A for indices in A,
+        # leaving the other bits of u the unchanged (rows in A.T set to identity)
+        T = np.eye(self.myPC.N, dtype=int)
+        A = self.inverse_set(self.myPC.frozen, self.myPC.N)
+        T[A, :] = self.myPC.F[A, :]
+        self.myPC.T = T

@@ -2,12 +2,11 @@
 
 """
 An object that encapsulates all of the parameters required to define a polar code.
-This object must be given to the following classes: :class:`AWGN`, :class:`Construct`, :class:`Decode`,
-:class:`Encode`, :class:`GUI`, :class:`Shorten`.
+This object must be given to the following classes: `AWGN`, `Construct`, `Decode`, `Encode`, `GUI`, `Shorten`.
 """
 
 import numpy as np
-from polarcodes.Math import Math
+from polarcodes.utils import *
 from polarcodes.Construct import Construct
 from polarcodes.Shorten import Shorten
 from polarcodes.Encode import Encode
@@ -18,42 +17,70 @@ import matplotlib.pyplot as plt
 import threading
 import tkinter as tk
 
-class PolarCode(Math):
+class PolarCode:
     """
-    :var N: the mothercode block length
-    :var M: the block length (after puncturing)
-    :var K: the code dimension
-    :var n: number of bits per index
-    :var s: number of shortened bit-channels
-    :var reliabilities: reliability vector (least reliable to most reliable)
-    :var frozen: the frozen bit indices
-    :var frozen_lookup: lookup table for the frozen bits
-    :var x: the uncoded message with frozen bits
-    :var construction_type: the mothercode construction type
-    :var message_received: the decoded message received from a channel
-    :var punct_flag: whether or not the code is punctured
-    :var simulated_snr: the SNR values simulated
-    :var simulated_fer: the FER values for the SNR values in ``simulated_snr`` using :func:`simulate`
-    :var simulated_ber: the BER values for the SNR values in ``simulated_snr`` using :func:`simulate`
-    :var punct_type: 'punct' for puncturing, and 'shorten' for shortening
-    :var punct_set: the coded punctured indices
-    :var punct_set_lookup: lookup table for ``punct_set``
-    :var source_set: the uncoded punctured indices
-    :var source_set_lookup: lookup table for ``source_set``
-    :var punct_algorithm: the name of a puncturing algorithm. Options: {'brs', 'wls', 'bgl', 'perm'}
-    :var update_frozen_flag: whether or not to update the frozen indices after puncturing
-    :var recip_flag: True if ``punct_set`` equals ``source_set``
+    Attributes
+    ----------
+    N: int
+        the mothercode block length
+    M: int
+        the block length (after puncturing)
+    K: int
+        the code dimension
+    n: int
+        number of bits per index
+    s: int
+        number of shortened bit-channels
+    reliabilities: ndarray<int>
+        reliability vector (least reliable to most reliable)
+    frozen: ndarray<int>
+        the frozen bit indices
+    frozen_lookup: ndarray<int>
+        lookup table for the frozen bits
+    x: ndarray<int>
+        the uncoded message with frozen bits
+    construction_type: string
+        the mothercode construction type
+    message_received: ndarray<int>
+        the decoded message received from a channel
+    punct_flag: bool
+        whether or not the code is punctured
+    simulated_snr: ndarray<float>
+        the SNR values simulated
+    simulated_fer: ndarray<float>
+        the FER values for the SNR values in ``simulated_snr`` using `simulate`
+    simulated_ber: ndarray<float>
+        the BER values for the SNR values in ``simulated_snr`` using `simulate`
+    punct_type: string
+        'punct' for puncturing, and 'shorten' for shortening
+    punct_set: ndarray<int>
+        the coded punctured indices
+    punct_set_lookup: ndarray<int>
+        lookup table for ``punct_set``
+    source_set: ndarray<int>
+        the uncoded punctured indices
+    source_set_lookup: ndarray<int>
+        lookup table for ``source_set``
+    punct_algorithm: string
+        the name of a puncturing algorithm. Options: {'brs', 'wls', 'bgl', 'perm'}
+    update_frozen_flag: bool
+        whether or not to update the frozen indices after puncturing
+    recip_flag: bool
+        True if ``punct_set`` equals ``source_set``
+
     """
 
     def __init__(self, M, K, punct_params=('', '', [], [], None,)):
         """
-        :param M: the block length (after puncturing)
-        :param K: the code dimension
-        :param punct_params: a tuple to completely specify the puncturing parameters (if required).
-                            The syntax is (``punct_type``, ``punct_algorithm``, ``punct_set``, ``source_set``, ``update_frozen_flag``)
-        :type M: int
-        :type K: int
-        :type punct_params: tuple
+        Parameters
+        ----------
+        M: int
+            the block length (after puncturing)
+        K: int
+            the code dimension
+        punct_params: tuple
+            a tuple to completely specify the puncturing parameters (if required).
+            The syntax is (``punct_type``, ``punct_algorithm``, ``punct_set``, ``source_set``, ``update_frozen_flag``)
         """
 
         self.initialise_code(M, K, punct_params)
@@ -70,18 +97,22 @@ class PolarCode(Math):
         self.M = M
         self.N = int(2**(np.ceil(np.log2(M))))
         self.n = int(np.log2(self.N))
+        self.F = arikan_gen(self.n)
         self.K = K
         self.s = self.N - self.M
         self.reliabilities = np.array([])
         self.frozen = np.array([])
         self.frozen_lookup = np.array([])
         self.x = np.zeros(self.N, dtype=int)
+        self.u = np.zeros(self.N, dtype=int)
         self.construction_type = 'bb'
         self.message_received = np.array([])
         self.punct_flag = False if self.M == self.N else True
         self.simulated_snr = np.array([])
         self.simulated_fer = np.array([])
         self.simulated_ber = np.array([])
+        self.FERestimate = 0
+        self.T = None
 
         # puncturing parameters
         self.punct_type = punct_params[0]
@@ -98,8 +129,11 @@ class PolarCode(Math):
         A string definition of PolarCode. This allows you to print any PolarCode object and see all of its
         relevant parameters.
 
-        :return: a stringified version of PolarCode
-        :rtype: string
+        Returns
+        ----------
+        string
+            a stringified version of PolarCode
+
         """
 
         output = '=' * 10 + " Polar Code " + '=' * 10 + '\n'
@@ -121,8 +155,11 @@ class PolarCode(Math):
         """
         Set the message vector to the non-frozen bits in ``x``. The frozen bits in ``frozen`` are set to zero.
 
-        :param m: the message vector
-        :type m: ndarray<int>
+        Parameters
+        ----------
+        m: ndarray<int>
+            the message vector
+
         """
 
         self.message = m
@@ -133,10 +170,16 @@ class PolarCode(Math):
         """
         Normalise E_b/N_o so that the message bits have the same energy for any code rate.
 
-        :param design_SNR: E_b/N_o in decibels
-        :type design_SNR: float
-        :return: normalised E_b/N_o in linear units
-        :rtype: float
+        Parameters
+        ----------
+        design_SNR: float
+            E_b/N_o in decibels
+
+        Returns
+        ----------
+        float
+            normalised E_b/N_o in linear units
+
         """
 
         Eb_No_dB = design_SNR
@@ -148,10 +191,16 @@ class PolarCode(Math):
         """
         Convert a set into a lookup table.
 
-        :param my_set: a vector of indices
-        :type my_set: ndarray<int>
-        :return: lookup table. "0" for an index in ``my_set``, else "1"
-        :rtype: ndarray<int>
+        Parameters
+        ----------
+        my_set: ndarray<int>
+            a vector of indices
+
+        Returns
+        ----------
+        ndarray<int>
+            a LUT with "0" for an index in ``my_set``, else "1"
+
         """
 
         my_lut = np.ones(self.N, dtype=int)
@@ -162,8 +211,11 @@ class PolarCode(Math):
         """
         Save all the important parameters in this object as a JSON file.
 
-        :param sim_filename: directory and filename to save JSON file to (excluding extension)
-        :type sim_filename: string
+        Parameters
+        ----------
+        sim_filename: string
+            directory and filename to save JSON file to (excluding extension)
+
         """
         data = {
             'N': self.M,
@@ -214,23 +266,26 @@ class PolarCode(Math):
         Each E_b/N_o simulation has an additional early stopping condition using the minimum iterations
         and the minimum number of errors. The results are saved in a JSON file using :func:`save_as_json`.
 
-        :param save_to: directory and filename to save JSON file to (excluding extension)
-        :param Eb_No_vec: the range of SNR values to simulate
-        :param design_SNR: the construction design SNR, E_b/N_o
-        :param max_iter: maximum number of iterations per SNR
-        :param min_iterations: the minimum number of iterations before early stopping is allowed per SNR
-        :param min_errors: the minimum number of frame errors before early stopping is allowed per SNR
-        :param sim_seed: pseudo-random generator seed, default is 1729 ('twister' on MATLAB)
-        :param manual_const_flag: a flag that decides if construction should be done before simulating.
-                                Set to False if mothercode and/or puncturing constructions are manually set by the user.
-        :type save_to: string
-        :type Eb_No_vec: ndarray<float>
-        :type design_SNR: float
-        :type max_iter: int
-        :type min_iterations: int
-        :type min_errors: int
-        :type sim_seed: int
-        :type manual_const_flag: bool
+        Parameters
+        ----------
+        save_to: string
+            directory and filename to save JSON file to (excluding extension)
+        Eb_No_vec: ndarray<float>
+            the range of SNR values to simulate
+        design_SNR: float
+            the construction design SNR, E_b/N_o
+        max_iter: int
+            maximum number of iterations per SNR
+        min_iterations: int
+            the minimum number of iterations before early stopping is allowed per SNR
+        min_errors: int
+            the minimum number of frame errors before early stopping is allowed per SNR
+        sim_seed: int
+            pseudo-random generator seed, default is 1729 ('twister' on MATLAB)
+        manual_const_flag: bool
+            a flag that decides if construction should be done before simulating.
+            Set to False if mothercode and/or puncturing constructions are manually set by the user.
+
         """
 
         # initialise simulation
@@ -307,10 +362,13 @@ class PolarCode(Math):
         """
         Plot multiple sets of FER data from the same directory on the same axes.
 
-        :param sim_filenames: a list of all filenames to plot in a common root directory
-        :param dir: the root directory for the specified filenames
-        :type sim_filenames: ndarray<string>
-        :type dir: string
+        Parameters
+        ----------
+        sim_filenames: ndarray<string>
+            a list of all filenames to plot in a common root directory
+        dir: string
+            the root directory for the specified filenames
+
         """
 
         fig = plt.figure()
@@ -344,7 +402,6 @@ class PolarCode(Math):
         Eb_No_vec = gui_dict['snr_values']
 
         # run simulation in another thread to avoid GUI freeze
-        x = threading.Thread(name='sim_thread', target=self.simulate, args=(save_to, Eb_No_vec, design_SNR, iterations, 1000, min_frame_errors, 1729, manual_const_flag,))
-        x.setDaemon(True)
-        x.start()
-
+        th = threading.Thread(name='sim_thread', target=self.simulate, args=(save_to, Eb_No_vec, design_SNR, iterations, 1000, min_frame_errors, 1729, manual_const_flag,))
+        th.setDaemon(True)
+        th.start()

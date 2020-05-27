@@ -42,7 +42,7 @@
     "punct_set": [],
     "source_set": [],
     "punct_algorithm": "",
-    "update_frozen_flag": [],
+    "update_frozen_flag": null,
     "BER": [
         0.09709375,
         0.03740625,

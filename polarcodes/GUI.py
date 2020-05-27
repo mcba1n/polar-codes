@@ -2,15 +2,16 @@ from tkinter import *
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 import numpy as np
+from polarcodes.PolarCode import PolarCode
 
 class GUI:
-    def __init__(self, master, myPC):
+    def __init__(self):
         # initialise GUI global vars
-        self.master = master
+        self.master = self.create_window()
         self.my_widget_ptrs = []
         self.fig = Figure(figsize=(10, 5), dpi=60)
         self.new_plot = self.fig.add_subplot(111)
-        self.myPC = myPC
+        self.myPC = PolarCode(100, 64)
 
         # generate section frames
         first_frame = self.make_inputs()
@@ -21,6 +22,13 @@ class GUI:
         first_frame.pack()
         self.make_plot(self.fig)
         footer_frame.pack(side=BOTTOM, fill=X)
+        self.master.mainloop()
+
+    def create_window(self):
+        root = Tk()
+        root.geometry("800x710")
+        root.title('Polar Codes Simulator')
+        return root
 
     def make_plot(self, fig):
         # add plot to tkinter canvas

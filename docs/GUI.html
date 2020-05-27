@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>polarcodes.GUI API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>polarcodes.GUI</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from tkinter import *
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
+import numpy as np
+from polarcodes.PolarCode import PolarCode
+
+class GUI:
+    def __init__(self):
+        # initialise GUI global vars
+        self.master = self.create_window()
+        self.my_widget_ptrs = []
+        self.fig = Figure(figsize=(10, 5), dpi=60)
+        self.new_plot = self.fig.add_subplot(111)
+        self.myPC = PolarCode(100, 64)
+
+        # generate section frames
+        first_frame = self.make_inputs()
+        footer_frame = self.make_footer()
+        self.myPC.gui_widgets = self.my_widget_ptrs
+
+        # section layout
+        first_frame.pack()
+        self.make_plot(self.fig)
+        footer_frame.pack(side=BOTTOM, fill=X)
+        self.master.mainloop()
+
+    def create_window(self):
+        root = Tk()
+        root.geometry(&#34;800x710&#34;)
+        root.title(&#39;Polar Codes Simulator&#39;)
+        return root
+
+    def make_plot(self, fig):
+        # add plot to tkinter canvas
+        self.canvas = FigureCanvasTkAgg(fig, master=self.master)
+        self.canvas.draw()
+        graph_widget = self.canvas.get_tk_widget()
+        graph_widget.pack(pady=10)
+        return graph_widget
+
+    def make_inputs(self):
+        my_frame = Frame(self.master)
+
+        # labels
+        titleFont = (&#34;Arial&#34;, 10, &#34;bold&#34;)
+        pc_title_label = Label(my_frame, text=&#34;Polar Code&#34;, font=titleFont)
+        puncturing_title_label = Label(my_frame, text=&#34;Puncturing/Shortening&#34;, font=titleFont)
+        sim_label = Label(my_frame, text=&#34;Simulation&#34;, font=titleFont)
+        plot_label = Label(my_frame, text=&#34;Plot&#34;, font=titleFont)
+        n_label = Label(my_frame, text=&#34;N&#34;)
+        k_label = Label(my_frame, text=&#34;K&#34;)
+        const_title_label = Label(my_frame, text=&#34;Mothercode Construction&#34;)
+        design_label = Label(my_frame, text=&#34;Design Eb/No (dB)&#34;)
+        frozen_label = Label(my_frame, text=&#34;Frozen Bits&#34;)
+        punct_algorithm_label = Label(my_frame, text=&#34;Algorithm&#34;)
+        punctured_label = Label(my_frame, text=&#34;Punctured/Shortened Bits&#34;)
+        iter = Label(my_frame, text=&#34;Iterations&#34;)
+        min_frame_errors = Label(my_frame, text=&#34;Min. Frame Errors&#34;)
+        save_dir_label = Label(my_frame, text=&#34;Directory&#34;)
+        filenames_label = Label(my_frame, text=&#34;Filename(s)&#34;)
+        save_label = Label(my_frame, text=&#34;Save to&#34;)
+        Eb_No_values_label = Label(my_frame, text=&#34;Eb/No Values (dB)&#34;)
+
+        # entries and text fields
+        n_entry = Entry(my_frame)
+        k_entry = Entry(my_frame)
+        design_entry = Entry(my_frame)
+        iter_entry = Entry(my_frame)
+        min_frame_errors_entry = Entry(my_frame)
+        file_dir_entry = Entry(my_frame)
+        filenames_entry = Entry(my_frame)
+        savefilename_entry = Entry(my_frame)
+        frozen_bits = Text(my_frame, width=30, height=5)
+        shortened_bits = Text(my_frame, width=30, height=5)
+        Eb_No_values_entry = Entry(my_frame)
+
+        n_entry.insert(END, &#39;100&#39;)
+        k_entry.insert(END, &#39;64&#39;)
+        design_entry.insert(END, &#39;5&#39;)
+        iter_entry.insert(END, &#39;10000&#39;)
+        min_frame_errors_entry.insert(END, &#39;30&#39;)
+        savefilename_entry.insert(END, &#39;data/pc_sim&#39;)
+        file_dir_entry.insert(END, &#39;data/&#39;)
+        filenames_entry.insert(END, &#39;pc_sim&#39;)
+        Eb_No_values_entry.insert(END, &#39;1,2,3,4&#39;)
+
+        # menus
+        const_options = [&#39;bb&#39;, &#39;ga&#39;]
+        const_opt_val = StringVar(my_frame)
+        const_opt_val.set(const_options[0])
+        const_opt = OptionMenu(my_frame, const_opt_val, *const_options)
+
+        shortening_options = [&#39;brs&#39;, &#39;wls&#39;, &#39;bgl&#39;]
+        shortening_opt_val = StringVar(my_frame)
+        shortening_opt_val.set(shortening_options[0])
+        shortening_opt = OptionMenu(my_frame, shortening_opt_val, *shortening_options)
+
+        # check and radio buttons
+        manual_construction_flag = IntVar()
+        punct_type_var = IntVar()
+        punct_type_var.set(1)
+
+        c = Checkbutton(my_frame, text=&#34;Manual Construction&#34;, variable=manual_construction_flag)
+        p_opt = Radiobutton(my_frame, text=&#34;Puncturing&#34;, value=0, variable=punct_type_var)
+        s_opt = Radiobutton(my_frame, text=&#34;Shortening&#34;, value=1, variable=punct_type_var)
+
+        # buttons
+        button_1 = Button(my_frame, text=&#34;Simulate&#34;,
+                          command=lambda: [self.update_dict(), self.myPC.gui_sim_handler(self.dict)])
+        button_2 = Button(my_frame, text=&#34;Plot&#34;,
+                          command=lambda: [self.update_dict(), self.myPC.gui_plot_handler(self.dict, self.new_plot),
+                                           self.canvas.draw()])
+
+        # grid layout
+        pc_title_label.grid(row=0, columnspan=2)
+        n_label.grid(row=1, sticky=E)
+        k_label.grid(row=2, sticky=E)
+        n_entry.grid(row=1, column=1, sticky=&#34;nsew&#34;)
+        k_entry.grid(row=2, column=1, sticky=&#34;nsew&#34;)
+        design_label.grid(row=5, column=0, sticky=E)
+        design_entry.grid(row=5, column=1, sticky=&#34;nsew&#34;)
+        frozen_bits.grid(row=4, column=1)
+        frozen_label.grid(row=4, column=0, sticky=E)
+        const_title_label.grid(row=3, column=0, sticky=E)
+        const_opt.grid(row=3, column=1, sticky=&#34;nsew&#34;)
+        c.grid(row=6, column = 1)
+        puncturing_title_label.grid(row=0, column=2, columnspan=2)
+        shortening_opt.grid(row=2, column=3, sticky=&#34;nsew&#34;)
+        punct_algorithm_label.grid(row=2, column=2, sticky=E)
+        p_opt.grid(row=1, column=2)
+        s_opt.grid(row=1, column=3)
+        shortened_bits.grid(row=4, column=3)
+        punctured_label.grid(row=4, column=2, sticky=E)
+        save_label.grid(row=11, column=0, sticky=E)
+        savefilename_entry.grid(row=11, column=1, sticky=&#34;nsew&#34;)
+        save_dir_label.grid(row=9, column=2, sticky=E)
+        file_dir_entry.grid(row=9, column=3, sticky=&#34;nsew&#34;)
+        sim_label.grid(row=8, columnspan=2, column=0)
+        plot_label.grid(row=8, columnspan=2, column=2)
+        iter_entry.grid(row=9, column=1, sticky=&#34;nsew&#34;)
+        min_frame_errors_entry.grid(row=10, column=1, sticky=&#34;nsew&#34;)
+        iter.grid(row=9, column=0, sticky=E)
+        min_frame_errors.grid(row=10, column=0, sticky=E)
+        filenames_label.grid(row=10, column=2, sticky=E)
+        filenames_entry.grid(row=10, column=3, sticky=&#34;nsew&#34;)
+        Eb_No_values_label.grid(row=12, column=0, sticky=E)
+        Eb_No_values_entry.grid(row=12, column=1, sticky=&#34;nsew&#34;)
+        button_1.grid(row=13, column=0, columnspan=2, sticky=&#34;nsew&#34;)
+        button_2.grid(row=13, column=2, columnspan=4, sticky=&#34;nsew&#34;)
+
+        # save data widget pointers
+        my_widget_ptrs = [n_entry, k_entry, const_opt_val, frozen_bits, punct_type_var, shortening_opt_val, shortened_bits, iter_entry,
+                          min_frame_errors_entry, savefilename_entry, file_dir_entry, filenames_entry, design_entry, manual_construction_flag,
+                          Eb_No_values_entry]
+        self.my_widget_ptrs = my_widget_ptrs
+        return my_frame
+
+    def make_footer(self):
+        my_frame = Frame(self.master)
+        my_text_var = StringVar(my_frame)
+        my_text_var.set(&#34;Simulation updates here...&#34;)
+        status = Label(my_frame, relief=SUNKEN, anchor=W, textvariable=my_text_var)
+        status.pack(fill=X)
+        self.myPC.status_bar = my_text_var
+        return my_frame
+
+    def update_dict(self):
+        # create GUI parameters object
+        self.dict = {
+            &#39;N&#39;: int(self.my_widget_ptrs[0].get()),
+            &#39;K&#39;: int(self.my_widget_ptrs[1].get()),
+            &#39;construction_algo&#39;: self.my_widget_ptrs[2].get(),
+            &#39;frozen_set&#39;: [int(x) for x in self.my_widget_ptrs[3].get(&#34;1.0&#34;, END).strip().split(&#34;,&#34;) if x != &#39;&#39;],
+            &#39;punct_type&#39;: int(self.my_widget_ptrs[4].get()),
+            &#39;punct_algo&#39;: self.my_widget_ptrs[5].get(),
+            &#39;shortened_set&#39;: [int(x) for x in self.my_widget_ptrs[6].get(&#34;1.0&#34;, END).strip().split(&#34;,&#34;) if x != &#39;&#39;],
+            &#39;iterations&#39;: int(self.my_widget_ptrs[7].get()),
+            &#39;min_frame_errors&#39;: int(self.my_widget_ptrs[8].get()),
+            &#39;save_to&#39;: self.my_widget_ptrs[9].get(),
+            &#39;file_dir&#39;: self.my_widget_ptrs[10].get(),
+            &#39;filenames&#39;: self.my_widget_ptrs[11].get().strip().replace(&#39; &#39;, &#39;&#39;).split(&#34;,&#34;),
+            &#39;design_SNR&#39;: int(self.my_widget_ptrs[12].get()),
+            &#39;manual_const_flag&#39;: self.my_widget_ptrs[13].get(),
+            &#39;snr_values&#39;: np.array([int(x) for x in self.my_widget_ptrs[14].get().strip().split(&#39;,&#39;)])
+        }</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="polarcodes.GUI.GUI"><code class="flex name class">
+<span>class <span class="ident">GUI</span></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class GUI:
+    def __init__(self):
+        # initialise GUI global vars
+        self.master = self.create_window()
+        self.my_widget_ptrs = []
+        self.fig = Figure(figsize=(10, 5), dpi=60)
+        self.new_plot = self.fig.add_subplot(111)
+        self.myPC = PolarCode(100, 64)
+
+        # generate section frames
+        first_frame = self.make_inputs()
+        footer_frame = self.make_footer()
+        self.myPC.gui_widgets = self.my_widget_ptrs
+
+        # section layout
+        first_frame.pack()
+        self.make_plot(self.fig)
+        footer_frame.pack(side=BOTTOM, fill=X)
+        self.master.mainloop()
+
+    def create_window(self):
+        root = Tk()
+        root.geometry(&#34;800x710&#34;)
+        root.title(&#39;Polar Codes Simulator&#39;)
+        return root
+
+    def make_plot(self, fig):
+        # add plot to tkinter canvas
+        self.canvas = FigureCanvasTkAgg(fig, master=self.master)
+        self.canvas.draw()
+        graph_widget = self.canvas.get_tk_widget()
+        graph_widget.pack(pady=10)
+        return graph_widget
+
+    def make_inputs(self):
+        my_frame = Frame(self.master)
+
+        # labels
+        titleFont = (&#34;Arial&#34;, 10, &#34;bold&#34;)
+        pc_title_label = Label(my_frame, text=&#34;Polar Code&#34;, font=titleFont)
+        puncturing_title_label = Label(my_frame, text=&#34;Puncturing/Shortening&#34;, font=titleFont)
+        sim_label = Label(my_frame, text=&#34;Simulation&#34;, font=titleFont)
+        plot_label = Label(my_frame, text=&#34;Plot&#34;, font=titleFont)
+        n_label = Label(my_frame, text=&#34;N&#34;)
+        k_label = Label(my_frame, text=&#34;K&#34;)
+        const_title_label = Label(my_frame, text=&#34;Mothercode Construction&#34;)
+        design_label = Label(my_frame, text=&#34;Design Eb/No (dB)&#34;)
+        frozen_label = Label(my_frame, text=&#34;Frozen Bits&#34;)
+        punct_algorithm_label = Label(my_frame, text=&#34;Algorithm&#34;)
+        punctured_label = Label(my_frame, text=&#34;Punctured/Shortened Bits&#34;)
+        iter = Label(my_frame, text=&#34;Iterations&#34;)
+        min_frame_errors = Label(my_frame, text=&#34;Min. Frame Errors&#34;)
+        save_dir_label = Label(my_frame, text=&#34;Directory&#34;)
+        filenames_label = Label(my_frame, text=&#34;Filename(s)&#34;)
+        save_label = Label(my_frame, text=&#34;Save to&#34;)
+        Eb_No_values_label = Label(my_frame, text=&#34;Eb/No Values (dB)&#34;)
+
+        # entries and text fields
+        n_entry = Entry(my_frame)
+        k_entry = Entry(my_frame)
+        design_entry = Entry(my_frame)
+        iter_entry = Entry(my_frame)
+        min_frame_errors_entry = Entry(my_frame)
+        file_dir_entry = Entry(my_frame)
+        filenames_entry = Entry(my_frame)
+        savefilename_entry = Entry(my_frame)
+        frozen_bits = Text(my_frame, width=30, height=5)
+        shortened_bits = Text(my_frame, width=30, height=5)
+        Eb_No_values_entry = Entry(my_frame)
+
+        n_entry.insert(END, &#39;100&#39;)
+        k_entry.insert(END, &#39;64&#39;)
+        design_entry.insert(END, &#39;5&#39;)
+        iter_entry.insert(END, &#39;10000&#39;)
+        min_frame_errors_entry.insert(END, &#39;30&#39;)
+        savefilename_entry.insert(END, &#39;data/pc_sim&#39;)
+        file_dir_entry.insert(END, &#39;data/&#39;)
+        filenames_entry.insert(END, &#39;pc_sim&#39;)
+        Eb_No_values_entry.insert(END, &#39;1,2,3,4&#39;)
+
+        # menus
+        const_options = [&#39;bb&#39;, &#39;ga&#39;]
+        const_opt_val = StringVar(my_frame)
+        const_opt_val.set(const_options[0])
+        const_opt = OptionMenu(my_frame, const_opt_val, *const_options)
+
+        shortening_options = [&#39;brs&#39;, &#39;wls&#39;, &#39;bgl&#39;]
+        shortening_opt_val = StringVar(my_frame)
+        shortening_opt_val.set(shortening_options[0])
+        shortening_opt = OptionMenu(my_frame, shortening_opt_val, *shortening_options)
+
+        # check and radio buttons
+        manual_construction_flag = IntVar()
+        punct_type_var = IntVar()
+        punct_type_var.set(1)
+
+        c = Checkbutton(my_frame, text=&#34;Manual Construction&#34;, variable=manual_construction_flag)
+        p_opt = Radiobutton(my_frame, text=&#34;Puncturing&#34;, value=0, variable=punct_type_var)
+        s_opt = Radiobutton(my_frame, text=&#34;Shortening&#34;, value=1, variable=punct_type_var)
+
+        # buttons
+        button_1 = Button(my_frame, text=&#34;Simulate&#34;,
+                          command=lambda: [self.update_dict(), self.myPC.gui_sim_handler(self.dict)])
+        button_2 = Button(my_frame, text=&#34;Plot&#34;,
+                          command=lambda: [self.update_dict(), self.myPC.gui_plot_handler(self.dict, self.new_plot),
+                                           self.canvas.draw()])
+
+        # grid layout
+        pc_title_label.grid(row=0, columnspan=2)
+        n_label.grid(row=1, sticky=E)
+        k_label.grid(row=2, sticky=E)
+        n_entry.grid(row=1, column=1, sticky=&#34;nsew&#34;)
+        k_entry.grid(row=2, column=1, sticky=&#34;nsew&#34;)
+        design_label.grid(row=5, column=0, sticky=E)
+        design_entry.grid(row=5, column=1, sticky=&#34;nsew&#34;)
+        frozen_bits.grid(row=4, column=1)
+        frozen_label.grid(row=4, column=0, sticky=E)
+        const_title_label.grid(row=3, column=0, sticky=E)
+        const_opt.grid(row=3, column=1, sticky=&#34;nsew&#34;)
+        c.grid(row=6, column = 1)
+        puncturing_title_label.grid(row=0, column=2, columnspan=2)
+        shortening_opt.grid(row=2, column=3, sticky=&#34;nsew&#34;)
+        punct_algorithm_label.grid(row=2, column=2, sticky=E)
+        p_opt.grid(row=1, column=2)
+        s_opt.grid(row=1, column=3)
+        shortened_bits.grid(row=4, column=3)
+        punctured_label.grid(row=4, column=2, sticky=E)
+        save_label.grid(row=11, column=0, sticky=E)
+        savefilename_entry.grid(row=11, column=1, sticky=&#34;nsew&#34;)
+        save_dir_label.grid(row=9, column=2, sticky=E)
+        file_dir_entry.grid(row=9, column=3, sticky=&#34;nsew&#34;)
+        sim_label.grid(row=8, columnspan=2, column=0)
+        plot_label.grid(row=8, columnspan=2, column=2)
+        iter_entry.grid(row=9, column=1, sticky=&#34;nsew&#34;)
+        min_frame_errors_entry.grid(row=10, column=1, sticky=&#34;nsew&#34;)
+        iter.grid(row=9, column=0, sticky=E)
+        min_frame_errors.grid(row=10, column=0, sticky=E)
+        filenames_label.grid(row=10, column=2, sticky=E)
+        filenames_entry.grid(row=10, column=3, sticky=&#34;nsew&#34;)
+        Eb_No_values_label.grid(row=12, column=0, sticky=E)
+        Eb_No_values_entry.grid(row=12, column=1, sticky=&#34;nsew&#34;)
+        button_1.grid(row=13, column=0, columnspan=2, sticky=&#34;nsew&#34;)
+        button_2.grid(row=13, column=2, columnspan=4, sticky=&#34;nsew&#34;)
+
+        # save data widget pointers
+        my_widget_ptrs = [n_entry, k_entry, const_opt_val, frozen_bits, punct_type_var, shortening_opt_val, shortened_bits, iter_entry,
+                          min_frame_errors_entry, savefilename_entry, file_dir_entry, filenames_entry, design_entry, manual_construction_flag,
+                          Eb_No_values_entry]
+        self.my_widget_ptrs = my_widget_ptrs
+        return my_frame
+
+    def make_footer(self):
+        my_frame = Frame(self.master)
+        my_text_var = StringVar(my_frame)
+        my_text_var.set(&#34;Simulation updates here...&#34;)
+        status = Label(my_frame, relief=SUNKEN, anchor=W, textvariable=my_text_var)
+        status.pack(fill=X)
+        self.myPC.status_bar = my_text_var
+        return my_frame
+
+    def update_dict(self):
+        # create GUI parameters object
+        self.dict = {
+            &#39;N&#39;: int(self.my_widget_ptrs[0].get()),
+            &#39;K&#39;: int(self.my_widget_ptrs[1].get()),
+            &#39;construction_algo&#39;: self.my_widget_ptrs[2].get(),
+            &#39;frozen_set&#39;: [int(x) for x in self.my_widget_ptrs[3].get(&#34;1.0&#34;, END).strip().split(&#34;,&#34;) if x != &#39;&#39;],
+            &#39;punct_type&#39;: int(self.my_widget_ptrs[4].get()),
+            &#39;punct_algo&#39;: self.my_widget_ptrs[5].get(),
+            &#39;shortened_set&#39;: [int(x) for x in self.my_widget_ptrs[6].get(&#34;1.0&#34;, END).strip().split(&#34;,&#34;) if x != &#39;&#39;],
+            &#39;iterations&#39;: int(self.my_widget_ptrs[7].get()),
+            &#39;min_frame_errors&#39;: int(self.my_widget_ptrs[8].get()),
+            &#39;save_to&#39;: self.my_widget_ptrs[9].get(),
+            &#39;file_dir&#39;: self.my_widget_ptrs[10].get(),
+            &#39;filenames&#39;: self.my_widget_ptrs[11].get().strip().replace(&#39; &#39;, &#39;&#39;).split(&#34;,&#34;),
+            &#39;design_SNR&#39;: int(self.my_widget_ptrs[12].get()),
+            &#39;manual_const_flag&#39;: self.my_widget_ptrs[13].get(),
+            &#39;snr_values&#39;: np.array([int(x) for x in self.my_widget_ptrs[14].get().strip().split(&#39;,&#39;)])
+        }</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="polarcodes.GUI.GUI.create_window"><code class="name flex">
+<span>def <span class="ident">create_window</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_window(self):
+    root = Tk()
+    root.geometry(&#34;800x710&#34;)
+    root.title(&#39;Polar Codes Simulator&#39;)
+    return root</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.GUI.GUI.make_footer"><code class="name flex">
+<span>def <span class="ident">make_footer</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_footer(self):
+    my_frame = Frame(self.master)
+    my_text_var = StringVar(my_frame)
+    my_text_var.set(&#34;Simulation updates here...&#34;)
+    status = Label(my_frame, relief=SUNKEN, anchor=W, textvariable=my_text_var)
+    status.pack(fill=X)
+    self.myPC.status_bar = my_text_var
+    return my_frame</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.GUI.GUI.make_inputs"><code class="name flex">
+<span>def <span class="ident">make_inputs</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_inputs(self):
+    my_frame = Frame(self.master)
+
+    # labels
+    titleFont = (&#34;Arial&#34;, 10, &#34;bold&#34;)
+    pc_title_label = Label(my_frame, text=&#34;Polar Code&#34;, font=titleFont)
+    puncturing_title_label = Label(my_frame, text=&#34;Puncturing/Shortening&#34;, font=titleFont)
+    sim_label = Label(my_frame, text=&#34;Simulation&#34;, font=titleFont)
+    plot_label = Label(my_frame, text=&#34;Plot&#34;, font=titleFont)
+    n_label = Label(my_frame, text=&#34;N&#34;)
+    k_label = Label(my_frame, text=&#34;K&#34;)
+    const_title_label = Label(my_frame, text=&#34;Mothercode Construction&#34;)
+    design_label = Label(my_frame, text=&#34;Design Eb/No (dB)&#34;)
+    frozen_label = Label(my_frame, text=&#34;Frozen Bits&#34;)
+    punct_algorithm_label = Label(my_frame, text=&#34;Algorithm&#34;)
+    punctured_label = Label(my_frame, text=&#34;Punctured/Shortened Bits&#34;)
+    iter = Label(my_frame, text=&#34;Iterations&#34;)
+    min_frame_errors = Label(my_frame, text=&#34;Min. Frame Errors&#34;)
+    save_dir_label = Label(my_frame, text=&#34;Directory&#34;)
+    filenames_label = Label(my_frame, text=&#34;Filename(s)&#34;)
+    save_label = Label(my_frame, text=&#34;Save to&#34;)
+    Eb_No_values_label = Label(my_frame, text=&#34;Eb/No Values (dB)&#34;)
+
+    # entries and text fields
+    n_entry = Entry(my_frame)
+    k_entry = Entry(my_frame)
+    design_entry = Entry(my_frame)
+    iter_entry = Entry(my_frame)
+    min_frame_errors_entry = Entry(my_frame)
+    file_dir_entry = Entry(my_frame)
+    filenames_entry = Entry(my_frame)
+    savefilename_entry = Entry(my_frame)
+    frozen_bits = Text(my_frame, width=30, height=5)
+    shortened_bits = Text(my_frame, width=30, height=5)
+    Eb_No_values_entry = Entry(my_frame)
+
+    n_entry.insert(END, &#39;100&#39;)
+    k_entry.insert(END, &#39;64&#39;)
+    design_entry.insert(END, &#39;5&#39;)
+    iter_entry.insert(END, &#39;10000&#39;)
+    min_frame_errors_entry.insert(END, &#39;30&#39;)
+    savefilename_entry.insert(END, &#39;data/pc_sim&#39;)
+    file_dir_entry.insert(END, &#39;data/&#39;)
+    filenames_entry.insert(END, &#39;pc_sim&#39;)
+    Eb_No_values_entry.insert(END, &#39;1,2,3,4&#39;)
+
+    # menus
+    const_options = [&#39;bb&#39;, &#39;ga&#39;]
+    const_opt_val = StringVar(my_frame)
+    const_opt_val.set(const_options[0])
+    const_opt = OptionMenu(my_frame, const_opt_val, *const_options)
+
+    shortening_options = [&#39;brs&#39;, &#39;wls&#39;, &#39;bgl&#39;]
+    shortening_opt_val = StringVar(my_frame)
+    shortening_opt_val.set(shortening_options[0])
+    shortening_opt = OptionMenu(my_frame, shortening_opt_val, *shortening_options)
+
+    # check and radio buttons
+    manual_construction_flag = IntVar()
+    punct_type_var = IntVar()
+    punct_type_var.set(1)
+
+    c = Checkbutton(my_frame, text=&#34;Manual Construction&#34;, variable=manual_construction_flag)
+    p_opt = Radiobutton(my_frame, text=&#34;Puncturing&#34;, value=0, variable=punct_type_var)
+    s_opt = Radiobutton(my_frame, text=&#34;Shortening&#34;, value=1, variable=punct_type_var)
+
+    # buttons
+    button_1 = Button(my_frame, text=&#34;Simulate&#34;,
+                      command=lambda: [self.update_dict(), self.myPC.gui_sim_handler(self.dict)])
+    button_2 = Button(my_frame, text=&#34;Plot&#34;,
+                      command=lambda: [self.update_dict(), self.myPC.gui_plot_handler(self.dict, self.new_plot),
+                                       self.canvas.draw()])
+
+    # grid layout
+    pc_title_label.grid(row=0, columnspan=2)
+    n_label.grid(row=1, sticky=E)
+    k_label.grid(row=2, sticky=E)
+    n_entry.grid(row=1, column=1, sticky=&#34;nsew&#34;)
+    k_entry.grid(row=2, column=1, sticky=&#34;nsew&#34;)
+    design_label.grid(row=5, column=0, sticky=E)
+    design_entry.grid(row=5, column=1, sticky=&#34;nsew&#34;)
+    frozen_bits.grid(row=4, column=1)
+    frozen_label.grid(row=4, column=0, sticky=E)
+    const_title_label.grid(row=3, column=0, sticky=E)
+    const_opt.grid(row=3, column=1, sticky=&#34;nsew&#34;)
+    c.grid(row=6, column = 1)
+    puncturing_title_label.grid(row=0, column=2, columnspan=2)
+    shortening_opt.grid(row=2, column=3, sticky=&#34;nsew&#34;)
+    punct_algorithm_label.grid(row=2, column=2, sticky=E)
+    p_opt.grid(row=1, column=2)
+    s_opt.grid(row=1, column=3)
+    shortened_bits.grid(row=4, column=3)
+    punctured_label.grid(row=4, column=2, sticky=E)
+    save_label.grid(row=11, column=0, sticky=E)
+    savefilename_entry.grid(row=11, column=1, sticky=&#34;nsew&#34;)
+    save_dir_label.grid(row=9, column=2, sticky=E)
+    file_dir_entry.grid(row=9, column=3, sticky=&#34;nsew&#34;)
+    sim_label.grid(row=8, columnspan=2, column=0)
+    plot_label.grid(row=8, columnspan=2, column=2)
+    iter_entry.grid(row=9, column=1, sticky=&#34;nsew&#34;)
+    min_frame_errors_entry.grid(row=10, column=1, sticky=&#34;nsew&#34;)
+    iter.grid(row=9, column=0, sticky=E)
+    min_frame_errors.grid(row=10, column=0, sticky=E)
+    filenames_label.grid(row=10, column=2, sticky=E)
+    filenames_entry.grid(row=10, column=3, sticky=&#34;nsew&#34;)
+    Eb_No_values_label.grid(row=12, column=0, sticky=E)
+    Eb_No_values_entry.grid(row=12, column=1, sticky=&#34;nsew&#34;)
+    button_1.grid(row=13, column=0, columnspan=2, sticky=&#34;nsew&#34;)
+    button_2.grid(row=13, column=2, columnspan=4, sticky=&#34;nsew&#34;)
+
+    # save data widget pointers
+    my_widget_ptrs = [n_entry, k_entry, const_opt_val, frozen_bits, punct_type_var, shortening_opt_val, shortened_bits, iter_entry,
+                      min_frame_errors_entry, savefilename_entry, file_dir_entry, filenames_entry, design_entry, manual_construction_flag,
+                      Eb_No_values_entry]
+    self.my_widget_ptrs = my_widget_ptrs
+    return my_frame</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.GUI.GUI.make_plot"><code class="name flex">
+<span>def <span class="ident">make_plot</span></span>(<span>self, fig)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_plot(self, fig):
+    # add plot to tkinter canvas
+    self.canvas = FigureCanvasTkAgg(fig, master=self.master)
+    self.canvas.draw()
+    graph_widget = self.canvas.get_tk_widget()
+    graph_widget.pack(pady=10)
+    return graph_widget</code></pre>
+</details>
+</dd>
+<dt id="polarcodes.GUI.GUI.update_dict"><code class="name flex">
+<span>def <span class="ident">update_dict</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_dict(self):
+    # create GUI parameters object
+    self.dict = {
+        &#39;N&#39;: int(self.my_widget_ptrs[0].get()),
+        &#39;K&#39;: int(self.my_widget_ptrs[1].get()),
+        &#39;construction_algo&#39;: self.my_widget_ptrs[2].get(),
+        &#39;frozen_set&#39;: [int(x) for x in self.my_widget_ptrs[3].get(&#34;1.0&#34;, END).strip().split(&#34;,&#34;) if x != &#39;&#39;],
+        &#39;punct_type&#39;: int(self.my_widget_ptrs[4].get()),
+        &#39;punct_algo&#39;: self.my_widget_ptrs[5].get(),
+        &#39;shortened_set&#39;: [int(x) for x in self.my_widget_ptrs[6].get(&#34;1.0&#34;, END).strip().split(&#34;,&#34;) if x != &#39;&#39;],
+        &#39;iterations&#39;: int(self.my_widget_ptrs[7].get()),
+        &#39;min_frame_errors&#39;: int(self.my_widget_ptrs[8].get()),
+        &#39;save_to&#39;: self.my_widget_ptrs[9].get(),
+        &#39;file_dir&#39;: self.my_widget_ptrs[10].get(),
+        &#39;filenames&#39;: self.my_widget_ptrs[11].get().strip().replace(&#39; &#39;, &#39;&#39;).split(&#34;,&#34;),
+        &#39;design_SNR&#39;: int(self.my_widget_ptrs[12].get()),
+        &#39;manual_const_flag&#39;: self.my_widget_ptrs[13].get(),
+        &#39;snr_values&#39;: np.array([int(x) for x in self.my_widget_ptrs[14].get().strip().split(&#39;,&#39;)])
+    }</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="polarcodes" href="index.html">polarcodes</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="polarcodes.GUI.GUI" href="#polarcodes.GUI.GUI">GUI</a></code></h4>
+<ul class="">
+<li><code><a title="polarcodes.GUI.GUI.create_window" href="#polarcodes.GUI.GUI.create_window">create_window</a></code></li>
+<li><code><a title="polarcodes.GUI.GUI.make_footer" href="#polarcodes.GUI.GUI.make_footer">make_footer</a></code></li>
+<li><code><a title="polarcodes.GUI.GUI.make_inputs" href="#polarcodes.GUI.GUI.make_inputs">make_inputs</a></code></li>
+<li><code><a title="polarcodes.GUI.GUI.make_plot" href="#polarcodes.GUI.GUI.make_plot">make_plot</a></code></li>
+<li><code><a title="polarcodes.GUI.GUI.update_dict" href="#polarcodes.GUI.GUI.update_dict">update_dict</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>
