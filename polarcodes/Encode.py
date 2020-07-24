@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-A polar encoder class. Currently only non-systematic encoding is supported.
+A polar encoder class with systematic and non-systematic methods.
 """
 
 import numpy as np
@@ -98,8 +98,8 @@ class Encode:
 
         # T = [I_(N-K,N)|F_(K,N)]
         # multiply with the inverse of sub-matrix F_A for indices in A,
-        # leaving the other bits of u the unchanged (rows in A.T set to identity)
+        # leaving the other bits of u unchanged (rows in A.T set to identity)
         T = np.eye(self.myPC.N, dtype=int)
-        A = self.inverse_set(self.myPC.frozen, self.myPC.N)
+        A = inverse_set(self.myPC.frozen, self.myPC.N)
         T[A, :] = self.myPC.F[A, :]
         self.myPC.T = T
