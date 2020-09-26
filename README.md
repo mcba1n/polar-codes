@@ -49,7 +49,7 @@ For systematic encoding and decoding, replace `Encode(myPC)` with `Encode(myPC, 
     
     # encode message
     Encode(myPC)
-    print("The coded message is:", myPC.get_codeword())
+    print("The coded message is:", myPC.u)
     
     # transmit the codeword
     AWGN(myPC, design_SNR)
@@ -65,8 +65,8 @@ An example of constructing a shortened polar code with Bit-Reversal Shortening (
 The shortening parameters are set by the tuple `shorten_params`, the third argument of `PolarCode`, and is defined by:
 - Puncturing type: `shorten` or `punct`.
 - Puncturing algorithm: `brs`, `wls`, or `bgl`.
-- Puncturing set (for manual puncturing): `ndarray<int>`
-- Overcapable set (for manual puncturing): `ndarray<int>`
+- Puncturing set (for manual puncturing): `List`
+- Overcapable set (for manual puncturing): `List`
 - Update reliabilities after puncturing (or use mothercode reliabilities): `True` or `False`.
 
 
