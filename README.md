@@ -125,6 +125,6 @@ The simulation will save your PolarCode object in a JSON file, for example:
 
 ### Graphical User Interface
 An example of using the GUI to simulate and plot a specified polar code. Note: if "manual construction" is ticked, the user is required to input the frozen bits and the shortened bits.
-<br/><img src="https://github.com/mcba1n/polar-codes/blob/master/gui_example.PNG" width="500">
+<br/><img src="https://raw.githubusercontent.com/mcba1n/polar-codes/master/gui_example.PNG" width="500">
 
 *This is a final year project created by Brendon McBain under the supervision of Dr Harish Vangala at Monash University.*
