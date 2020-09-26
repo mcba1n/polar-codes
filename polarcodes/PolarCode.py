@@ -166,6 +166,23 @@ class PolarCode:
         self.x[self.frozen_lookup == 1] = m
         self.u = self.x.copy()
 
+    def get_codeword(self):
+        """
+        Get the codeword that was last encoded in this `PolarCode` object. Note that this codeword is not always
+        the same as `myPC.u`, since punctured bits are simply set to zero in this variable as if they were
+        frozen bits, and then decoded using the corresponding puncturing table likelihoods.
+
+        Returns
+        -------
+        ndarray<float>
+            the codeword for the last encoded message using `myPC.u`, or None.
+
+        """
+        if self.punct_flag == False:
+            return self.u
+        else:
+            return self.u[np.where(self.source_set_lookup == 1)]
+
     def get_normalised_SNR(self, design_SNR):
         """
         Normalise E_b/N_o so that the message bits have the same energy for any code rate.
